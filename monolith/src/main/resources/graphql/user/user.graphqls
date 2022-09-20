@@ -1,0 +1,21 @@
+type User{
+    id: ID
+    username: String!
+    email: String!
+}
+
+input UserRequestDTO{
+    username: String!
+    password: String!
+    email: String!
+}
+
+extend type Query {
+    getUsers: [User]
+    getUser(id: ID): User
+    getUserByUsername(username: String!): User
+}
+
+extend type Mutation{
+    insertUser(input: UserRequestDTO): User
+}
