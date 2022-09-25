@@ -5,17 +5,25 @@ type User{
 }
 
 input UserRequestDTO{
+    id: ID
     username: String!
     password: String!
     email: String!
+}
+
+input UserLoginDTO{
+    username:String!
+    password:String!
 }
 
 extend type Query {
     getUsers: [User]
     getUser(id: ID): User
     getUserByUsername(username: String!): User
+    checkUserLogin(user: UserLoginDTO!): Boolean
 }
 
 extend type Mutation{
     insertUser(input: UserRequestDTO): User
+    updateUser(input: UserRequestDTO): User
 }
