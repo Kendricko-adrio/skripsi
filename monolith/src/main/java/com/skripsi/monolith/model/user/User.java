@@ -1,10 +1,8 @@
-package com.skripsi.monolith.model;
+package com.skripsi.monolith.model.user;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigInteger;
 
 @Data
@@ -12,6 +10,7 @@ import java.math.BigInteger;
 @Table(name = "users")
 public class User {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private BigInteger id;
     private String username;
     private String password;
