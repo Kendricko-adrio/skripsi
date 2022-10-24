@@ -1,0 +1,10 @@
+type Order{
+    id: ID
+    courseId: Int
+    teacherId: Int
+    course: Course
+}
+
+extend type Mutation{
+    createOrder(courseInput: CourseInput): Order
+}
