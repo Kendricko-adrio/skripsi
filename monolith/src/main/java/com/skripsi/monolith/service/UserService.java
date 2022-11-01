@@ -1,9 +1,9 @@
 package com.skripsi.monolith.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skripsi.monolith.dto.UserRequestDTO;
-import com.skripsi.monolith.model.User;
-import com.skripsi.monolith.repository.UserRepository;
+import com.skripsi.monolith.dto.user.UserRequestDTO;
+import com.skripsi.monolith.model.user.User;
+import com.skripsi.monolith.repository.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -10,13 +10,13 @@ create table users(
 );
 
 insert into users(id, username, email, password, name, country_id, created_at, updated_at) values
-(1, 'user1', 'email@email.com', 'password', 'name1', 1, 1, 1);
+(1, 'user1', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name1', 1, 1, 1);
 
 insert into users(id, username, email, password, name, country_id, created_at, updated_at) values
-(2, 'user2', 'email@email.com', 'password', 'name2', 1, 1, 1);
+(2, 'user2', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name2', 1, 1, 1);
 
 insert into users(id, username, email, password, name, country_id, created_at, updated_at) values
-(3, 'user3', 'email@email.com', 'password', 'name3', 1, 1, 1);
+(3, 'user3', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name3', 1, 1, 1);
 
 insert into users(id, username, email, password, name, country_id, created_at, updated_at) values
-(4, 'user4', 'email@email.com', 'password', 'name4', 1, 1, 1);
+(4, 'user4', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name4', 1, 1, 1);

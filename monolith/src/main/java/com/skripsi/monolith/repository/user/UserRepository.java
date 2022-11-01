@@ -1,6 +1,6 @@
-package com.skripsi.monolith.repository;
+package com.skripsi.monolith.repository.user;
 
-import com.skripsi.monolith.model.User;
+import com.skripsi.monolith.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
