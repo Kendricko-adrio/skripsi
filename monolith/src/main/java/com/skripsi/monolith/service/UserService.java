@@ -16,6 +16,9 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -32,11 +35,10 @@ public class UserService {
         return userRepository.findFirstByUsername(username).get();
     }
 
-    public User insertUser(UserRequestDTO user){
-        log.info(user.getUsername());
-        ObjectMapper mapper = new ObjectMapper();
-        User users = mapper.convertValue(user, User.class);
-        return userRepository.save(users);
+    public User insertUser(UserRequestDTO userDTO){
+        log.info(userDTO.getUsername());
+        User user = objectMapper.convertValue(userDTO, User.class);
+        return userRepository.save(user);
     }
 
 }

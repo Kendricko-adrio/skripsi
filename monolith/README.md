@@ -2,10 +2,14 @@
 
 configure flyway.conf sesuai dengan url dan username password sesuai local
 
-.\mvnw -Dflyway.configFiles=flyway.conf flyway:migrate
+```.\mvnw -Dflyway.configFiles=flyway.conf flyway:migrate```
+
+```mvn -Dflyway.configFiles=flyway.conf flyway:migrate```
 
 # how to clean all db from flyway:
-.\mvnw -Dflyway.configFiles=flyway.conf flyway:clean
+```.\mvnw -Dflyway.configFiles=flyway.conf flyway:clean```
+
+```mvn -Dflyway.configFiles=flyway.conf flyway:clean```
 
 # Graphql playground:
 ### url:
