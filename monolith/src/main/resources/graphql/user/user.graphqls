@@ -1,7 +1,13 @@
-type User{
-    id: ID
+type User {
+    id: ID!
     username: String!
     email: String!
+    country: Country!
+}
+
+type Country {
+    id: ID!
+    name: String!
 }
 
 input UserRequestDTO{
