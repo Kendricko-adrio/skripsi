@@ -1,8 +1,8 @@
-package com.skripsi.monolith.controller;
+package com.skripsi.monolith.controller.country;
 
-import com.skripsi.monolith.model.Country;
-import com.skripsi.monolith.model.User;
-import com.skripsi.monolith.service.CountryService;
+import com.skripsi.monolith.model.country.Country;
+import com.skripsi.monolith.model.user.User;
+import com.skripsi.monolith.service.country.CountryService;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;

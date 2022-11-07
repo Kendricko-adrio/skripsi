@@ -35,4 +35,7 @@ public class User extends BaseEntity {
 
   @Column(name = "country_id")
   private BigInteger countryId;
+
+  @Column(name = "role_id")
+  private BigInteger roleId;
 }

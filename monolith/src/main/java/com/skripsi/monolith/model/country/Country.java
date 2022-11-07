@@ -1,5 +1,6 @@
-package com.skripsi.monolith.model;
+package com.skripsi.monolith.model.country;
 
+import com.skripsi.monolith.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
