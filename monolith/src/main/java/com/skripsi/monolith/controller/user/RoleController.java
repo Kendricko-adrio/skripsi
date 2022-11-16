@@ -17,7 +17,7 @@ public class RoleController {
 
   @SchemaMapping
   public Role role(User user) {
-    return roleService.getRole(user.getRoleId());
+    return roleService.getRole(user.getRole().getId());
   }
 
 }

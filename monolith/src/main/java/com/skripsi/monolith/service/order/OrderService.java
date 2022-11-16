@@ -31,6 +31,10 @@ public class OrderService {
         this.userService = userService;
     }
 
+    public Order getOrder(BigInteger id){
+        return orderRepository.findById(id).orElse(null);
+    }
+
     public Order createOrder(CourseInput courseInput) {
 
         User user = userService.getUser(courseInput.getCreatedBy());
