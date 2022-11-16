@@ -19,4 +19,5 @@ extend type Mutation{
     createOrder(courseInput: CourseInput): Order
     deleteOrder(orderId: Int!): Order
     assignTeacher(orderInput: OrderInput): Order
+    cancelJobApplication(orderInput: OrderInput): Order
 }

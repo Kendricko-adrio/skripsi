@@ -2,22 +2,25 @@ package com.skripsi.monolith.service.user;
 
 import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.repository.user.RoleRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.List;
 
-@Slf4j
 @Service
 public class RoleService {
-    private RoleRepository roleRepository;
 
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+  private final RoleRepository roleRepository;
 
-    public Role role(BigInteger id){
-        Role role = roleRepository.findById(id).get();
-        return role;
-    }
+  public RoleService(RoleRepository roleRepository) {
+    this.roleRepository = roleRepository;
+  }
+
+  public List<Role> getRoles() {
+    return roleRepository.findAll();
+  }
+
+  public Role getRole(BigInteger id) {
+    return roleRepository.findById(id).orElse(null);
+  }
 }

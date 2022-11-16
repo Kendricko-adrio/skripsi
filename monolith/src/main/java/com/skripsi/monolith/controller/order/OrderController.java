@@ -32,6 +32,11 @@ public class OrderController {
     }
 
     @MutationMapping
+    public Order cancelJobApplication(@Argument OrderInput orderInput){
+        return orderService.cancelJobApplication(orderInput);
+    }
+
+    @MutationMapping
     public Order assignTeacher(@Argument OrderInput orderInput){
         return orderService.assignTeacher(orderInput);
     }

@@ -34,7 +34,7 @@ public class OrderService {
     public Order createOrder(CourseInput courseInput) {
 
         User user = userService.getUser(courseInput.getCreatedBy());
-        Role role = roleService.role(user.getRoleId());
+        Role role = roleService.getRole(user.getRoleId());
         log.info(role.toString());
         if(role.getId().compareTo(new BigInteger("1")) != 0){
             throw new RuntimeException("User role is not Student!");
@@ -56,6 +56,15 @@ public class OrderService {
     public Order assignTeacher(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
         order.setTeacherId(orderInput.getTeacherId());
+        return orderRepository.save(order);
+    }
+
+    public Order cancelJobApplication(OrderInput orderInput){
+        Order order = orderRepository.findById(orderInput.getOrderId()).get();
+        if(order.getTeacherId().compareTo(orderInput.getOrderId()) == 0){
+            throw new RuntimeException("This teacher is not assigned to this order");
+        }
+        order.setTeacherId(null);
         return orderRepository.save(order);
     }
 
