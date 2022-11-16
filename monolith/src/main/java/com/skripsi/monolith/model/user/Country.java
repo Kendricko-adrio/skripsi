@@ -1,4 +1,4 @@
-package com.skripsi.monolith.model.role;
+package com.skripsi.monolith.model.user;
 
 import com.skripsi.monolith.model.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -16,12 +16,11 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "countries")
+public class Country extends BaseEntity {
 
   @Id
   private BigInteger id;
 
   private String name;
-
 }

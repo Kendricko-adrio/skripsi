@@ -1,14 +1,11 @@
 package com.skripsi.monolith.model.user;
 
 import com.skripsi.monolith.model.BaseEntity;
-import com.skripsi.monolith.model.country.Country;
-import com.skripsi.monolith.model.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
