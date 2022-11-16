@@ -1,8 +1,8 @@
-package com.skripsi.monolith.controller.role;
+package com.skripsi.monolith.controller.user;
 
-import com.skripsi.monolith.model.role.Role;
+import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.model.user.User;
-import com.skripsi.monolith.service.role.RoleService;
+import com.skripsi.monolith.service.user.RoleService;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
@@ -17,7 +17,7 @@ public class RoleController {
 
   @SchemaMapping
   public Role role(User user) {
-    return roleService.getRole(user.getRoleId());
+    return roleService.getRole(user.getRole().getId());
   }
 
 }

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,9 +32,18 @@ public class User extends BaseEntity {
 
   private String name;
 
-  @Column(name = "country_id")
-  private BigInteger countryId;
+//  @Column(name = "country_id")
+//  private BigInteger countryId;
 
-  @Column(name = "role_id")
-  private BigInteger roleId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "country_id")
+  private Country country;
+
+//  @Column(name = "role_id")
+//  private BigInteger roleId;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "role_id")
+  private Role role;
+
 }

@@ -7,6 +7,8 @@ import com.skripsi.monolith.repository.order.OrderRepository;
 import com.skripsi.monolith.service.course.CourseService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+
 @Service
 public class OrderService {
     private OrderRepository orderRepository;
@@ -17,11 +19,14 @@ public class OrderService {
         this.courseService = courseService;
     }
 
+    public Order getOrder(BigInteger id){
+        return orderRepository.findById(id).orElse(null);
+    }
+
     public Order createOrder(CourseInput courseInput) {
         Course course = courseService.insertCourse(courseInput);
         Order order = new Order();
         order.setCourse(course);
-        order.setCourseId(course.getId());
         return orderRepository.save(order);
     }
 

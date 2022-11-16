@@ -1,6 +1,6 @@
-package com.skripsi.monolith.repository.role;
+package com.skripsi.monolith.repository.user;
 
-import com.skripsi.monolith.model.role.Role;
+import com.skripsi.monolith.model.user.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;

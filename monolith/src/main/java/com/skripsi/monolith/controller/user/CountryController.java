@@ -1,8 +1,8 @@
-package com.skripsi.monolith.controller.country;
+package com.skripsi.monolith.controller.user;
 
-import com.skripsi.monolith.model.country.Country;
+import com.skripsi.monolith.model.user.Country;
 import com.skripsi.monolith.model.user.User;
-import com.skripsi.monolith.service.country.CountryService;
+import com.skripsi.monolith.service.user.CountryService;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class CountryController {
 
   @SchemaMapping
   public Country country(User user) {
-    return countryService.getCountry(user.getCountryId());
+    return countryService.getCountry(user.getCountry().getId());
   }
 
 }
