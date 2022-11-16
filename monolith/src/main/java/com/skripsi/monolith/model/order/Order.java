@@ -16,6 +16,7 @@ public class Order {
     private BigInteger id;
     private BigInteger courseId;
     private BigInteger teacherId;
+    private Boolean isActive;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id", referencedColumnName = "course_id")

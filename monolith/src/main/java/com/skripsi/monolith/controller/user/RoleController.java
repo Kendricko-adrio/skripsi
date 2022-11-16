@@ -17,7 +17,6 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-
     @SchemaMapping
     private Role role(User user) {
         return roleService.role(user.getRoleId());

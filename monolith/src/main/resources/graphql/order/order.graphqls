@@ -3,8 +3,20 @@ type Order{
     courseId: Int
     teacherId: Int
     course: Course
+    isActive: Boolean
+}
+
+input OrderInput{
+    orderId: ID!
+    teacherId: ID!
+}
+
+extend type Query {
+    getAllOrder:[Order]
 }
 
 extend type Mutation{
     createOrder(courseInput: CourseInput): Order
+    deleteOrder(orderId: Int!): Order
+    assignTeacher(orderInput: OrderInput): Order
 }

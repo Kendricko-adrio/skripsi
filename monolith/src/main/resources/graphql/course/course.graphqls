@@ -2,6 +2,7 @@ type Course{
     id: ID!
     courseName: String!
     courseDescription: String!
+    coursePrice: Int!
     createdBy: Int
 }
 
@@ -9,6 +10,7 @@ input CourseInput{
     id: ID
     courseName: String!
     courseDescription: String!
+    coursePrice: Int!
     createdBy: Int!
 }
 

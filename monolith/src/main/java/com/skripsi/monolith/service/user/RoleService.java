@@ -18,7 +18,6 @@ public class RoleService {
 
     public Role role(BigInteger id){
         Role role = roleRepository.findById(id).get();
-
         return role;
     }
 }

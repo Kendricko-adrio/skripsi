@@ -3,6 +3,7 @@ package com.skripsi.monolith.model.course;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Entity
@@ -14,5 +15,6 @@ public class Course {
     private BigInteger id;
     private String courseName;
     private String courseDescription;
+    private BigInteger coursePrice;
     private BigInteger createdBy;
 }
