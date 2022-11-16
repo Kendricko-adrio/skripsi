@@ -12,9 +12,9 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable {
 
   @CreatedDate
-  private long createdAt;
+  protected long createdAt;
 
   @LastModifiedDate
-  private long updatedAt;
+  protected long updatedAt;
 
 }

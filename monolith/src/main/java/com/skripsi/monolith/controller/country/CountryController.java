@@ -25,7 +25,7 @@ public class CountryController {
 
   @SchemaMapping
   public Country country(User user) {
-    return countryService.getCountry(user.getCountryId());
+    return countryService.getCountry(user.getCountry().getId());
   }
 
 }

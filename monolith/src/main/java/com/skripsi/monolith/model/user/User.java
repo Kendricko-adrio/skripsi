@@ -1,6 +1,8 @@
 package com.skripsi.monolith.model.user;
 
 import com.skripsi.monolith.model.BaseEntity;
+import com.skripsi.monolith.model.country.Country;
+import com.skripsi.monolith.model.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,9 +35,18 @@ public class User extends BaseEntity {
 
   private String name;
 
-  @Column(name = "country_id")
-  private BigInteger countryId;
+//  @Column(name = "country_id")
+//  private BigInteger countryId;
 
-  @Column(name = "role_id")
-  private BigInteger roleId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "country_id")
+  private Country country;
+
+//  @Column(name = "role_id")
+//  private BigInteger roleId;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "role_id")
+  private Role role;
+
 }
