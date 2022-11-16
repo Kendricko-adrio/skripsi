@@ -26,7 +26,9 @@ public class UserService {
     }
 
     public List<User> getUsers(){
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        log.info(users.toString());
+        return users;
     }
 
     public User getUser(BigInteger id){

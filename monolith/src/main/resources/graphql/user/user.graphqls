@@ -3,9 +3,15 @@ type User {
     username: String!
     email: String!
     country: Country!
+    role: Role!
 }
 
 type Country {
+    id: ID!
+    name: String!
+}
+
+type Role{
     id: ID!
     name: String!
 }
@@ -15,6 +21,8 @@ input UserRequestDTO{
     username: String!
     password: String!
     email: String!
+    countryId:ID!
+    roleId: ID!
 }
 
 input UserLoginDTO{
