@@ -1,4 +1,4 @@
-package com.skripsi.monolith.model.user;
+package com.skripsi.monolith.model.country;
 
 import com.skripsi.monolith.model.BaseEntity;
 import lombok.AllArgsConstructor;

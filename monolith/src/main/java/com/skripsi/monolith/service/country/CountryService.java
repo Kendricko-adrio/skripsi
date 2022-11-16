@@ -1,8 +1,8 @@
-package com.skripsi.monolith.service.user;
+package com.skripsi.monolith.service.country;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skripsi.monolith.model.user.Country;
-import com.skripsi.monolith.repository.user.CountryRepository;
+import com.skripsi.monolith.model.country.Country;
+import com.skripsi.monolith.repository.country.CountryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
