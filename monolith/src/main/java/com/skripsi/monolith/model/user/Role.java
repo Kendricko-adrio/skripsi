@@ -17,7 +17,7 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role extends BaseEntity {
 
   @Id
   private BigInteger id;

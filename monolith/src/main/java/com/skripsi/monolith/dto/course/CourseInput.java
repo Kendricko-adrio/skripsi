@@ -9,5 +9,6 @@ public class CourseInput {
     private BigInteger id;
     private String courseName;
     private String courseDescription;
+    private BigInteger coursePrice;
     private BigInteger createdBy;
 }
