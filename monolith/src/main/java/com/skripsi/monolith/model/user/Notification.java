@@ -1,4 +1,4 @@
-package com.skripsi.monolith.model.notification;
+package com.skripsi.monolith.model.user;
 
 import com.skripsi.monolith.model.user.User;
 import lombok.AllArgsConstructor;

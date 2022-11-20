@@ -1,7 +1,6 @@
-type Order{
+type Order {
     id: ID
-    courseId: Int
-    teacherId: Int
+    tutor: User
     course: Course
     isActive: Boolean
 }

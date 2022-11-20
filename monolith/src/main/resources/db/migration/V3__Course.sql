@@ -4,5 +4,5 @@ CREATE TABLE courses(
     course_description varchar(255),
     course_price bigint,
     created_by bigint
-)
+);
 
