@@ -45,8 +45,8 @@ public class OrderController {
   }
 
   @MutationMapping
-  public Order assignTeacher(@Argument OrderInput orderInput) {
-    return orderService.assignTeacher(orderInput);
+  public Order assignTutor(@Argument OrderInput orderInput) {
+    return orderService.assignTutor(orderInput);
   }
 
   @QueryMapping

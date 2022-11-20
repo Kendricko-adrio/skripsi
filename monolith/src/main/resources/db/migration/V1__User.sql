@@ -45,7 +45,7 @@ insert into roles(id, name, created_at, updated_at)
 values (1, 'Student', 0, 0);
 
 insert into roles(id, name, created_at, updated_at)
-values (2, 'Teacher', 0, 0);
+values (2, 'Tutor', 0, 0);
 --
 insert into countries(id, name, created_at, updated_at)
 values (1, 'Indonesia', 0, 0);

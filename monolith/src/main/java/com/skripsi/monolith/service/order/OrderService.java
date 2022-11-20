@@ -61,7 +61,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order assignTeacher(OrderInput orderInput){
+    public Order assignTutor(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
         User tutor = userRepository.findById(orderInput.getTutorId()).get();
         order.setTutor(tutor);
@@ -71,7 +71,7 @@ public class OrderService {
     public Order cancelJobApplication(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
         if(order.getTutor().getId().compareTo(orderInput.getTutorId()) == 0){
-            throw new RuntimeException("This teacher is not assigned to this order");
+            throw new RuntimeException("This tutor is not assigned to this order");
         }
         order.setTutor(null);
         return orderRepository.save(order);
