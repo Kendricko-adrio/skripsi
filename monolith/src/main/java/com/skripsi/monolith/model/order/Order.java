@@ -16,8 +16,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
-    private BigInteger courseId;
-    private BigInteger teacherId;
+
     private Boolean isActive;
 
     @ManyToOne(fetch = FetchType.LAZY)

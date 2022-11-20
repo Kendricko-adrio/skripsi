@@ -26,30 +26,26 @@ public class UserService {
     }
 
     public List<User> getUsers(){
-        List<User> users = userRepository.findAll();
-        log.info(users.toString());
-        return users;
+        return userRepository.findAll();
     }
 
     public User getUser(BigInteger id){
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElse(null);
     }
 
     public User getUserByUsername(String username){
-        return userRepository.findFirstByUsername(username).get();
+        return userRepository.findFirstByUsername(username).orElse(null);
     }
 
     public User insertUser(UserRequestDTO user){
-        log.info(user.toString());
         ObjectMapper mapper = new ObjectMapper();
         User users = mapper.convertValue(user, User.class);
         users.setPassword(passwordEncoder.encode(users.getPassword()));
-        log.info(users.toString());
         return userRepository.save(users);
     }
 
     public User updateUser(UserRequestDTO user){
-        User userUpdate = userRepository.findById(user.getId()).get();
+        User userUpdate = userRepository.findById(user.getId()).orElse(null);
         log.info(userUpdate.toString());
         userUpdate.setEmail(user.getEmail());
         userUpdate.setUsername(user.getUsername());

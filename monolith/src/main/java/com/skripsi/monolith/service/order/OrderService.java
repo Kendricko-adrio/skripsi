@@ -7,10 +7,12 @@ import com.skripsi.monolith.model.order.Order;
 import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.repository.order.OrderRepository;
+import com.skripsi.monolith.repository.user.UserRepository;
 import com.skripsi.monolith.service.course.CourseService;
 import com.skripsi.monolith.service.user.RoleService;
 import com.skripsi.monolith.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -23,6 +25,9 @@ public class OrderService {
     private CourseService courseService;
     private RoleService roleService;
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public OrderService(OrderRepository orderRepository, CourseService courseService, RoleService roleService, UserService userService) {
         this.orderRepository = orderRepository;
@@ -38,7 +43,7 @@ public class OrderService {
     public Order createOrder(CourseInput courseInput) {
 
         User user = userService.getUser(courseInput.getCreatedBy());
-        Role role = roleService.getRole(user.getRoleId());
+        Role role = roleService.getRole(user.getRole().getId());
         log.info(role.toString());
         if(role.getId().compareTo(new BigInteger("1")) != 0){
             throw new RuntimeException("User role is not Student!");
@@ -46,7 +51,6 @@ public class OrderService {
         Course course = courseService.insertCourse(courseInput);
         Order order = new Order();
         order.setCourse(course);
-        order.setCourseId(course.getId());
         order.setIsActive(true);
         return orderRepository.save(order);
     }
@@ -57,18 +61,19 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order assignTeacher(OrderInput orderInput){
+    public Order assignTutor(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        order.setTeacherId(orderInput.getTeacherId());
+        User tutor = userRepository.findById(orderInput.getTutorId()).get();
+        order.setTutor(tutor);
         return orderRepository.save(order);
     }
 
     public Order cancelJobApplication(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        if(order.getTeacherId().compareTo(orderInput.getOrderId()) == 0){
-            throw new RuntimeException("This teacher is not assigned to this order");
+        if(order.getTutor().getId().compareTo(orderInput.getTutorId()) == 0){
+            throw new RuntimeException("This tutor is not assigned to this order");
         }
-        order.setTeacherId(null);
+        order.setTutor(null);
         return orderRepository.save(order);
     }
 

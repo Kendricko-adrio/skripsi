@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.List;
 
 @Data
 @Builder
@@ -32,18 +33,15 @@ public class User extends BaseEntity {
 
   private String name;
 
-//  @Column(name = "country_id")
-//  private BigInteger countryId;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "country_id")
   private Country country;
 
-//  @Column(name = "role_id")
-//  private BigInteger roleId;
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "role_id")
   private Role role;
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Notification> notifications;
 
 }
