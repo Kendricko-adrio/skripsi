@@ -44,6 +44,6 @@ public class CourseController {
 
     @SchemaMapping
     public Course course(Order order){
-        return courseService.getCourse(order.getCourse().getId());
+        return courseService.getCourse(order.getCourseId());
     }
 }
