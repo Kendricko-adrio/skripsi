@@ -43,10 +43,10 @@ insert into users(username, email, password, name, country_id, created_at, updat
 values ('user1', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name1', 1, 1, 1, 1);
 
 insert into users(username, email, password, name, country_id, created_at, updated_at, role_id)
-values ('user2', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name2', 1, 1, 1, 1);
+values ('user2', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name2', 1, 1, 1, 2);
 
 insert into users(username, email, password, name, country_id, created_at, updated_at, role_id)
 values ('user3', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name3', 1, 1, 1, 1);
 
 insert into users(username, email, password, name, country_id, created_at, updated_at, role_id)
-values ('user4', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name4', 1, 1, 1, 1);
+values ('user4', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G', 'name4', 1, 1, 1, 2);

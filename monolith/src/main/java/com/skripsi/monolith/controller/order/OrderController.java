@@ -48,10 +48,21 @@ public class OrderController {
     public Order assignTeacher(@Argument OrderInput orderInput){
         return orderService.assignTeacher(orderInput);
     }
+
+    @MutationMapping
+    public Order cancelPrivateTeacherApplication(@Argument OrderInput orderInput){
+        return orderService.cancelPrivateTeacherApplication(orderInput);
+    }
+
     @QueryMapping
-    public List<Order> getAllOrder(){
+    public List<Order> viewOwnOrder(@Argument Integer page, @Argument Integer size, @Argument BigInteger userId){
+        return orderService.viewOwnOrder(page, size, userId);
+    }
+
+    @QueryMapping
+    public List<Order> getAllOrder() {
         return orderService.getAllOrder();
-      
+    }
     @SchemaMapping
     public Course course(Order order) {
         return courseService.getCourse(order.getCourse().getId());

@@ -11,6 +11,9 @@ import com.skripsi.monolith.service.course.CourseService;
 import com.skripsi.monolith.service.user.RoleService;
 import com.skripsi.monolith.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -38,7 +41,7 @@ public class OrderService {
     public Order createOrder(CourseInput courseInput) {
 
         User user = userService.getUser(courseInput.getCreatedBy());
-        Role role = roleService.getRole(user.getRoleId());
+        Role role = roleService.getRole(user.getRole().getId());
         log.info(role.toString());
         if(role.getId().compareTo(new BigInteger("1")) != 0){
             throw new RuntimeException("User role is not Student!");
@@ -72,7 +75,33 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public Order cancelPrivateTeacherApplication(OrderInput orderInput){
+        Order order = orderRepository.findById(orderInput.getOrderId()).get();
+        order.setTeacherId(null);
+        return orderRepository.save(order);
+    }
+
     public List<Order> getAllOrder(){
         return orderRepository.findByIsActive(true);
+    }
+
+    public List<Order> viewOwnOrder(Integer page, Integer size, BigInteger id){
+        log.info("User ID: " + id);
+        User user = userService.getUser(id);
+
+        Pageable pageable = null;
+        if(!(page == null || size == null)){
+            pageable = PageRequest.of(page,size);
+        }
+
+        List<Order> order = null;
+        if(user.getRole().getId().compareTo(new BigInteger("1")) == 0){
+            // if student
+            order = orderRepository.findByStudentId(id, pageable);
+        }else{
+            // if teacher
+            order = orderRepository.findByTeacherId(id, pageable);
+        }
+        return order;
     }
 }

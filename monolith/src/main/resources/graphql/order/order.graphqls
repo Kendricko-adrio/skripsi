@@ -13,6 +13,7 @@ input OrderInput{
 
 extend type Query {
     getAllOrder:[Order]
+    viewOwnOrder(page: Int, size: Int,userId: Int!): [Order]
 }
 
 extend type Mutation{
@@ -20,4 +21,5 @@ extend type Mutation{
     deleteOrder(orderId: Int!): Order
     assignTeacher(orderInput: OrderInput): Order
     cancelJobApplication(orderInput: OrderInput): Order
+    cancelPrivateTeacherApplication(orderInput: OrderInput): Order
 }
