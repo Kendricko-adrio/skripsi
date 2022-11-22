@@ -1,14 +1,13 @@
-type Order{
+type Order {
     id: ID
-    courseId: Int
-    teacherId: Int
+    tutor: User
     course: Course
     isActive: Boolean
 }
 
 input OrderInput{
     orderId: ID!
-    teacherId: ID!
+    tutorId: ID!
 }
 
 extend type Query {
@@ -19,7 +18,7 @@ extend type Query {
 extend type Mutation{
     createOrder(courseInput: CourseInput): Order
     deleteOrder(orderId: Int!): Order
-    assignTeacher(orderInput: OrderInput): Order
+    assignTutor(orderInput: OrderInput): Order
     cancelJobApplication(orderInput: OrderInput): Order
     cancelPrivateTeacherApplication(orderInput: OrderInput): Order
 }

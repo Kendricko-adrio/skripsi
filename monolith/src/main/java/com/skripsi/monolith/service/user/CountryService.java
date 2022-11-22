@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -28,7 +29,7 @@ public class CountryService {
   }
 
   public Country getCountry(BigInteger id) {
-    return countryRepository.findById(id).get();
+    return countryRepository.findById(id).orElse(null);
   }
 
 }

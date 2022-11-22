@@ -4,6 +4,7 @@ type User {
     email: String!
     country: Country!
     role: Role!
+    notifications: [Notification!]!
 }
 
 type Country {
@@ -14,6 +15,12 @@ type Country {
 type Role{
     id: ID!
     name: String!
+}
+
+type Notification {
+    id: ID!
+    content: String!
+    read: Boolean!
 }
 
 input UserRequestDTO{
