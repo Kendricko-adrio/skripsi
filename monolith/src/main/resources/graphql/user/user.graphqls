@@ -5,6 +5,7 @@ type User {
     country: Country!
     role: Role!
     notifications: [Notification!]!
+    jobVacancies: [JobVacancy!]!
 }
 
 type Country {

@@ -53,20 +53,20 @@ insert into countries(id, name, created_at, updated_at)
 values (2, 'Singapore', 0, 0);
 
 insert into users(username, email, password, name, country_id, role_id, created_at, updated_at)
-values ('user1', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
-        'name1', 1, 1, 0, 0);
+values ('student1', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
+        'Student Pertama', 1, 1, 0, 0);
 
 insert into users(username, email, password, name, country_id, role_id, created_at, updated_at)
-values ('user2', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
-        'name2', 2, 1, 0, 0);
+values ('student 2', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
+        'Student Kedua', 2, 1, 0, 0);
 
 insert into users(username, email, password, name, country_id, role_id, created_at, updated_at)
-values ('user3', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
-        'name3', 1, 2, 0, 0);
+values ('teacher1', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
+        'Teacher Pertama', 1, 2, 0, 0);
 
 insert into users(username, email, password, name, country_id, role_id, created_at, updated_at)
-values ('user4', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
-        'name4', 2, 2, 0, 0);
+values ('teacher2', 'email@email.com', '$2a$10$W/tLF9I8R5WrMEZ/4R0i0OQm8/lDu9Jaf7rzCDsYFKEmfjHiyr21G',
+        'Teacher Kedua', 2, 2, 0, 0);
 
 insert into notifications(user_id, content, read, created_at, updated_at)
 values (1, 'content1', false, 0, 0);

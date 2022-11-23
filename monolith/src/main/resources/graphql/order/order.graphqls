@@ -1,8 +1,9 @@
 type Order {
-    id: ID
-    tutor: User
-    course: Course
-    isActive: Boolean
+    id: ID!
+    tutor: User!
+    student: User!
+    course: Course!
+    isActive: Boolean!
 }
 
 input OrderInput{

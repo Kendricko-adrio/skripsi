@@ -2,11 +2,15 @@ package com.skripsi.monolith.controller.user;
 
 import com.skripsi.monolith.dto.user.UserLoginDTO;
 import com.skripsi.monolith.dto.user.UserRequestDTO;
+import com.skripsi.monolith.model.order.JobApplication;
+import com.skripsi.monolith.model.order.JobVacancy;
+import com.skripsi.monolith.model.order.Order;
 import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.service.user.UserService;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigInteger;
@@ -49,5 +53,20 @@ public class UserController {
     @MutationMapping
     public User updateUser(@Argument UserRequestDTO input) {
         return userService.updateUser(input);
+    }
+
+    @SchemaMapping
+    public User student(JobVacancy jobVacancy) {
+        return userService.getUser(jobVacancy.getStudent().getId());
+    }
+
+    @SchemaMapping
+    public User student(Order order) {
+        return userService.getUser(order.getStudent().getId());
+    }
+
+    @SchemaMapping
+    public User tutor(JobApplication jobApplication) {
+        return userService.getUser(jobApplication.getTutorId());
     }
 }

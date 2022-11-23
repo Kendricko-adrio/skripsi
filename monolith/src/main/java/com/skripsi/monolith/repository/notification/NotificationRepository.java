@@ -1,6 +1,6 @@
 package com.skripsi.monolith.repository.notification;
 
-import com.skripsi.monolith.model.user.Notification;
+import com.skripsi.monolith.model.notification.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;

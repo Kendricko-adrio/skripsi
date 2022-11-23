@@ -1,6 +1,6 @@
 package com.skripsi.monolith.service.notification;
 
-import com.skripsi.monolith.model.user.Notification;
+import com.skripsi.monolith.model.notification.Notification;
 import com.skripsi.monolith.repository.notification.NotificationRepository;
 import org.springframework.stereotype.Service;
 
