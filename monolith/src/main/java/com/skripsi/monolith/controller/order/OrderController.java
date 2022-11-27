@@ -67,4 +67,5 @@ public class OrderController {
     public Course course(Order order) {
         return courseService.getCourse(order.getCourse().getId());
     }
+
 }

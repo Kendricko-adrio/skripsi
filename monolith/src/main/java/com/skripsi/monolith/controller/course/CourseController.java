@@ -42,8 +42,4 @@ public class CourseController {
         return courseService.updateCourse(input);
     }
 
-    @SchemaMapping
-    public Course course(Order order){
-        return courseService.getCourse(order.getCourseId());
-    }
 }
