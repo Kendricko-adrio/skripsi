@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface JobApplicationRepository extends JpaRepository<JobApplication, JobApplicationId> {
 
-  List<JobApplication> findAllByJobVacancyIdAndTutorIdAndMarkForDeleteFalse(BigInteger jobVacancyId, BigInteger tutorId);
+  List<JobApplication> findAllByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(BigInteger jobVacancyId, BigInteger teacherId);
 
   List<JobApplication> findAllByJobVacancyIdAndMarkForDeleteFalse(BigInteger jobVacancyId);
 
-  List<JobApplication> findAllByTutorIdAndMarkForDeleteFalse(BigInteger tutorId);
+  List<JobApplication> findAllByTeacherIdAndMarkForDeleteFalse(BigInteger teacherId);
 
 }

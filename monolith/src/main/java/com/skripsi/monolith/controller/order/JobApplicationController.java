@@ -26,13 +26,13 @@ public class JobApplicationController {
 
   @QueryMapping
   public List<JobApplication> getJobApplications(@Argument BigInteger jobVacancyId,
-      @Argument BigInteger tutorId) {
-    return jobApplicationService.getJobApplications(jobVacancyId, tutorId);
+      @Argument BigInteger teacherId) {
+    return jobApplicationService.getJobApplications(jobVacancyId, teacherId);
   }
 
   @QueryMapping
-  public List<JobApplication> getJobApplicationsByTutor(@Argument BigInteger tutorId) {
-    return jobApplicationService.getJobApplicationsByTutor(tutorId);
+  public List<JobApplication> getJobApplicationsByTeacher(@Argument BigInteger teacherId) {
+    return jobApplicationService.getJobApplicationsByTeacher(teacherId);
   }
 
   @MutationMapping
@@ -56,8 +56,8 @@ public class JobApplicationController {
   }
 
   @SchemaMapping
-  public List<JobApplication> jobApplications(User tutor) {
-    return jobApplicationService.getJobApplicationsByTutor(tutor.getId());
+  public List<JobApplication> jobApplications(User teacher) {
+    return jobApplicationService.getJobApplicationsByTeacher(teacher.getId());
   }
 
   @SchemaMapping

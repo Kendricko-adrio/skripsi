@@ -1,6 +1,6 @@
 type Order {
     id: ID!
-    tutor: User!
+    teacher: User!
     student: User!
     course: Course!
     isActive: Boolean!
@@ -8,16 +8,18 @@ type Order {
 
 input OrderInput{
     orderId: ID!
-    tutorId: ID!
+    teacherId: ID!
 }
 
 extend type Query {
     getAllOrder:[Order]
+    viewOwnOrder(page: Int, size: Int,userId: Int!): [Order]
 }
 
 extend type Mutation{
     createOrder(courseInput: CourseInput): Order
     deleteOrder(orderId: Int!): Order
-    assignTutor(orderInput: OrderInput): Order
+    assignTeacher(orderInput: OrderInput): Order
     cancelJobApplication(orderInput: OrderInput): Order
+    cancelPrivateTeacherApplication(orderInput: OrderInput): Order
 }

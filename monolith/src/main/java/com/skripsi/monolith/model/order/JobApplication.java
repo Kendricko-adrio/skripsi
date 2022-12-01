@@ -34,8 +34,8 @@ public class JobApplication extends BaseEntity {
   private BigInteger jobVacancyId;
 
   @Id
-  @Column(name = "tutor_id")
-  private BigInteger tutorId;
+  @Column(name = "teacher_id")
+  private BigInteger teacherId;
 
   @Column(name = "approval_status")
   @Enumerated(EnumType.STRING)

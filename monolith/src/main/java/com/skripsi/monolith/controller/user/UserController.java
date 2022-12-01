@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @SchemaMapping
-    public User tutor(JobApplication jobApplication) {
-        return userService.getUser(jobApplication.getTutorId());
+    public User teacher(JobApplication jobApplication) {
+        return userService.getUser(jobApplication.getTeacherId());
     }
 }

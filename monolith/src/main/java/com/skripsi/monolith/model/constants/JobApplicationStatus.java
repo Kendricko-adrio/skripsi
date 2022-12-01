@@ -9,7 +9,7 @@ public enum JobApplicationStatus {
   PENDING("Pending"),
   APPROVED("Approved"),
   REJECTED_BY_STUDENT("Rejected by Student"),
-  CANCELLED_BY_TUTOR("Cancelled by Tutor");
+  CANCELLED_BY_TEACHER("Cancelled by Teacher");
 
   @Getter
   private String description;

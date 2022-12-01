@@ -13,6 +13,9 @@ import com.skripsi.monolith.service.user.RoleService;
 import com.skripsi.monolith.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -60,25 +63,49 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order assignTutor(OrderInput orderInput){
+    public Order assignTeacher(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        User tutor = userRepository.findById(orderInput.getTutorId()).get();
-//         TODO: change logic later
-//                order.setTutor(tutor);
+        User teacher = userRepository.findById(orderInput.getTeacherId()).get();
+        order.setTeacher(teacher);
         return orderRepository.save(order);
     }
 
     public Order cancelJobApplication(OrderInput orderInput){
         Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        // TODO: change logic later
-//        if(order.getTutor().getId().compareTo(orderInput.getTutorId()) == 0){
-//            throw new RuntimeException("This tutor is not assigned to this order");
-//        }
-//        order.setTutor(null);
+        if(order.getTeacher().getId().compareTo(orderInput.getOrderId()) == 0){
+            throw new RuntimeException("This teacher is not assigned to this order");
+        }
+        order.setTeacher(null);
+        return orderRepository.save(order);
+    }
+
+    public Order cancelPrivateTeacherApplication(OrderInput orderInput){
+        Order order = orderRepository.findById(orderInput.getOrderId()).get();
+        order.setTeacher(null);
         return orderRepository.save(order);
     }
 
     public List<Order> getAllOrder(){
         return orderRepository.findByIsActive(true);
+    }
+
+    public List<Order> viewOwnOrder(Integer page, Integer size, BigInteger id){
+        log.info("User ID: " + id);
+        User user = userService.getUser(id);
+
+        Pageable pageable = null;
+        if(!(page == null || size == null)){
+            pageable = PageRequest.of(page,size);
+        }
+
+        List<Order> order = null;
+        if(user.getRole().getId().compareTo(new BigInteger("1")) == 0){
+            // if student
+            order = orderRepository.findByStudentId(id, pageable);
+        }else{
+            // if teacher
+            order = orderRepository.findByTeacherId(id, pageable);
+        }
+        return order;
     }
 }

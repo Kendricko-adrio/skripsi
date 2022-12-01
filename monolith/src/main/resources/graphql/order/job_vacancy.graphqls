@@ -14,7 +14,7 @@ type JobApplication {
 
 type JobApplicationId {
     jobVacancy: JobVacancy!
-    tutor: User!
+    teacher: User!
 }
 
 input CreateJobVacancyRequest {
@@ -35,22 +35,22 @@ input DeleteJobVacancyRequest {
 
 input CreateJobApplicationRequest {
     jobVacancyId: ID!
-    tutorId: ID!
+    teacherId: ID!
 }
 
 input RejectJobApplicationRequest {
     jobVacancyId: ID!
-    tutorId: ID!
+    teacherId: ID!
 }
 
 input WithdrawJobApplicationRequest {
     jobVacancyId: ID!
-    tutorId: ID!
+    teacherId: ID!
 }
 
 input AcceptJobApplicationRequest {
     jobVacancyId: ID!
-    tutorId: ID!
+    teacherId: ID!
 }
 
 extend type Query {
@@ -58,7 +58,7 @@ extend type Query {
     getJobVacancies: [JobVacancy!]!,
     getJobVacancyByUser(id: ID!): JobVacancy!,
     getJobApplications: [JobApplication!]!,
-    getJobApplicationByTutor(tutorId: ID!): [JobApplication!]!,
+    getJobApplicationByTeacher(teacherId: ID!): [JobApplication!]!,
 }
 
 extend type Mutation {

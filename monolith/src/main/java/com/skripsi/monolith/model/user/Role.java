@@ -23,7 +23,7 @@ import java.util.List;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "roles")
-public class Role extends BaseEntity {
+public class Role {
 
   @Id
   private BigInteger id;

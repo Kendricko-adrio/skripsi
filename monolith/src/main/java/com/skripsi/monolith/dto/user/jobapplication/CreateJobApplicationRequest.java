@@ -18,6 +18,6 @@ public class CreateJobApplicationRequest {
   private BigInteger jobVacancyId;
 
   @NotBlank(message = "NotBlank")
-  private BigInteger tutorId;
+  private BigInteger teacherId;
 
 }

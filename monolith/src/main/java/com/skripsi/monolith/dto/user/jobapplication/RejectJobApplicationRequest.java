@@ -19,6 +19,6 @@ public class RejectJobApplicationRequest {
   private BigInteger jobVacancyId;
 
   @NotNull(message = "NotNull")
-  private BigInteger tutorId;
+  private BigInteger teacherId;
 
 }

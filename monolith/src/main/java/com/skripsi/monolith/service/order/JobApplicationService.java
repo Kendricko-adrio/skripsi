@@ -28,24 +28,24 @@ public class JobApplicationService {
   @Autowired
   private UserRepository userRepository;
 
-  public List<JobApplication> getJobApplications(BigInteger jobVacancyId, BigInteger tutorId) {
-    return jobApplicationRepository.findAllByJobVacancyIdAndTutorIdAndMarkForDeleteFalse(
+  public List<JobApplication> getJobApplications(BigInteger jobVacancyId, BigInteger teacherId) {
+    return jobApplicationRepository.findAllByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(
         jobVacancyId,
-        tutorId);
+        teacherId);
   }
 
   public List<JobApplication> getJobApplicationsByJobVacancy(BigInteger jobVacancyId) {
     return jobApplicationRepository.findAllByJobVacancyIdAndMarkForDeleteFalse(jobVacancyId);
   }
 
-  public List<JobApplication> getJobApplicationsByTutor(BigInteger tutorId) {
-    return jobApplicationRepository.findAllByTutorIdAndMarkForDeleteFalse(tutorId);
+  public List<JobApplication> getJobApplicationsByTeacher(BigInteger teacherId) {
+    return jobApplicationRepository.findAllByTeacherIdAndMarkForDeleteFalse(teacherId);
   }
 
   public JobApplication createJobApplication(CreateJobApplicationRequest request) {
     JobApplication jobApplication = JobApplication.builder()
         .jobVacancyId(request.getJobVacancyId())
-        .tutorId(request.getTutorId())
+        .teacherId(request.getTeacherId())
         .approvalStatus(JobApplicationStatus.PENDING)
         .build();
 
@@ -55,7 +55,7 @@ public class JobApplicationService {
   public Boolean rejectJobApplication(RejectJobApplicationRequest request) {
     JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
         .jobVacancyId(request.getJobVacancyId())
-        .tutorId(request.getTutorId())
+        .teacherId(request.getTeacherId())
         .build()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.REJECTED_BY_STUDENT);
     jobApplicationRepository.save(jobApplication);
@@ -65,9 +65,9 @@ public class JobApplicationService {
   public Boolean withdrawJobApplication(WithdrawJobApplicationRequest request) {
     JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
         .jobVacancyId(request.getJobVacancyId())
-        .tutorId(request.getTutorId())
+        .teacherId(request.getTeacherId())
         .build()).get();
-    jobApplication.setApprovalStatus(JobApplicationStatus.CANCELLED_BY_TUTOR);
+    jobApplication.setApprovalStatus(JobApplicationStatus.CANCELLED_BY_TEACHER);
     jobApplicationRepository.save(jobApplication);
     return true;
   }
@@ -75,7 +75,7 @@ public class JobApplicationService {
   public Boolean acceptJobApplication(AcceptJobApplicationRequest request) {
     JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
         .jobVacancyId(request.getJobVacancyId())
-        .tutorId(request.getTutorId())
+        .teacherId(request.getTeacherId())
         .build()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.APPROVED);
     jobApplicationRepository.save(jobApplication);
