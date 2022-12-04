@@ -1,6 +1,9 @@
 package com.skripsi.monolith.service.notification;
 
+import com.skripsi.monolith.model.constants.NotificationStatus;
 import com.skripsi.monolith.model.notification.Notification;
+import com.skripsi.monolith.model.order.JobApplication;
+import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.repository.notification.NotificationRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +21,13 @@ public class NotificationService {
 
   public List<Notification> getNotifications(BigInteger userId) {
     return repository.findAllByUser_Id(userId);
+  }
+
+  public Notification saveJobApplicationNotification(User targetUser, NotificationStatus status) {
+    return repository.save(Notification.builder()
+        .content(status.name())
+        .read(false)
+        .user(targetUser)
+        .build());
   }
 }

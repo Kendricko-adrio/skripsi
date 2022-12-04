@@ -3,7 +3,6 @@ package com.skripsi.monolith.service.order;
 import com.skripsi.monolith.dto.user.jobvacancy.CreateJobVacancyRequest;
 import com.skripsi.monolith.dto.user.jobvacancy.DeleteJobVacancyRequest;
 import com.skripsi.monolith.dto.user.jobvacancy.UpdateJobVacancyRequest;
-import com.skripsi.monolith.model.order.JobApplication;
 import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.repository.course.CourseRepository;
 import com.skripsi.monolith.repository.order.JobApplicationRepository;
@@ -54,14 +53,14 @@ public class JobVacancyService {
   }
 
   public JobVacancy updateJobVacancy(UpdateJobVacancyRequest request) {
-    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getId()).orElse(null);
+    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getId()).get();
     jobVacancy.setDescription(request.getDescription());
     jobVacancy.setIsActive(request.getIsActive());
     return jobVacancyRepository.save(jobVacancy);
   }
 
   public Boolean deleteJobVacancy(DeleteJobVacancyRequest request) {
-    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getId()).orElse(null);
+    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getId()).get();
     jobVacancy.setMarkForDelete(Boolean.TRUE);
     jobVacancyRepository.save(jobVacancy);
     return Boolean.TRUE;

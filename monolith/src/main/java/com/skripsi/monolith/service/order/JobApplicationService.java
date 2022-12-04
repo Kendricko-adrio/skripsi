@@ -5,11 +5,14 @@ import com.skripsi.monolith.dto.user.jobapplication.CreateJobApplicationRequest;
 import com.skripsi.monolith.dto.user.jobapplication.RejectJobApplicationRequest;
 import com.skripsi.monolith.dto.user.jobapplication.WithdrawJobApplicationRequest;
 import com.skripsi.monolith.model.constants.JobApplicationStatus;
+import com.skripsi.monolith.model.constants.NotificationStatus;
 import com.skripsi.monolith.model.order.JobApplication;
+import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.model.order.jobapplication.JobApplicationId;
 import com.skripsi.monolith.repository.order.JobApplicationRepository;
 import com.skripsi.monolith.repository.order.JobVacancyRepository;
 import com.skripsi.monolith.repository.user.UserRepository;
+import com.skripsi.monolith.service.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ public class JobApplicationService {
 
   @Autowired
   private JobApplicationRepository jobApplicationRepository;
+
+  @Autowired
+  private NotificationService notificationService;
 
   @Autowired
   private JobVacancyRepository jobVacancyRepository;
@@ -49,6 +55,10 @@ public class JobApplicationService {
         .approvalStatus(JobApplicationStatus.PENDING)
         .build();
 
+    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        NotificationStatus.JOB_APPLICATION_NEW);
+
     return jobApplicationRepository.save(jobApplication);
   }
 
@@ -59,6 +69,11 @@ public class JobApplicationService {
         .build()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.REJECTED_BY_STUDENT);
     jobApplicationRepository.save(jobApplication);
+
+    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        NotificationStatus.JOB_APPLICATION_REJECTION);
+
     return true;
   }
 
@@ -69,6 +84,11 @@ public class JobApplicationService {
         .build()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.CANCELLED_BY_TEACHER);
     jobApplicationRepository.save(jobApplication);
+
+    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        NotificationStatus.JOB_APPLICATION_WITHDRAW);
+
     return true;
   }
 
@@ -79,6 +99,11 @@ public class JobApplicationService {
         .build()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.APPROVED);
     jobApplicationRepository.save(jobApplication);
+
+    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
+
     return true;
   }
 

@@ -16,7 +16,7 @@ extend type Query {
     viewOwnOrder(page: Int, size: Int,userId: Int!): [Order]
 }
 
-extend type Mutation{
+extend type Mutation {
     createOrder(courseInput: CourseInput): Order
     deleteOrder(orderId: Int!): Order
     assignTeacher(orderInput: OrderInput): Order

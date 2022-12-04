@@ -18,12 +18,6 @@ type Role{
     name: String!
 }
 
-type Notification {
-    id: ID!
-    content: String!
-    read: Boolean!
-}
-
 input UserRequestDTO{
     id: ID
     username: String!
