@@ -19,53 +19,46 @@ import java.util.List;
 @Controller
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+  @Autowired
+  private OrderService orderService;
 
-    @Autowired
-    private CourseService courseService;
+  @Autowired
+  private CourseService courseService;
 
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
+  @MutationMapping
+  public Order createOrder(@Argument CourseInput courseInput) {
+    return orderService.createOrder(courseInput);
+  }
 
-    @MutationMapping
-    public Order createOrder(@Argument CourseInput courseInput){
-        return orderService.createOrder(courseInput);
-    }
+  @MutationMapping
+  public Order deleteOrder(@Argument BigInteger orderId) {
+    return orderService.deleteOrder(orderId);
+  }
 
-    @MutationMapping
-    public Order deleteOrder(@Argument BigInteger orderId){
-        return orderService.deleteOrder(orderId);
-    }
+  @MutationMapping
+  public Order cancelJobApplication(@Argument OrderInput orderInput) {
+    return orderService.cancelJobApplication(orderInput);
+  }
 
-    @MutationMapping
-    public Order cancelJobApplication(@Argument OrderInput orderInput){
-        return orderService.cancelJobApplication(orderInput);
-    }
+  @MutationMapping
+  public Order assignTeacher(@Argument OrderInput orderInput) {
+    return orderService.assignTeacher(orderInput);
+  }
 
-    @MutationMapping
-    public Order assignTeacher(@Argument OrderInput orderInput){
-        return orderService.assignTeacher(orderInput);
-    }
+  @MutationMapping
+  public Order cancelPrivateTeacherApplication(@Argument OrderInput orderInput) {
+    return orderService.cancelPrivateTeacherApplication(orderInput);
+  }
 
-    @MutationMapping
-    public Order cancelPrivateTeacherApplication(@Argument OrderInput orderInput){
-        return orderService.cancelPrivateTeacherApplication(orderInput);
-    }
+  @QueryMapping
+  public List<Order> viewOwnOrder(@Argument Integer page,
+      @Argument Integer size,
+      @Argument BigInteger userId) {
+    return orderService.viewOwnOrder(page, size, userId);
+  }
 
-    @QueryMapping
-    public List<Order> viewOwnOrder(@Argument Integer page, @Argument Integer size, @Argument BigInteger userId){
-        return orderService.viewOwnOrder(page, size, userId);
-    }
-
-    @QueryMapping
-    public List<Order> getAllOrder() {
-        return orderService.getAllOrder();
-    }
-    @SchemaMapping
-    public Course course(Order order) {
-        return courseService.getCourse(order.getCourse().getId());
-    }
-
+  @QueryMapping
+  public List<Order> getAllOrder() {
+    return orderService.getAllOrder();
+  }
 }

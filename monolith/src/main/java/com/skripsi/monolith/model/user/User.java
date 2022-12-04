@@ -1,10 +1,13 @@
 package com.skripsi.monolith.model.user;
 
 import com.skripsi.monolith.model.BaseEntity;
+import com.skripsi.monolith.model.notification.Notification;
+import com.skripsi.monolith.model.order.JobApplication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
 public class User extends BaseEntity {
   @Id

@@ -18,9 +18,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.math.BigInteger;
+import java.util.List;
 
 @Data
 @Builder
@@ -28,25 +29,25 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "orders")
-public class Order extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+@Table(name = "job_vacancies")
+public class JobVacancy extends BaseEntity {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private BigInteger id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id")
-    private Course course;
+  @Column(name = "is_active")
+  private Boolean isActive;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private User student;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "student_id")
+  private User student;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id")
-    private User teacher;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "course_id")
+  private Course course;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+  private String description;
 
+  @Column(name = "mark_for_delete")
+  private boolean markForDelete;
 }
