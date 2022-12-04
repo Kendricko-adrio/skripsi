@@ -1,6 +1,6 @@
 package com.skripsi.monolith.controller.notification;
 
-import com.skripsi.monolith.model.user.Notification;
+import com.skripsi.monolith.model.notification.Notification;
 import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.service.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;

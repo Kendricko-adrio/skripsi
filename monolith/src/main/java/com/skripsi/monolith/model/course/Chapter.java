@@ -1,4 +1,4 @@
-package com.skripsi.monolith.model.user;
+package com.skripsi.monolith.model.course;
 
 import com.skripsi.monolith.model.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.math.BigInteger;
-import java.util.List;
 
 @Data
 @Builder
@@ -22,15 +24,19 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "roles")
-public class Role {
+@Table(name = "chapters")
+public class Chapter extends BaseEntity {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private BigInteger id;
 
   private String name;
 
-  @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-  private List<User> users;
+  private String detail;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "course_id")
+  private Course course;
 
 }
