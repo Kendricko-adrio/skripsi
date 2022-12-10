@@ -1,6 +1,5 @@
-package com.example.courseskripsi.constant;
+package com.skripsi.userskripsi.constant;
 
-import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 

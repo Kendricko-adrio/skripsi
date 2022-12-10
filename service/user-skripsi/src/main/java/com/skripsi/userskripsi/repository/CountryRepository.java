@@ -1,6 +1,6 @@
-package com.skripsi.monolith.repository.user;
+package com.skripsi.userskripsi.repository;
 
-import com.skripsi.monolith.model.user.Country;
+import com.skripsi.userskripsi.model.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;

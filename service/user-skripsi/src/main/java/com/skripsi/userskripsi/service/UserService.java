@@ -1,10 +1,12 @@
-package com.skripsi.monolith.service.user;
+package com.skripsi.userskripsi.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skripsi.monolith.dto.user.UserLoginDTO;
-import com.skripsi.monolith.dto.user.UserRequestDTO;
-import com.skripsi.monolith.model.user.User;
-import com.skripsi.monolith.repository.user.UserRepository;
+import com.skripsi.userskripsi.dto.UserLoginDTO;
+import com.skripsi.userskripsi.dto.UserRequestDTO;
+import com.skripsi.userskripsi.model.Country;
+import com.skripsi.userskripsi.model.Role;
+import com.skripsi.userskripsi.model.User;
+import com.skripsi.userskripsi.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,10 +40,19 @@ public class UserService {
     }
 
     public User insertUser(UserRequestDTO user){
-        ObjectMapper mapper = new ObjectMapper();
-        User users = mapper.convertValue(user, User.class);
-        users.setPassword(passwordEncoder.encode(users.getPassword()));
-        return userRepository.save(users);
+        User userInsert = requestToUserMapper(user);
+        return userRepository.save(userInsert);
+    }
+
+    private User requestToUserMapper(UserRequestDTO user){
+        return User.builder()
+                .name(user.getName())
+                .username(user.getUsername())
+                .password(passwordEncoder.encode(user.getPassword()))
+                .email(user.getEmail())
+                .country(new Country().builder().id(user.getCountryId()).build())
+                .role(new Role().builder().id(user.getRoleId()).build())
+                .build();
     }
 
     public User updateUser(UserRequestDTO user){
@@ -50,6 +61,9 @@ public class UserService {
         userUpdate.setEmail(user.getEmail());
         userUpdate.setUsername(user.getUsername());
         userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+        userUpdate.setName(user.getName());
+        userUpdate.setCountry(new Country().builder().id(user.getCountryId()).build());
+        userUpdate.setRole(new Role().builder().id(user.getRoleId()).build());
         return userRepository.save(userUpdate);
     }
 

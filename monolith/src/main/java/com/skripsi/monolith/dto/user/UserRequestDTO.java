@@ -10,7 +10,9 @@ import java.math.BigInteger;
 public class UserRequestDTO {
     private BigInteger id;
     private String username;
+    private String name;
     private String password;
     private String email;
     private BigInteger countryId;
+    private BigInteger roleId;
 }

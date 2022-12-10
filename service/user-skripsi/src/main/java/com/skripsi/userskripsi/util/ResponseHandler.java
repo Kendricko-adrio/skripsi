@@ -1,12 +1,8 @@
-package com.example.courseskripsi.util;
+package com.skripsi.userskripsi.util;
 
-import com.example.courseskripsi.constant.ResponseMessage;
-import com.example.courseskripsi.dto.BaseResponse;
-import org.springframework.http.HttpStatus;
+import com.skripsi.userskripsi.constant.ResponseMessage;
+import com.skripsi.userskripsi.dto.BaseResponse;
 import org.springframework.http.ResponseEntity;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ResponseHandler {
     public static ResponseEntity<BaseResponse> generateResponse(ResponseMessage message, Object responseObj) {

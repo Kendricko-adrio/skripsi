@@ -1,4 +1,4 @@
-package com.skripsi.monolith.model;
+package com.skripsi.userskripsi.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

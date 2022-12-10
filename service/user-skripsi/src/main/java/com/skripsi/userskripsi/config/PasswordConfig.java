@@ -1,4 +1,4 @@
-package com.skripsi.monolith.config;
+package com.skripsi.userskripsi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

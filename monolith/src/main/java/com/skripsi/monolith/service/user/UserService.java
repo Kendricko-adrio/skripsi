@@ -1,12 +1,12 @@
-package com.skripsi.userskripsi.service;
+package com.skripsi.monolith.service.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.skripsi.userskripsi.dto.UserLoginDTO;
-import com.skripsi.userskripsi.dto.UserRequestDTO;
-import com.skripsi.userskripsi.model.Country;
-import com.skripsi.userskripsi.model.Role;
-import com.skripsi.userskripsi.model.User;
-import com.skripsi.userskripsi.repository.UserRepository;
+import com.skripsi.monolith.dto.user.UserLoginDTO;
+import com.skripsi.monolith.dto.user.UserRequestDTO;
+import com.skripsi.monolith.model.user.Country;
+import com.skripsi.monolith.model.user.Role;
+import com.skripsi.monolith.model.user.User;
+import com.skripsi.monolith.repository.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class UserService {
 
     public User updateUser(UserRequestDTO user){
         User userUpdate = userRepository.findById(user.getId()).orElse(null);
-        log.info(userUpdate.toString());
+//        log.info(userUpdate.toString());
         userUpdate.setEmail(user.getEmail());
         userUpdate.setUsername(user.getUsername());
         userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -77,5 +77,6 @@ public class UserService {
 //        log.info("password : {}", passwordEncoder.encode(user.getPassword()));
         return passwordEncoder.matches(user.getPassword(), userSearch.get().getPassword());
     }
+
 
 }

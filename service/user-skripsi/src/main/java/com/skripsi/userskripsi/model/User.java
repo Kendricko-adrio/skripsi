@@ -1,18 +1,11 @@
-package com.skripsi.monolith.model.user;
+package com.skripsi.userskripsi.model;
 
-import com.skripsi.monolith.model.BaseEntity;
-import com.skripsi.monolith.model.notification.Notification;
-import com.skripsi.monolith.model.order.JobApplication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
@@ -41,11 +34,13 @@ public class User extends BaseEntity {
   @JoinColumn(name = "country_id")
   private Country country;
 
+
+
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "role_id")
   private Role role;
 
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-  private List<Notification> notifications;
+//  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//  private List<Notification> notifications;
 
 }

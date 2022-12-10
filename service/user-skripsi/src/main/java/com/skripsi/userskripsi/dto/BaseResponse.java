@@ -1,4 +1,4 @@
-package com.example.courseskripsi.dto;
+package com.skripsi.userskripsi.dto;
 
 import lombok.Data;
 

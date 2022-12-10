@@ -22,6 +22,7 @@ input UserRequestDTO{
     id: ID
     username: String!
     password: String!
+    name: String!
     email: String!
     countryId:ID!
     roleId: ID!

@@ -1,18 +1,12 @@
-package com.skripsi.monolith.model.user;
+package com.skripsi.userskripsi.model;
 
-import com.skripsi.monolith.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -30,7 +24,7 @@ public class Role {
 
   private String name;
 
-  @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-  private List<User> users;
+//  @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+//  private List<User> users;
 
 }

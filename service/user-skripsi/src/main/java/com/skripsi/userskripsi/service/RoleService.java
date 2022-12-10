@@ -1,7 +1,7 @@
-package com.skripsi.monolith.service.user;
+package com.skripsi.userskripsi.service;
 
-import com.skripsi.monolith.model.user.Role;
-import com.skripsi.monolith.repository.user.RoleRepository;
+import com.skripsi.userskripsi.model.Role;
+import com.skripsi.userskripsi.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
