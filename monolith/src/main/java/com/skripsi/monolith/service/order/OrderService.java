@@ -86,7 +86,8 @@ public class OrderService {
     }
 
     public List<Order> getAllOrder(){
-        return orderRepository.findByIsActive(true);
+
+        return orderRepository.findByIsActive(true); 
     }
 
     public List<Order> viewOwnOrder(Integer page, Integer size, BigInteger id){
