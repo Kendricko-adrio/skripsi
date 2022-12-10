@@ -1,4 +1,4 @@
-package com.skripsi.monolith.dto.user;
+package com.skripsi.userskripsi.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

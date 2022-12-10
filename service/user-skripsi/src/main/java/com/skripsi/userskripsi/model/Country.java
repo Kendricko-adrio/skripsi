@@ -1,4 +1,4 @@
-package com.example.courseskripsi.model;
+package com.skripsi.userskripsi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigInteger;
 
 @Data
@@ -15,19 +18,11 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "chapters")
-public class Chapter extends BaseEntity {
+@Table(name = "countries")
+public class Country extends BaseEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private BigInteger id;
 
   private String name;
-
-  private String detail;
-
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "course_id")
-  private Course course;
-
 }
