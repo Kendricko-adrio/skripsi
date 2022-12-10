@@ -1,0 +1,15 @@
+type Course{
+    id: ID!
+    courseName: String!
+    courseDescription: String!
+    coursePrice: Int!
+    createdBy: User!
+}
+
+type User @key(fields: "id") @extends {
+    id: ID! @external
+}
+
+extend type Query {
+    getCourses: [Course]
+}
