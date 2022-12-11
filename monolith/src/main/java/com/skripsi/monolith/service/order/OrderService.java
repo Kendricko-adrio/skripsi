@@ -3,6 +3,7 @@ package com.skripsi.monolith.service.order;
 import com.skripsi.monolith.dto.course.CourseInput;
 import com.skripsi.monolith.dto.order.OrderInput;
 import com.skripsi.monolith.model.course.Course;
+import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.model.order.Order;
 import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.model.user.User;
@@ -25,63 +26,38 @@ import java.util.List;
 @Slf4j
 public class OrderService {
     private OrderRepository orderRepository;
-    private CourseService courseService;
-    private RoleService roleService;
-    private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
 
-    public OrderService(OrderRepository orderRepository, CourseService courseService, RoleService roleService, UserService userService) {
+    public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.courseService = courseService;
-        this.roleService = roleService;
-        this.userService = userService;
+
     }
 
     public Order getOrder(BigInteger id){
         return orderRepository.findById(id).orElse(null);
     }
 
-    public Order createOrder(CourseInput courseInput) {
+//    public Order createOrder(CourseInput courseInput) {
+//
+//        User user = userService.getUser(courseInput.getCreatedBy());
+//        Role role = roleService.getRole(user.getRole().getId());
+//        if(role.getId().compareTo(new BigInteger("1")) != 0){
+//            throw new RuntimeException("User role is not Student!");
+//        }
+//        Course course = courseService.insertCourse(courseInput);
+//        Order order = new Order();
+//        order.setCourse(course);
+//        order.setIsActive(true);
+//        return orderRepository.save(order);
+//    }
+    public Order createOrder(JobVacancy jobVacancy, BigInteger teacherId) {
+        Order order = Order.builder()
+                .course(jobVacancy.getCourse())
+                .student(jobVacancy.getStudent())
+                .teacher(User.builder().id(teacherId).build())
+                .isActive(true)
+                .build();
 
-        User user = userService.getUser(courseInput.getCreatedBy());
-        Role role = roleService.getRole(user.getRole().getId());
-        if(role.getId().compareTo(new BigInteger("1")) != 0){
-            throw new RuntimeException("User role is not Student!");
-        }
-        Course course = courseService.insertCourse(courseInput);
-        Order order = new Order();
-        order.setCourse(course);
-        order.setIsActive(true);
-        return orderRepository.save(order);
-    }
-
-    public Order deleteOrder(BigInteger orderId){
-        Order order = orderRepository.findById(orderId).get();
-        order.setIsActive(false);
-        return orderRepository.save(order);
-    }
-
-    public Order assignTeacher(OrderInput orderInput){
-        Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        User teacher = userRepository.findById(orderInput.getTeacherId()).get();
-        order.setTeacher(teacher);
-        return orderRepository.save(order);
-    }
-
-    public Order cancelJobApplication(OrderInput orderInput){
-        Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        if(order.getTeacher().getId().compareTo(orderInput.getOrderId()) == 0){
-            throw new RuntimeException("This teacher is not assigned to this order");
-        }
-        order.setTeacher(null);
-        return orderRepository.save(order);
-    }
-
-    public Order cancelPrivateTeacherApplication(OrderInput orderInput){
-        Order order = orderRepository.findById(orderInput.getOrderId()).get();
-        order.setTeacher(null);
         return orderRepository.save(order);
     }
 
@@ -92,21 +68,12 @@ public class OrderService {
 
     public List<Order> viewOwnOrder(Integer page, Integer size, BigInteger id){
         log.info("User ID: " + id);
-        User user = userService.getUser(id);
-
         Pageable pageable = null;
         if(!(page == null || size == null)){
             pageable = PageRequest.of(page,size);
         }
 
-        List<Order> order = null;
-        if(user.getRole().getId().compareTo(new BigInteger("1")) == 0){
-            // if student
-            order = orderRepository.findByStudentId(id, pageable);
-        }else{
-            // if teacher
-            order = orderRepository.findByTeacherId(id, pageable);
-        }
+        List<Order> order = orderRepository.viewOrderedJob(id, pageable);
         return order;
     }
 }

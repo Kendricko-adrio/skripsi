@@ -22,89 +22,90 @@ import java.util.List;
 @Service
 public class JobApplicationService {
 
-  @Autowired
-  private JobApplicationRepository jobApplicationRepository;
+    @Autowired
+    private JobApplicationRepository jobApplicationRepository;
 
-  @Autowired
-  private NotificationService notificationService;
+    @Autowired
+    private NotificationService notificationService;
 
-  @Autowired
-  private JobVacancyRepository jobVacancyRepository;
+    @Autowired
+    private JobVacancyRepository jobVacancyRepository;
 
-  @Autowired
-  private UserRepository userRepository;
+    @Autowired
+    private OrderService orderService;
 
-  public List<JobApplication> getJobApplications(BigInteger jobVacancyId, BigInteger teacherId) {
-    return jobApplicationRepository.findAllByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(
-        jobVacancyId,
-        teacherId);
-  }
+    public List<JobApplication> getJobApplications(BigInteger jobVacancyId, BigInteger teacherId) {
+        return jobApplicationRepository.findAllByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(
+                jobVacancyId,
+                teacherId);
+    }
 
-  public List<JobApplication> getJobApplicationsByJobVacancy(BigInteger jobVacancyId) {
-    return jobApplicationRepository.findAllByJobVacancyIdAndMarkForDeleteFalse(jobVacancyId);
-  }
+    public List<JobApplication> getJobApplicationsByJobVacancy(BigInteger jobVacancyId) {
+        return jobApplicationRepository.findAllByJobVacancyIdAndMarkForDeleteFalse(jobVacancyId);
+    }
 
-  public List<JobApplication> getJobApplicationsByTeacher(BigInteger teacherId) {
-    return jobApplicationRepository.findAllByTeacherIdAndMarkForDeleteFalse(teacherId);
-  }
+    public List<JobApplication> getJobApplicationsByTeacher(BigInteger teacherId) {
+        return jobApplicationRepository.findAllByTeacherIdAndMarkForDeleteFalse(teacherId);
+    }
 
-  public JobApplication createJobApplication(CreateJobApplicationRequest request) {
-    JobApplication jobApplication = JobApplication.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .approvalStatus(JobApplicationStatus.PENDING)
-        .build();
+    public JobApplication createJobApplication(CreateJobApplicationRequest request) {
+        JobApplication jobApplication = JobApplication.builder()
+                .jobVacancyId(request.getJobVacancyId())
+                .teacherId(request.getTeacherId())
+                .approvalStatus(JobApplicationStatus.PENDING)
+                .build();
 
-    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
-        NotificationStatus.JOB_APPLICATION_NEW);
+        JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+                NotificationStatus.JOB_APPLICATION_NEW);
 
-    return jobApplicationRepository.save(jobApplication);
-  }
+        return jobApplicationRepository.save(jobApplication);
+    }
 
-  public Boolean rejectJobApplication(RejectJobApplicationRequest request) {
-    JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .build()).get();
-    jobApplication.setApprovalStatus(JobApplicationStatus.REJECTED_BY_STUDENT);
-    jobApplicationRepository.save(jobApplication);
+    public Boolean rejectJobApplication(RejectJobApplicationRequest request) {
+        JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
+                .jobVacancyId(request.getJobVacancyId())
+                .teacherId(request.getTeacherId())
+                .build()).get();
+        jobApplication.setApprovalStatus(JobApplicationStatus.REJECTED_BY_STUDENT);
+        jobApplicationRepository.save(jobApplication);
 
-    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
-        NotificationStatus.JOB_APPLICATION_REJECTION);
+        JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+                NotificationStatus.JOB_APPLICATION_REJECTION);
 
-    return true;
-  }
+        return true;
+    }
 
-  public Boolean withdrawJobApplication(WithdrawJobApplicationRequest request) {
-    JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .build()).get();
-    jobApplication.setApprovalStatus(JobApplicationStatus.CANCELLED_BY_TEACHER);
-    jobApplicationRepository.save(jobApplication);
+    public Boolean withdrawJobApplication(WithdrawJobApplicationRequest request) {
+        JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
+                .jobVacancyId(request.getJobVacancyId())
+                .teacherId(request.getTeacherId())
+                .build()).get();
+        jobApplication.setApprovalStatus(JobApplicationStatus.CANCELLED_BY_TEACHER);
+        jobApplicationRepository.save(jobApplication);
 
-    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
-        NotificationStatus.JOB_APPLICATION_WITHDRAW);
+        JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+                NotificationStatus.JOB_APPLICATION_WITHDRAW);
 
-    return true;
-  }
+        return true;
+    }
 
-  public Boolean acceptJobApplication(AcceptJobApplicationRequest request) {
-    JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .build()).get();
-    jobApplication.setApprovalStatus(JobApplicationStatus.APPROVED);
-    jobApplicationRepository.save(jobApplication);
+    public Boolean acceptJobApplication(AcceptJobApplicationRequest request) {
+        JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
+                .jobVacancyId(request.getJobVacancyId())
+                .teacherId(request.getTeacherId())
+                .build()).get();
+        jobApplication.setApprovalStatus(JobApplicationStatus.APPROVED);
+        jobApplicationRepository.save(jobApplication);
 
-    JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-    notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
-        NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
+        JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+                NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
 
-    return true;
-  }
+        orderService.createOrder(jobVacancy, request.getTeacherId());
+        return true;
+    }
 
 }
