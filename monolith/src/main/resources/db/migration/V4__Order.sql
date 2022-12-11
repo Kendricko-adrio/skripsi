@@ -32,18 +32,18 @@ CREATE TABLE job_applications
     PRIMARY KEY (job_vacancy_id, teacher_id)
 );
 
-insert into job_vacancies (id, course_id, student_id, description, is_active, mark_for_delete,
+insert into job_vacancies (course_id, student_id, description, is_active, mark_for_delete,
                            created_at, updated_at)
-values (1, 1, 1, 'test job', true, false, 0, 0);
-insert into job_vacancies (id, course_id, student_id, description, is_active, mark_for_delete,
-                           created_at, updated_at)
-values (2, 2, 1, 'test job 2', true, false, 0, 0);
-insert into job_vacancies (id, course_id, student_id, description, is_active, mark_for_delete,
-                           created_at, updated_at)
-values (3, 2, 1, 'test job 3', true, false, 0, 0);
-insert into job_vacancies (id, course_id, student_id, description, is_active, mark_for_delete,
-                           created_at, updated_at)
-values (4, 2, 1, 'test job 4', true, false, 0, 0);
+values (1, 1, 'test job', true, false, 0, 0);
+insert into job_vacancies ( course_id, student_id, description, is_active, mark_for_delete,
+                            created_at, updated_at)
+values ( 2, 1, 'test job 2', true, false, 0, 0);
+insert into job_vacancies ( course_id, student_id, description, is_active, mark_for_delete,
+                            created_at, updated_at)
+values ( 2, 1, 'test job 3', true, false, 0, 0);
+insert into job_vacancies ( course_id, student_id, description, is_active, mark_for_delete,
+                            created_at, updated_at)
+values ( 2, 1, 'test job 4', true, false, 0, 0);
 
 
 insert into job_applications (job_vacancy_id, teacher_id, approval_status, mark_for_delete,

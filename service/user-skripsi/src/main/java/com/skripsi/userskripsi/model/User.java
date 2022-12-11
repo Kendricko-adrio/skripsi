@@ -34,8 +34,6 @@ public class User extends BaseEntity {
   @JoinColumn(name = "country_id")
   private Country country;
 
-
-
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "role_id")
   private Role role;
