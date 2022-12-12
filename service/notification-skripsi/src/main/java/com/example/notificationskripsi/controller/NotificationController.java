@@ -1,10 +1,14 @@
 package com.example.notificationskripsi.controller;
 
+import com.example.notificationskripsi.dto.BaseResponse;
 import com.example.notificationskripsi.dto.NotificationRequest;
+import com.example.notificationskripsi.dto.ResponseMessage;
 import com.example.notificationskripsi.model.Notification;
 import com.example.notificationskripsi.model.constants.NotificationStatus;
 import com.example.notificationskripsi.service.NotificationService;
+import com.example.notificationskripsi.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +27,8 @@ public class NotificationController {
 
 //  @QueryMapping
     @GetMapping("/{userId}")
-  public List<Notification> getNotifications(@PathVariable BigInteger userId) {
-    return notificationService.getNotifications(userId);
+  public ResponseEntity<BaseResponse> getNotifications(@PathVariable BigInteger userId) {
+      return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,notificationService.getNotifications(userId));
   }
 
 //  @SchemaMapping
@@ -33,8 +37,8 @@ public class NotificationController {
 //  }
 
   @PostMapping
-  public Notification saveJobApplicationNotification(@RequestBody NotificationRequest request) {
-    return notificationService.saveJobApplicationNotification(request.getUserId(), request.getStatus());
+  public ResponseEntity<BaseResponse> saveJobApplicationNotification(@RequestBody NotificationRequest request) {
+    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,notificationService.saveJobApplicationNotification(request.getUserId(), request.getStatus()));
   }
 
 }
