@@ -46,7 +46,7 @@ public class UserController {
     }
 
     //  @QueryMapping
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<BaseResponse> checkUserLogin(@RequestBody UserLoginDTO user) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.checkUserLogin(user));
     }
