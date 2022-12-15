@@ -4,6 +4,7 @@ import com.skripsi.monolith.model.notification.Notification;
 import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.service.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class NotificationController {
   }
 
   @QueryMapping
-  public List<Notification> getNotifications(BigInteger id) {
+  public List<Notification> getNotifications(@Argument BigInteger id) {
     return notificationService.getNotifications(id);
   }
 

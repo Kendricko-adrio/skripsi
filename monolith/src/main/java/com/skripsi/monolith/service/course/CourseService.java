@@ -3,6 +3,9 @@ package com.skripsi.monolith.service.course;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skripsi.monolith.dto.course.CourseInput;
 import com.skripsi.monolith.model.course.Course;
+import com.skripsi.monolith.model.user.Country;
+import com.skripsi.monolith.model.user.Role;
+import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.repository.course.CourseRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
@@ -20,9 +23,17 @@ public class CourseService {
     }
 
     public Course insertCourse(@Argument CourseInput input){
-        ObjectMapper mapper = new ObjectMapper();
-        Course course = mapper.convertValue(input, Course.class);
+        Course course = requestToCourseMapper(input);
         return repository.save(course);
+    }
+
+    private Course requestToCourseMapper(CourseInput courseInput){
+        return Course.builder()
+                .courseName(courseInput.getCourseName())
+                .courseDescription(courseInput.getCourseDescription())
+                .coursePrice(courseInput.getCoursePrice())
+                .createdBy(courseInput.getCreatedBy())
+                .build();
     }
 
     public List<Course> getCourses(){
