@@ -8,6 +8,7 @@ type JobVacancy {
 }
 
 type JobApplication {
+    jobVacancyId: ID!
     jobApplicationId: JobApplicationId!
     approvalStatus: String!
 }

@@ -1,18 +1,20 @@
-package com.federated.users.model;
+package com.example.orderskripsi.dto.jobvacancy;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
 import java.math.BigInteger;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Country {
+public class DeleteJobVacancyRequest {
 
-
+  @NotBlank(message = "NotBlank")
   private BigInteger id;
 
-  private String name;
 }
