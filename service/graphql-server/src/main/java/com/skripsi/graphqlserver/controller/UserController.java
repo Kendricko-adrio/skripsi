@@ -3,7 +3,7 @@ package com.skripsi.graphqlserver.controller;
 import com.skripsi.graphqlserver.model.request.user.UserLoginDTO;
 import com.skripsi.graphqlserver.model.request.user.UserRequestDTO;
 import com.skripsi.graphqlserver.model.user.User;
-import com.skripsi.graphqlserver.model.user.UserClient;
+import com.skripsi.graphqlserver.client.user.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
