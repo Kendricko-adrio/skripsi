@@ -22,34 +22,6 @@ public class OrderController {
   @Autowired
   private OrderService orderService;
 
-  @Autowired
-  private CourseService courseService;
-
-  @MutationMapping
-  public Order createOrder(@Argument CourseInput courseInput) {
-    return orderService.createOrder(courseInput);
-  }
-
-  @MutationMapping
-  public Order deleteOrder(@Argument BigInteger orderId) {
-    return orderService.deleteOrder(orderId);
-  }
-
-  @MutationMapping
-  public Order cancelJobApplication(@Argument OrderInput orderInput) {
-    return orderService.cancelJobApplication(orderInput);
-  }
-
-  @MutationMapping
-  public Order assignTeacher(@Argument OrderInput orderInput) {
-    return orderService.assignTeacher(orderInput);
-  }
-
-  @MutationMapping
-  public Order cancelPrivateTeacherApplication(@Argument OrderInput orderInput) {
-    return orderService.cancelPrivateTeacherApplication(orderInput);
-  }
-
   @QueryMapping
   public List<Order> viewOwnOrder(@Argument Integer page,
       @Argument Integer size,

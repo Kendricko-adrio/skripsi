@@ -3,6 +3,8 @@ package com.skripsi.monolith.service.user;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skripsi.monolith.dto.user.UserLoginDTO;
 import com.skripsi.monolith.dto.user.UserRequestDTO;
+import com.skripsi.monolith.model.user.Country;
+import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.repository.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -38,18 +40,30 @@ public class UserService {
     }
 
     public User insertUser(UserRequestDTO user){
-        ObjectMapper mapper = new ObjectMapper();
-        User users = mapper.convertValue(user, User.class);
-        users.setPassword(passwordEncoder.encode(users.getPassword()));
-        return userRepository.save(users);
+        User userInsert = requestToUserMapper(user);
+        return userRepository.save(userInsert);
+    }
+
+    private User requestToUserMapper(UserRequestDTO user){
+        return User.builder()
+                .name(user.getName())
+                .username(user.getUsername())
+                .password(passwordEncoder.encode(user.getPassword()))
+                .email(user.getEmail())
+                .country(new Country().builder().id(user.getCountryId()).build())
+                .role(new Role().builder().id(user.getRoleId()).build())
+                .build();
     }
 
     public User updateUser(UserRequestDTO user){
         User userUpdate = userRepository.findById(user.getId()).orElse(null);
-        log.info(userUpdate.toString());
+//        log.info(userUpdate.toString());
         userUpdate.setEmail(user.getEmail());
         userUpdate.setUsername(user.getUsername());
         userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+        userUpdate.setName(user.getName());
+        userUpdate.setCountry(new Country().builder().id(user.getCountryId()).build());
+        userUpdate.setRole(new Role().builder().id(user.getRoleId()).build());
         return userRepository.save(userUpdate);
     }
 
@@ -63,5 +77,6 @@ public class UserService {
 //        log.info("password : {}", passwordEncoder.encode(user.getPassword()));
         return passwordEncoder.matches(user.getPassword(), userSearch.get().getPassword());
     }
+
 
 }

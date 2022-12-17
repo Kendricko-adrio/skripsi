@@ -12,8 +12,6 @@ public interface OrderRepository extends JpaRepository<Order, BigInteger> {
 
     List<Order> findByIsActive(Boolean isActive);
 
-    List<Order> findByTeacherId(BigInteger id, Pageable pageable);
-
-    @Query(value = "select o from Order o where o.course.createdBy = :id")
-    List<Order> findByStudentId(BigInteger id, Pageable pageable);
+    @Query(value = "select o from Order o where o.student = :id OR o.teacher = :id")
+    List<Order> viewOrderedJob(BigInteger id, Pageable pageable);
 }

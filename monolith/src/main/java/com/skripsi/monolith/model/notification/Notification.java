@@ -7,13 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigInteger;
 
 @Data
@@ -26,6 +20,7 @@ import java.math.BigInteger;
 public class Notification {
 
   @Id
+  @GeneratedValue(strategy= GenerationType.IDENTITY)
   private BigInteger id;
 
   @ManyToOne(fetch = FetchType.LAZY)
