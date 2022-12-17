@@ -6,6 +6,8 @@ import com.skripsi.userskripsi.dto.BaseResponse;
 import com.skripsi.userskripsi.dto.UserLoginDTO;
 import com.skripsi.userskripsi.dto.UserRequestDTO;
 import com.skripsi.userskripsi.model.User;
+import com.skripsi.userskripsi.model.response.Response;
+import com.skripsi.userskripsi.model.response.user.GetUserResponse;
 import com.skripsi.userskripsi.service.UserService;
 import com.skripsi.userskripsi.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,61 +22,88 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+  @Autowired
+  private UserService userService;
 
 
-//    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,);
+  @GetMapping
+  public Response<List<User>> getUsers() {
+    return ResponseHandler.ok(userService.getUsers());
+  }
 
-    //  @QueryMapping
-    @GetMapping
-    public ResponseEntity<BaseResponse> getUsers() {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, userService.getUsers());
-    }
+  @GetMapping("/{id}")
+  public Response<GetUserResponse> getUser(@PathVariable BigInteger id) {
+    User user = userService.getUser(id);
 
-//  @QueryMapping
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse> getUser(@PathVariable BigInteger id)
-    {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.getUser(id));
-    }
+    return ResponseHandler.ok(GetUserResponse.builder()
+        .id(user.getId())
+        .username(user.getUsername())
+        .email(user.getEmail())
+        .name(user.getName())
+        .countryId(user.getCountry().getId())
+        .roleId(user.getRole().getId())
+        .build());
+  }
 
-    //  @QueryMapping(name = "getUserByUsername")
-    @GetMapping("/username/{username}")
-    public ResponseEntity<BaseResponse> getUserByUsername(@PathVariable String username) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.getUserByUsername(username));
-    }
+  @GetMapping("/username/{username}")
+  public Response<GetUserResponse> getUserByUsername(@PathVariable String username) {
+    User user = userService.getUserByUsername(username);
 
-    //  @QueryMapping
-    @PostMapping("/login")
-    public ResponseEntity<BaseResponse> checkUserLogin(@RequestBody UserLoginDTO user) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.checkUserLogin(user));
-    }
+    return ResponseHandler.ok(GetUserResponse.builder()
+        .id(user.getId())
+        .username(user.getUsername())
+        .email(user.getEmail())
+        .name(user.getName())
+        .countryId(user.getCountry().getId())
+        .roleId(user.getRole().getId())
+        .build());
+  }
 
-    //  @MutationMapping
-    @PostMapping
-    public ResponseEntity<BaseResponse> insertUser(@RequestBody UserRequestDTO input) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.insertUser(input));
-    }
+  @PostMapping("/login")
+  public Response<Boolean> checkUserLogin(@RequestBody UserLoginDTO user) {
+    return ResponseHandler.ok(userService.checkUserLogin(user));
+  }
 
-    //  @MutationMapping
-    @PutMapping
-    public ResponseEntity<BaseResponse> updateUser(@RequestBody UserRequestDTO input) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.updateUser(input));
-    }
+  @PostMapping
+  public Response<GetUserResponse> insertUser(@RequestBody UserRequestDTO input) {
+    User user = userService.insertUser(input);
+    return ResponseHandler.ok(GetUserResponse.builder()
+        .id(user.getId())
+        .username(user.getUsername())
+        .email(user.getEmail())
+        .name(user.getName())
+        .countryId(user.getCountry().getId())
+        .roleId(user.getRole().getId())
+        .build());
+  }
 
-//  @SchemaMapping
-//  public User student(JobVacancy jobVacancy) {
-//    return userService.getUser(jobVacancy.getStudent().getId());
-//  }
 
-//  @SchemaMapping
-//  public User student(Order order) {
-//    return userService.getUser(order.getStudent().getId());
-//  }
+  @PutMapping
+  public Response<GetUserResponse> updateUser(@RequestBody UserRequestDTO input) {
+    User user = userService.updateUser(input);
 
-//  @SchemaMapping
-//  public User teacher(JobApplication jobApplication) {
-//    return userService.getUser(jobApplication.getTeacherId());
-//  }
+    return ResponseHandler.ok(GetUserResponse.builder()
+        .id(user.getId())
+        .username(user.getUsername())
+        .email(user.getEmail())
+        .name(user.getName())
+        .countryId(user.getCountry().getId())
+        .roleId(user.getRole().getId())
+        .build());
+  }
+
+  //  @SchemaMapping
+  //  public User student(JobVacancy jobVacancy) {
+  //    return userService.getUser(jobVacancy.getStudent().getId());
+  //  }
+
+  //  @SchemaMapping
+  //  public User student(Order order) {
+  //    return userService.getUser(order.getStudent().getId());
+  //  }
+
+  //  @SchemaMapping
+  //  public User teacher(JobApplication jobApplication) {
+  //    return userService.getUser(jobApplication.getTeacherId());
+  //  }
 }

@@ -1,8 +1,10 @@
 package com.skripsi.userskripsi.controller;
+
 import com.skripsi.userskripsi.constant.ResponseMessage;
 import com.skripsi.userskripsi.dto.BaseResponse;
 import com.skripsi.userskripsi.model.Country;
 import com.skripsi.userskripsi.model.User;
+import com.skripsi.userskripsi.model.response.Response;
 import com.skripsi.userskripsi.service.CountryService;
 import com.skripsi.userskripsi.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,14 @@ public class CountryController {
   @Autowired
   private CountryService countryService;
 
-//  @QueryMapping
-
   @GetMapping
-  public ResponseEntity<BaseResponse> getCountries(){
-    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, countryService.getCountries());
+  public Response<List<Country>> getCountries() {
+    return ResponseHandler.ok(countryService.getCountries());
   }
 
-//  @SchemaMapping
   @GetMapping("/{id}")
-  public ResponseEntity<BaseResponse> country(@PathVariable BigInteger id) {
-    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, countryService.getCountry(id));
+  public Response<Country> country(@PathVariable BigInteger id) {
+    return ResponseHandler.ok(countryService.getCountry(id));
   }
 
 }

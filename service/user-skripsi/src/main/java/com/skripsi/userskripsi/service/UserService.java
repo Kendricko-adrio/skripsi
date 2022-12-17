@@ -50,8 +50,8 @@ public class UserService {
                 .username(user.getUsername())
                 .password(passwordEncoder.encode(user.getPassword()))
                 .email(user.getEmail())
-                .country(new Country().builder().id(user.getCountryId()).build())
-                .role(new Role().builder().id(user.getRoleId()).build())
+//                .country(new Country().builder().id(user.getCountryId()).build())
+//                .role(new Role().builder().id(user.getRoleId()).build())
                 .build();
     }
 
@@ -62,8 +62,8 @@ public class UserService {
         userUpdate.setUsername(user.getUsername());
         userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
         userUpdate.setName(user.getName());
-        userUpdate.setCountry(new Country().builder().id(user.getCountryId()).build());
-        userUpdate.setRole(new Role().builder().id(user.getRoleId()).build());
+//        userUpdate.setCountry(new Country().builder().id(user.getCountryId()).build());
+//        userUpdate.setRole(new Role().builder().id(user.getRoleId()).build());
         return userRepository.save(userUpdate);
     }
 

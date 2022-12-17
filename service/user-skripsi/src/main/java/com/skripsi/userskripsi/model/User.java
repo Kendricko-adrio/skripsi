@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "users")
 public class User extends BaseEntity {
   @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private BigInteger id;
 
   private String username;
@@ -38,7 +38,7 @@ public class User extends BaseEntity {
   @JoinColumn(name = "role_id")
   private Role role;
 
-//  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//  private List<Notification> notifications;
+  //  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  //  private List<Notification> notifications;
 
 }
