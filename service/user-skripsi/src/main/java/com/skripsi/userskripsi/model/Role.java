@@ -1,5 +1,6 @@
 package com.skripsi.userskripsi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "roles")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Role {
 
   @Id

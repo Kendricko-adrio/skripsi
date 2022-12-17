@@ -1,7 +1,10 @@
-package com.skripsi.graphqlserver.model.user;
+package com.skripsi.graphqlserver.client.user;
 
-import com.skripsi.graphqlserver.controller.BaseClient;
+import com.skripsi.graphqlserver.client.BaseClient;
 import com.skripsi.graphqlserver.model.response.Response;
+import com.skripsi.graphqlserver.model.user.Country;
+import com.skripsi.graphqlserver.property.ServiceProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -13,12 +16,15 @@ import java.util.List;
 @Component
 public class CountryClient extends BaseClient {
 
+  @Autowired
+  private ServiceProperties serviceProperties;
+
   public CountryClient(RestTemplateBuilder builder) {
     super(builder);
   }
 
   public Response<List<Country>> getCountries() {
-    return restTemplate.exchange(USER_URL + "country",
+    return restTemplate.exchange(serviceProperties.getUser() + "country",
         HttpMethod.GET,
         null,
         new ParameterizedTypeReference<Response<List<Country>>>() {
@@ -26,7 +32,7 @@ public class CountryClient extends BaseClient {
   }
 
   public Response<Country> getCountry(BigInteger id) {
-    return restTemplate.exchange(USER_URL + "country/" + id,
+    return restTemplate.exchange(serviceProperties.getUser() + "country/" + id,
         HttpMethod.GET,
         null,
         new ParameterizedTypeReference<Response<Country>>() {

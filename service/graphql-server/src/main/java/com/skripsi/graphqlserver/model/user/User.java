@@ -24,15 +24,9 @@ public class User extends BaseEntity {
 
   private String name;
 
-  @JsonProperty("country_id")
-  private BigInteger countryId;
+  private Country country;
 
-  @JsonProperty("role_id")
-  private BigInteger roleId;
-
-//  private Country country;
-//
-//  private Role role;
+  private Role role;
 
   //  private List<Notification> notifications;
 

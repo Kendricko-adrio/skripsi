@@ -1,4 +1,4 @@
-package com.skripsi.graphqlserver.controller;
+package com.skripsi.graphqlserver.client;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;

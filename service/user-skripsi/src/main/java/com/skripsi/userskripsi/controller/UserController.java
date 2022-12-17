@@ -25,38 +25,19 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-
   @GetMapping
   public Response<List<User>> getUsers() {
     return ResponseHandler.ok(userService.getUsers());
   }
 
   @GetMapping("/{id}")
-  public Response<GetUserResponse> getUser(@PathVariable BigInteger id) {
-    User user = userService.getUser(id);
-
-    return ResponseHandler.ok(GetUserResponse.builder()
-        .id(user.getId())
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .name(user.getName())
-        .countryId(user.getCountry().getId())
-        .roleId(user.getRole().getId())
-        .build());
+  public Response<User> getUser(@PathVariable BigInteger id) {
+    return ResponseHandler.ok(userService.getUser(id));
   }
 
   @GetMapping("/username/{username}")
-  public Response<GetUserResponse> getUserByUsername(@PathVariable String username) {
-    User user = userService.getUserByUsername(username);
-
-    return ResponseHandler.ok(GetUserResponse.builder()
-        .id(user.getId())
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .name(user.getName())
-        .countryId(user.getCountry().getId())
-        .roleId(user.getRole().getId())
-        .build());
+  public Response<User> getUserByUsername(@PathVariable String username) {
+    return ResponseHandler.ok(userService.getUserByUsername(username));
   }
 
   @PostMapping("/login")
@@ -65,31 +46,14 @@ public class UserController {
   }
 
   @PostMapping
-  public Response<GetUserResponse> insertUser(@RequestBody UserRequestDTO input) {
-    User user = userService.insertUser(input);
-    return ResponseHandler.ok(GetUserResponse.builder()
-        .id(user.getId())
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .name(user.getName())
-        .countryId(user.getCountry().getId())
-        .roleId(user.getRole().getId())
-        .build());
+  public Response<User> insertUser(@RequestBody UserRequestDTO input) {
+    return ResponseHandler.ok(userService.insertUser(input));
   }
 
 
   @PutMapping
-  public Response<GetUserResponse> updateUser(@RequestBody UserRequestDTO input) {
-    User user = userService.updateUser(input);
-
-    return ResponseHandler.ok(GetUserResponse.builder()
-        .id(user.getId())
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .name(user.getName())
-        .countryId(user.getCountry().getId())
-        .roleId(user.getRole().getId())
-        .build());
+  public Response<User> updateUser(@RequestBody UserRequestDTO input) {
+    return ResponseHandler.ok(userService.updateUser(input));
   }
 
   //  @SchemaMapping

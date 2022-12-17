@@ -1,7 +1,7 @@
 package com.skripsi.graphqlserver.controller;
 
-import com.skripsi.graphqlserver.model.user.Country;
-import com.skripsi.graphqlserver.client.user.CountryClient;
+import com.skripsi.graphqlserver.model.user.Role;
+import com.skripsi.graphqlserver.client.user.RoleClient;
 import com.skripsi.graphqlserver.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -11,20 +11,20 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class CountryController {
+public class RoleController {
 
   @Autowired
-  private CountryClient countryClient;
+  private RoleClient roleClient;
 
   @QueryMapping
-  public List<Country> getCountries() {
-    return countryClient.getCountries().getData();
+  public List<Role> getRoles() {
+    return roleClient.getRoles().getData();
   }
 
   @Deprecated
   @SchemaMapping
-  public Country country(User user) {
-    return countryClient.getCountry(user.getCountry().getId()).getData();
+  public Role role(User user) {
+    return roleClient.getRole(user.getRole().getId()).getData();
   }
 
 }
