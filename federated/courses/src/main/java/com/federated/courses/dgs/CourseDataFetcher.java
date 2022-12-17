@@ -1,29 +1,59 @@
 package com.federated.courses.dgs;
 
-import com.federated.courses.entity.Course;
-import com.federated.courses.entity.User;
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
-import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
-import com.netflix.graphql.dgs.DgsQuery;
-import org.springframework.stereotype.Controller;
+import com.federated.courses.dto.course.CourseInput;
+import com.federated.courses.model.Course;
+import com.federated.courses.model.order.JobVacancy;
+import com.federated.courses.service.CourseService;
+import com.netflix.graphql.dgs.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 @DgsComponent
+@Slf4j
 public class CourseDataFetcher {
 
-    private List<Course> courses = new ArrayList<>();
-    public CourseDataFetcher() {
-        courses.add(new Course(new BigInteger("1"), "course1", "course1", new BigInteger("100"), new User(new BigInteger("1"))));
-        courses.add(new Course(new BigInteger("2"), "course2", "course2", new BigInteger("200"), new User(new BigInteger("2"))));
-        courses.add(new Course(new BigInteger("3"), "course3", "course3", new BigInteger("300"), new User(new BigInteger("3"))));
+    @Autowired
+    private CourseService courseService;
+
+    @DgsMutation
+    public Course insertCourse(@Argument CourseInput input){
+        return courseService.insertCourse(input);
     }
 
     @DgsQuery
-    public List<Course> getCourses() {
-        return courses;
+    public List<Course> getCourses(){
+        return courseService.getCourses();
     }
+
+    @DgsQuery
+    public Course getCourse(@InputArgument String id){
+        return courseService.getCourse(new BigInteger(id));
+    }
+
+    @DgsMutation
+    public Course updateCourse(@Argument CourseInput input){
+        return courseService.updateCourse(input);
+    }
+
+//    @SchemaMapping
+//    public Course course(Order order){
+//
+//        return courseService.getCourse(order.getCourse().getId());
+//    }
+
+//    @SchemaMapping
+//    public Course course(JobVacancy jobVacancy){
+//        return courseService.getCourse(jobVacancy.getCourse().getId());
+//    }
+    @DgsData(parentType = "JobVacancy", field = "course")
+    public Course course(DgsDataFetchingEnvironment dfe){
+        JobVacancy jobVacancy = dfe.getSource();
+        return courseService.getCourse(jobVacancy.getCourseId());
+    }
+
+
 }

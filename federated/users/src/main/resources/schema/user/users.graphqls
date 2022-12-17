@@ -6,6 +6,8 @@ type User @key(fields: "id"){
     role: Role!
 }
 
+
+
 type Country {
     id: ID!
     name: String!
