@@ -7,6 +7,7 @@ type Course{
 }
 
 input CourseInput{
+    id: ID
     courseName: String!
     courseDescription: String!
     coursePrice: Int!

@@ -6,6 +6,7 @@ import com.skripsi.monolith.dto.user.jobapplication.RejectJobApplicationRequest;
 import com.skripsi.monolith.dto.user.jobapplication.WithdrawJobApplicationRequest;
 import com.skripsi.monolith.model.order.JobApplication;
 import com.skripsi.monolith.model.order.JobVacancy;
+import com.skripsi.monolith.model.order.jobapplication.JobApplicationId;
 import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.service.order.JobApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +65,4 @@ public class JobApplicationController {
   public List<JobApplication> jobApplications(JobVacancy jobVacancy) {
     return jobApplicationService.getJobApplicationsByJobVacancy(jobVacancy.getId());
   }
-
 }

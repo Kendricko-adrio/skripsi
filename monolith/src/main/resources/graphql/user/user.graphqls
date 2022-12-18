@@ -20,6 +20,7 @@ type Role{
 }
 
 input UserRequestDTO{
+    id: ID
     username: String!
     password: String!
     name: String!

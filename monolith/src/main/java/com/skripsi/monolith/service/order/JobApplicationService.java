@@ -48,6 +48,15 @@ public class JobApplicationService {
         return jobApplicationRepository.findAllByTeacherIdAndMarkForDeleteFalse(teacherId);
     }
 
+    public JobApplicationId getJobApplicationByJobVacancyIdAndTeacherId(BigInteger jobVacancyId, BigInteger teacherId){
+        JobApplication ja = jobApplicationRepository.findByJobVacancyIdAndTeacherId(jobVacancyId, teacherId);
+        return JobApplicationId.builder()
+                .jobVacancyId(ja.getJobVacancyId())
+                .teacherId(ja.getTeacherId())
+                .build();
+//        return ja;
+    }
+
     public JobApplication createJobApplication(CreateJobApplicationRequest request) {
         JobApplication jobApplication = JobApplication.builder()
                 .jobVacancyId(request.getJobVacancyId())
@@ -107,5 +116,4 @@ public class JobApplicationService {
         orderService.createOrder(jobVacancy, request.getTeacherId());
         return true;
     }
-
 }
