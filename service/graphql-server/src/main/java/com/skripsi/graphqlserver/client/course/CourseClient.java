@@ -5,6 +5,7 @@ import com.skripsi.graphqlserver.model.course.Course;
 import com.skripsi.graphqlserver.model.request.course.CourseInput;
 import com.skripsi.graphqlserver.model.response.Response;
 import com.skripsi.graphqlserver.property.ServiceProperties;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -21,6 +22,10 @@ public class CourseClient extends BaseClient {
   @Autowired
   private ServiceProperties serviceProperties;
 
+  @Override
+  protected String getServiceProperties() {
+    return serviceProperties.getCourse();
+  }
 
   public CourseClient(RestTemplateBuilder builder) {
     super(builder);

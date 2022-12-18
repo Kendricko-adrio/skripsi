@@ -22,6 +22,11 @@ public class ChapterClient extends BaseClient {
   @Autowired
   private ServiceProperties serviceProperties;
 
+  @Override
+  protected String getServiceProperties() {
+    return serviceProperties.getCourse();
+  }
+
   public ChapterClient(RestTemplateBuilder builder) {
     super(builder);
   }

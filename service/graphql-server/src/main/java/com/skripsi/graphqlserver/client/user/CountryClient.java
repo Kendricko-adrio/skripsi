@@ -19,6 +19,11 @@ public class CountryClient extends BaseClient {
   @Autowired
   private ServiceProperties serviceProperties;
 
+  @Override
+  protected String getServiceProperties() {
+    return serviceProperties.getUser();
+  }
+
   public CountryClient(RestTemplateBuilder builder) {
     super(builder);
   }

@@ -19,6 +19,11 @@ public class RoleClient extends BaseClient {
   @Autowired
   private ServiceProperties serviceProperties;
 
+  @Override
+  protected String getServiceProperties() {
+    return serviceProperties.getUser();
+  }
+
   public RoleClient(RestTemplateBuilder builder) {
     super(builder);
   }

@@ -24,58 +24,43 @@ public class UserClient extends BaseClient {
   @Autowired
   private ServiceProperties serviceProperties;
 
+  @Override
+  protected String getServiceProperties() {
+    return serviceProperties.getUser();
+  }
+
   public UserClient(RestTemplateBuilder builder) {
     super(builder);
   }
 
   public Response<List<User>> getUsers() {
-    return restTemplate.exchange(serviceProperties.getUser() + "user",
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<List<User>>>() {
-        }).getBody();
+    return get("user", new ParameterizedTypeReference<Response<List<User>>>() {
+    });
   }
 
   public Response<User> getUser(BigInteger id) {
-    return restTemplate.exchange(serviceProperties.getUser() + "user/" + id,
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<User>>() {
-        }).getBody();
+    return get("user/" + id, new ParameterizedTypeReference<Response<User>>() {
+    });
   }
 
   public Response<User> getUserByUsername(String username) {
-    return restTemplate.exchange(serviceProperties.getUser() + "user/username/" + username,
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<User>>() {
-        }).getBody();
+    return get("user/username/" + username, new ParameterizedTypeReference<Response<User>>() {
+    });
   }
 
   public Response<Boolean> checkUserLogin(UserLoginDTO user) {
-    return restTemplate.exchange(serviceProperties.getUser() + "user/login",
-        HttpMethod.POST,
-        new HttpEntity<>(user),
-        new ParameterizedTypeReference<Response<Boolean>>() {
-        }).getBody();
+    return post("user/login", user, new ParameterizedTypeReference<Response<Boolean>>() {
+    });
   }
 
   public Response<User> insertUser(UserRequestDTO request) {
-    HttpEntity<UserRequestDTO> entity = new HttpEntity<>(request);
-    return restTemplate.exchange(serviceProperties.getUser() + "user",
-        HttpMethod.POST,
-        entity,
-        new ParameterizedTypeReference<Response<User>>() {
-        }).getBody();
+    return post("user", request, new ParameterizedTypeReference<Response<User>>() {
+    });
   }
 
   public Response<User> updateUser(UserRequestDTO request) {
-    HttpEntity<UserRequestDTO> entity = new HttpEntity<>(request);
-    return restTemplate.exchange(serviceProperties.getUser() + "user",
-        HttpMethod.PUT,
-        entity,
-        new ParameterizedTypeReference<Response<User>>() {
-        }).getBody();
+    return put("user", request, new ParameterizedTypeReference<Response<User>>() {
+    });
   }
 
 }
