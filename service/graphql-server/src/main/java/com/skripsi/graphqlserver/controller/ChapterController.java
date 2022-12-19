@@ -5,6 +5,7 @@ import com.skripsi.graphqlserver.model.course.Chapter;
 import com.skripsi.graphqlserver.model.request.course.CreateChapterRequest;
 import com.skripsi.graphqlserver.model.request.course.UpdateChapterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
@@ -24,18 +25,18 @@ public class ChapterController {
   }
 
   @QueryMapping
-  public Chapter getChapter(BigInteger id) {
+  public Chapter getChapter(@Argument BigInteger id) {
     return chapterClient.getChapter(id).getData();
   }
 
   @MutationMapping
-  public Chapter createChapter(CreateChapterRequest chapter) {
-    return chapterClient.insertChapter(chapter).getData();
+  public Chapter createChapter(@Argument CreateChapterRequest input) {
+    return chapterClient.insertChapter(input).getData();
   }
 
   @MutationMapping
-  public Chapter updateChapter(UpdateChapterRequest chapter) {
-    return chapterClient.updateChapter(chapter).getData();
+  public Chapter updateChapter(@Argument UpdateChapterRequest input) {
+    return chapterClient.updateChapter(input).getData();
   }
 
 }

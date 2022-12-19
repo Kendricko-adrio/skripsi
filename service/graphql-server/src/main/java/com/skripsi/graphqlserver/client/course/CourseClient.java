@@ -32,37 +32,19 @@ public class CourseClient extends BaseClient {
   }
 
   public Response<List<Course>> getCourses() {
-    return restTemplate.exchange(serviceProperties.getCourse() + "course",
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<List<Course>>>() {
-        }).getBody();
+    return get("course", new ParameterizedTypeReference<Response<List<Course>>>() {});
   }
 
   public Response<Course> getCourse(BigInteger id) {
-    return restTemplate.exchange(serviceProperties.getCourse() + "course/" + id,
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<Course>>() {
-        }).getBody();
+    return get("course/" + id, new ParameterizedTypeReference<Response<Course>>() {});
   }
 
   public Response<Course> insertCourse(CourseInput request) {
-    HttpEntity<CourseInput> entity = new HttpEntity<>(request);
-    return restTemplate.exchange(serviceProperties.getCourse() + "course",
-        HttpMethod.POST,
-        entity,
-        new ParameterizedTypeReference<Response<Course>>() {
-        }).getBody();
+    return post("course", request, new ParameterizedTypeReference<Response<Course>>() {});
   }
 
   public Response<Course> updateCourse(CourseInput request) {
-    HttpEntity<CourseInput> entity = new HttpEntity<>(request);
-    return restTemplate.exchange(serviceProperties.getCourse() + "course",
-        HttpMethod.PUT,
-        entity,
-        new ParameterizedTypeReference<Response<Course>>() {
-        }).getBody();
+    return put("course", request, new ParameterizedTypeReference<Response<Course>>() {});
   }
 
 }

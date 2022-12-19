@@ -1,12 +1,14 @@
 package com.skripsi.graphqlserver.controller;
 
 import com.skripsi.graphqlserver.client.course.CourseClient;
+import com.skripsi.graphqlserver.model.course.Chapter;
 import com.skripsi.graphqlserver.model.course.Course;
 import com.skripsi.graphqlserver.model.request.course.CourseInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigInteger;

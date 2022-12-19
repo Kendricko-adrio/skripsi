@@ -1,5 +1,6 @@
 package com.skripsi.graphqlserver.model.request.course;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class CreateChapterRequest {
 
   private String detail;
 
+  @JsonProperty("course_id")
   @NotBlank(message = "NotBlank")
   private BigInteger courseId;
 

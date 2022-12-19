@@ -1,0 +1,10 @@
+type Notification {
+    id: ID!
+    user: User!
+    content: String!
+    read: Boolean!
+}
+
+extend type Query {
+    getNotifications(id: ID!): [Notification!]!
+}

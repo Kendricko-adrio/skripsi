@@ -32,36 +32,22 @@ public class ChapterClient extends BaseClient {
   }
 
   public Response<List<Chapter>> getChapters() {
-    return restTemplate.exchange(serviceProperties.getCourse() + "chapter",
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<List<Chapter>>>() {
-        }).getBody();
+    return get("chapter", new ParameterizedTypeReference<Response<List<Chapter>>>() {
+    });
   }
 
   public Response<Chapter> getChapter(BigInteger id) {
-    return restTemplate.exchange(serviceProperties.getCourse() + "chapter/" + id,
-        HttpMethod.GET,
-        null,
-        new ParameterizedTypeReference<Response<Chapter>>() {
-        }).getBody();
+    return get("chapter/" + id, new ParameterizedTypeReference<Response<Chapter>>() {
+    });
   }
 
   public Response<Chapter> insertChapter(CreateChapterRequest request) {
-    HttpEntity<CreateChapterRequest> entity = new HttpEntity<>(request);
-    return restTemplate.exchange(serviceProperties.getCourse() + "chapter",
-        HttpMethod.POST,
-        entity,
-        new ParameterizedTypeReference<Response<Chapter>>() {
-        }).getBody();
+    return post("chapter", request, new ParameterizedTypeReference<Response<Chapter>>() {
+    });
   }
 
   public Response<Chapter> updateChapter(UpdateChapterRequest request) {
-    HttpEntity<UpdateChapterRequest> entity = new HttpEntity<>(request);
-    return restTemplate.exchange(serviceProperties.getCourse() + "chapter",
-        HttpMethod.PUT,
-        entity,
-        new ParameterizedTypeReference<Response<Chapter>>() {
-        }).getBody();
+    return put("chapter", request, new ParameterizedTypeReference<Response<Chapter>>() {
+    });
   }
 }
