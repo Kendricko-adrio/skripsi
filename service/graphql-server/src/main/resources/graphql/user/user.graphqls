@@ -1,0 +1,44 @@
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    country: Country!
+    role: Role!
+}
+
+type Country {
+    id: ID!
+    name: String!
+}
+
+type Role{
+    id: ID!
+    name: String!
+}
+
+input UserRequestDTO{
+    id: ID
+    username: String!
+    password: String!
+    name: String!
+    email: String!
+    countryId:ID!
+    roleId: ID!
+}
+
+input UserLoginDTO{
+    username:String!
+    password:String!
+}
+
+extend type Query {
+    getUsers: [User]
+    getUser(id: ID!): User
+    getUserByUsername(username: String!): User
+    checkUserLogin(user: UserLoginDTO!): Boolean
+}
+
+extend type Mutation{
+    insertUser(input: UserRequestDTO): User
+    updateUser(input: UserRequestDTO): User
+}

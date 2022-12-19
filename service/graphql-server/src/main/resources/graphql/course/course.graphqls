@@ -1,0 +1,25 @@
+type Course{
+    id: ID!
+    courseName: String!
+    courseDescription: String!
+    coursePrice: Int!
+    createdBy: Int
+}
+
+input CourseInput{
+    id: ID
+    courseName: String!
+    courseDescription: String!
+    coursePrice: Int!
+    createdBy: Int!
+}
+
+extend type Query {
+    getCourses: [Course]
+    getCourse(id: ID):Course
+}
+
+extend type Mutation {
+    insertCourse(input: CourseInput): Course
+    updateCourse(input: CourseInput): Course
+}

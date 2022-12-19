@@ -22,13 +22,13 @@ public class CourseController {
     private CourseService courseService;
 //    @MutationMapping
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<BaseResponse> insertCourse(@RequestBody CourseInput input) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.insertCourse(input));
     }
 
     //    @QueryMapping
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<BaseResponse> getCourses() {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.getCourses());
     }
