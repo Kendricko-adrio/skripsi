@@ -1,5 +1,6 @@
 package com.skripsi.graphqlserver.controller;
 
+import com.skripsi.graphqlserver.model.order.Order;
 import com.skripsi.graphqlserver.model.request.user.UserLoginDTO;
 import com.skripsi.graphqlserver.model.request.user.UserRequestDTO;
 import com.skripsi.graphqlserver.model.user.User;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigInteger;
@@ -47,6 +49,16 @@ public class UserController {
   @MutationMapping
   public User updateUser(@Argument UserRequestDTO input) {
     return userClient.updateUser(input).getData();
+  }
+
+  @SchemaMapping
+  public User teacher(Order order) {
+    return userClient.getUser(order.getTeacherId()).getData();
+  }
+
+  @SchemaMapping
+  public User student(Order order) {
+    return userClient.getUser(order.getStudentId()).getData();
   }
 
 }
