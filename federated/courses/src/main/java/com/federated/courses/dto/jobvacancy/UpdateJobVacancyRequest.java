@@ -15,7 +15,7 @@ import java.math.BigInteger;
 public class UpdateJobVacancyRequest {
 
   @NotBlank(message = "NotBlank")
-  private BigInteger id;
+  private String id;
 
   @NotBlank(message = "NotBlank")
   private String description;

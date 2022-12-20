@@ -1,4 +1,4 @@
-package com.federated.courses.dto.jobvacancy;
+package com.federated.courses.dto.course;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,15 +12,13 @@ import java.math.BigInteger;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateJobVacancyRequest {
+public class CreateChapter {
+
+  private String name;
+
+  private String detail;
 
   @NotBlank(message = "NotBlank")
   private String courseId;
-
-  @NotBlank(message = "NotBlank")
-  private String studentId;
-
-  @NotBlank(message = "NotBlank")
-  private String description;
 
 }

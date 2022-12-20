@@ -1,16 +1,14 @@
 package com.federated.courses.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.federated.courses.entity.User;
-import jdk.internal.instrumentation.TypeMapping;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import net.minidev.json.annotate.JsonIgnore;
 
-import javax.persistence.*;
 import java.math.BigInteger;
 
 @Data
@@ -18,6 +16,7 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Course extends BaseEntity {
     private BigInteger id;
 

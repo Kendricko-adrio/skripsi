@@ -1,4 +1,4 @@
-package com.federated.courses.entity;
+package com.federated.courses.model;
 
 import com.federated.courses.model.order.JobVacancy;
 import lombok.*;

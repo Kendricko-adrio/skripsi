@@ -1,10 +1,7 @@
-package com.federated.courses.model.order;
+package com.federated.courses.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.federated.courses.model.BaseEntity;
-import com.federated.courses.model.Course;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,17 +16,13 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Order extends BaseEntity {
-    private BigInteger id;
+public class Chapter extends BaseEntity {
+  private BigInteger id;
 
-    private Course course;
+  private String name;
 
-    private BigInteger studentId;
+  private String detail;
 
-    private BigInteger teacherId;
-
-    @Column(name = "is_active")
-    private Boolean isActive;
+  private Course course;
 
 }
