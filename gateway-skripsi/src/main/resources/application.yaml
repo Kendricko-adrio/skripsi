@@ -1,0 +1,19 @@
+server:
+  port: 8090
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: graphql
+          uri: http://localhost:8080
+          predicates:
+            - Path=/graphql
+#          filters:
+#            - RewritePath=/backend, /graphql
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 1
+  redis:
+    host: localhost
+    port: 6379

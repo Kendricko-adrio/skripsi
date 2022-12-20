@@ -1,0 +1,29 @@
+type Chapter {
+    id: ID!
+    name: String!
+    detail: String!
+    course: Course!
+}
+
+input CreateChapterRequest {
+    name: String!
+    detail: String!
+    courseId: ID!
+}
+
+input UpdateChapterRequest {
+    id: ID!
+    name: String
+    detail: String
+}
+
+extend type Query {
+    getChapter(id: ID!): Chapter
+    getChapters: [Chapter!]!
+}
+
+extend type Mutation {
+    createChapter(input: CreateChapterRequest): Chapter
+    updateChapter(input: UpdateChapterRequest): Chapter
+    deleteChapter(id: ID): Boolean
+}

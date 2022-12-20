@@ -1,5 +1,6 @@
 package com.skripsi.userskripsi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ import java.math.BigInteger;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "countries")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Country extends BaseEntity {
 
   @Id

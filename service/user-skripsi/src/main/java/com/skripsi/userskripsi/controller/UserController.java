@@ -6,6 +6,8 @@ import com.skripsi.userskripsi.dto.BaseResponse;
 import com.skripsi.userskripsi.dto.UserLoginDTO;
 import com.skripsi.userskripsi.dto.UserRequestDTO;
 import com.skripsi.userskripsi.model.User;
+import com.skripsi.userskripsi.model.response.Response;
+import com.skripsi.userskripsi.model.response.user.GetUserResponse;
 import com.skripsi.userskripsi.service.UserService;
 import com.skripsi.userskripsi.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,61 +22,52 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+  @Autowired
+  private UserService userService;
+
+  @GetMapping
+  public Response<List<User>> getUsers() {
+    return ResponseHandler.ok(userService.getUsers());
+  }
+
+  @GetMapping("/{id}")
+  public Response<User> getUser(@PathVariable BigInteger id) {
+    return ResponseHandler.ok(userService.getUser(id));
+  }
+
+  @GetMapping("/username/{username}")
+  public Response<User> getUserByUsername(@PathVariable String username) {
+    return ResponseHandler.ok(userService.getUserByUsername(username));
+  }
+
+  @PostMapping("/login")
+  public Response<Boolean> checkUserLogin(@RequestBody UserLoginDTO user) {
+    return ResponseHandler.ok(userService.checkUserLogin(user));
+  }
+
+  @PostMapping
+  public Response<User> insertUser(@RequestBody UserRequestDTO input) {
+    return ResponseHandler.ok(userService.insertUser(input));
+  }
 
 
-//    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,);
+  @PutMapping
+  public Response<User> updateUser(@RequestBody UserRequestDTO input) {
+    return ResponseHandler.ok(userService.updateUser(input));
+  }
 
-    //  @QueryMapping
-    @GetMapping
-    public ResponseEntity<BaseResponse> getUsers() {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, userService.getUsers());
-    }
+  //  @SchemaMapping
+  //  public User student(JobVacancy jobVacancy) {
+  //    return userService.getUser(jobVacancy.getStudent().getId());
+  //  }
 
-//  @QueryMapping
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse> getUser(@PathVariable BigInteger id)
-    {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.getUser(id));
-    }
+  //  @SchemaMapping
+  //  public User student(Order order) {
+  //    return userService.getUser(order.getStudent().getId());
+  //  }
 
-    //  @QueryMapping(name = "getUserByUsername")
-    @GetMapping("/username/{username}")
-    public ResponseEntity<BaseResponse> getUserByUsername(@PathVariable String username) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.getUserByUsername(username));
-    }
-
-    //  @QueryMapping
-    @PostMapping("/login")
-    public ResponseEntity<BaseResponse> checkUserLogin(@RequestBody UserLoginDTO user) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.checkUserLogin(user));
-    }
-
-    //  @MutationMapping
-    @PostMapping
-    public ResponseEntity<BaseResponse> insertUser(@RequestBody UserRequestDTO input) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.insertUser(input));
-    }
-
-    //  @MutationMapping
-    @PutMapping
-    public ResponseEntity<BaseResponse> updateUser(@RequestBody UserRequestDTO input) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,userService.updateUser(input));
-    }
-
-//  @SchemaMapping
-//  public User student(JobVacancy jobVacancy) {
-//    return userService.getUser(jobVacancy.getStudent().getId());
-//  }
-
-//  @SchemaMapping
-//  public User student(Order order) {
-//    return userService.getUser(order.getStudent().getId());
-//  }
-
-//  @SchemaMapping
-//  public User teacher(JobApplication jobApplication) {
-//    return userService.getUser(jobApplication.getTeacherId());
-//  }
+  //  @SchemaMapping
+  //  public User teacher(JobApplication jobApplication) {
+  //    return userService.getUser(jobApplication.getTeacherId());
+  //  }
 }
