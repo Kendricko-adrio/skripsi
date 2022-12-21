@@ -39,20 +39,16 @@ public class UserService {
         return userRepository.findFirstByUsername(username).orElse(null);
     }
 
-    public User insertUser(UserRequestDTO user){
-        User userInsert = requestToUserMapper(user);
-        return userRepository.save(userInsert);
-    }
-
-    private User requestToUserMapper(UserRequestDTO user){
-        return User.builder()
-                .name(user.getName())
-                .username(user.getUsername())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .email(user.getEmail())
-                .country(new Country().builder().id(user.getCountryId()).build())
-                .role(new Role().builder().id(user.getRoleId()).build())
-                .build();
+    public User insertUser(UserRequestDTO request){
+      User user = User.builder()
+          .name(request.getName())
+          .username(request.getUsername())
+          .password(passwordEncoder.encode(request.getPassword()))
+          .email(request.getEmail())
+          .country(Country.builder().id(request.getCountryId()).build())
+          .role(Role.builder().id(request.getRoleId()).build())
+          .build();
+        return userRepository.save(user);
     }
 
     public User updateUser(UserRequestDTO user){
@@ -62,8 +58,8 @@ public class UserService {
         userUpdate.setUsername(user.getUsername());
         userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
         userUpdate.setName(user.getName());
-        userUpdate.setCountry(new Country().builder().id(user.getCountryId()).build());
-        userUpdate.setRole(new Role().builder().id(user.getRoleId()).build());
+        userUpdate.setCountry(Country.builder().id(user.getCountryId()).build());
+        userUpdate.setRole(Role.builder().id(user.getRoleId()).build());
         return userRepository.save(userUpdate);
     }
 

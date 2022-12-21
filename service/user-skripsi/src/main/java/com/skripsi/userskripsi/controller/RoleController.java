@@ -5,6 +5,7 @@ import com.skripsi.userskripsi.constant.ResponseMessage;
 import com.skripsi.userskripsi.dto.BaseResponse;
 import com.skripsi.userskripsi.model.Role;
 import com.skripsi.userskripsi.model.User;
+import com.skripsi.userskripsi.model.response.Response;
 import com.skripsi.userskripsi.service.RoleService;
 import com.skripsi.userskripsi.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class RoleController {
 //  }
 
   @GetMapping("/{id}")
-  public ResponseEntity<BaseResponse> role(@PathVariable BigInteger id) {
-    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, roleService.getRole(id));
+  public Response<Role> role(@PathVariable BigInteger id) {
+    return ResponseHandler.ok(roleService.getRole(id));
   }
 
 }
