@@ -3,6 +3,7 @@ package com.skripsi.graphqlserver.controller;
 import com.skripsi.graphqlserver.client.course.CourseClient;
 import com.skripsi.graphqlserver.model.course.Chapter;
 import com.skripsi.graphqlserver.model.course.Course;
+import com.skripsi.graphqlserver.model.order.JobVacancy;
 import com.skripsi.graphqlserver.model.order.Order;
 import com.skripsi.graphqlserver.model.request.course.CourseInput;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,11 @@ public class CourseController {
   @SchemaMapping
   public Course course(Order order) {
     return courseClient.getCourse(order.getCourseId()).getData();
+  }
+
+  @SchemaMapping
+  public Course course(JobVacancy jobVacancy) {
+    return courseClient.getCourse(jobVacancy.getCourseId()).getData();
   }
 
 }

@@ -63,10 +63,9 @@ public class JobApplicationService {
   }
 
   public Boolean rejectJobApplication(RejectJobApplicationRequest request) {
-    JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .build()).get();
+    JobApplication jobApplication =
+        jobApplicationRepository.findByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(request.getJobVacancyId(),
+            request.getTeacherId()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.REJECTED_BY_STUDENT);
     jobApplicationRepository.save(jobApplication);
 
@@ -78,10 +77,9 @@ public class JobApplicationService {
   }
 
   public Boolean withdrawJobApplication(WithdrawJobApplicationRequest request) {
-    JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .build()).get();
+    JobApplication jobApplication =
+        jobApplicationRepository.findByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(request.getJobVacancyId(),
+            request.getTeacherId()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.CANCELLED_BY_TEACHER);
     jobApplicationRepository.save(jobApplication);
 
@@ -93,10 +91,9 @@ public class JobApplicationService {
   }
 
   public Boolean acceptJobApplication(AcceptJobApplicationRequest request) {
-    JobApplication jobApplication = jobApplicationRepository.findById(JobApplicationId.builder()
-        .jobVacancyId(request.getJobVacancyId())
-        .teacherId(request.getTeacherId())
-        .build()).get();
+    JobApplication jobApplication =
+        jobApplicationRepository.findByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(request.getJobVacancyId(),
+            request.getTeacherId()).get();
     jobApplication.setApprovalStatus(JobApplicationStatus.APPROVED);
     jobApplicationRepository.save(jobApplication);
 

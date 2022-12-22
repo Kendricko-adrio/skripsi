@@ -1,6 +1,7 @@
 package com.skripsi.graphqlserver.controller;
 
 import com.skripsi.graphqlserver.client.order.JobVacancyClient;
+import com.skripsi.graphqlserver.model.order.JobApplication;
 import com.skripsi.graphqlserver.model.order.JobVacancy;
 import com.skripsi.graphqlserver.model.request.order.jobvacancy.CreateJobVacancyRequest;
 import com.skripsi.graphqlserver.model.request.order.jobvacancy.DeleteJobVacancyRequest;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.math.BigInteger;
@@ -36,18 +38,23 @@ public class JobVacancyController {
   }
 
   @MutationMapping
-  public JobVacancy createJobVacancy(@Argument CreateJobVacancyRequest jobVacancy) {
-    return jobVacancyClient.createJobVacancy(jobVacancy).getData();
+  public JobVacancy createJobVacancy(@Argument CreateJobVacancyRequest request) {
+    return jobVacancyClient.createJobVacancy(request).getData();
   }
 
   @MutationMapping
-  public JobVacancy updateJobVacancy(@Argument UpdateJobVacancyRequest jobVacancy) {
-    return jobVacancyClient.updateJobVacancy(jobVacancy).getData();
+  public JobVacancy updateJobVacancy(@Argument UpdateJobVacancyRequest request) {
+    return jobVacancyClient.updateJobVacancy(request).getData();
   }
 
   @MutationMapping
-  public Boolean deleteJobVacancy(@Argument DeleteJobVacancyRequest id) {
-    return jobVacancyClient.deleteJobVacancy(id).getData();
+  public Boolean deleteJobVacancy(@Argument DeleteJobVacancyRequest request) {
+    return jobVacancyClient.deleteJobVacancy(request).getData();
+  }
+
+  @SchemaMapping
+  public JobVacancy jobVacancy(JobApplication jobApplication) {
+    return jobVacancyClient.getJobVacancy(jobApplication.getJobVacancyId()).getData();
   }
 
 }
