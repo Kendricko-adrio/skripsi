@@ -55,19 +55,4 @@ public class UserController {
   public Response<User> updateUser(@RequestBody UserRequestDTO input) {
     return ResponseHandler.ok(userService.updateUser(input));
   }
-
-  //  @SchemaMapping
-  //  public User student(JobVacancy jobVacancy) {
-  //    return userService.getUser(jobVacancy.getStudent().getId());
-  //  }
-
-  //  @SchemaMapping
-  //  public User student(Order order) {
-  //    return userService.getUser(order.getStudent().getId());
-  //  }
-
-  //  @SchemaMapping
-  //  public User teacher(JobApplication jobApplication) {
-  //    return userService.getUser(jobApplication.getTeacherId());
-  //  }
 }
