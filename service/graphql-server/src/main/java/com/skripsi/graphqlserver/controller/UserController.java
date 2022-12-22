@@ -1,5 +1,8 @@
 package com.skripsi.graphqlserver.controller;
 
+import com.skripsi.graphqlserver.model.notification.Notification;
+import com.skripsi.graphqlserver.model.order.JobApplication;
+import com.skripsi.graphqlserver.model.order.JobVacancy;
 import com.skripsi.graphqlserver.model.order.Order;
 import com.skripsi.graphqlserver.model.request.user.UserLoginDTO;
 import com.skripsi.graphqlserver.model.request.user.UserRequestDTO;
@@ -57,8 +60,23 @@ public class UserController {
   }
 
   @SchemaMapping
+  public User teacher(JobApplication jobApplication) {
+    return userClient.getUser(jobApplication.getTeacherId()).getData();
+  }
+
+  @SchemaMapping
   public User student(Order order) {
     return userClient.getUser(order.getStudentId()).getData();
+  }
+
+  @SchemaMapping
+  public User student(JobVacancy jobVacancy) {
+    return userClient.getUser(jobVacancy.getStudentId()).getData();
+  }
+
+  @SchemaMapping
+  public User user(Notification notification) {
+    return userClient.getUser(notification.getUserId()).getData();
   }
 
 }

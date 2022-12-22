@@ -33,8 +33,9 @@ public class JobApplicationClient extends BaseClient {
 
   public Response<List<JobApplication>> getJobApplications(BigInteger jobVacancyId,
       BigInteger teacherId) {
-    return get("job-application", new ParameterizedTypeReference<Response<List<JobApplication>>>() {
-    });
+    return get("job-application?jobVacancyId=" + jobVacancyId + "&teacherId=" + teacherId,
+        new ParameterizedTypeReference<Response<List<JobApplication>>>() {
+        });
   }
 
   public Response<List<JobApplication>> getJobApplicationByTeacher(BigInteger teacherId) {

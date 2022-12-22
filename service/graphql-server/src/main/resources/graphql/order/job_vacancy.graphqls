@@ -9,13 +9,9 @@ type JobVacancy {
 
 type JobApplication {
     jobVacancyId: ID!
-    jobApplicationId: JobApplicationId!
-    approvalStatus: String!
-}
-
-type JobApplicationId {
     jobVacancy: JobVacancy!
     teacher: User!
+    approvalStatus: String!
 }
 
 input CreateJobVacancyRequest {
@@ -55,11 +51,11 @@ input AcceptJobApplicationRequest {
 }
 
 extend type Query {
-    getJobVacancy(id: ID!): JobVacancy!,
-    getJobVacancies: [JobVacancy!]!,
-    getJobVacancyByUser(id: ID!): JobVacancy!,
-    getJobApplications: [JobApplication!]!,
-    getJobApplicationByTeacher(teacherId: ID!): [JobApplication!]!,
+    getJobVacancy(id: ID!): JobVacancy,
+    getJobVacancies: [JobVacancy],
+    getJobVacancyByUser(id: ID!): [JobVacancy],
+    getJobApplications(jobVacancyId:ID!, teacherId:ID!): [JobApplication],
+    getJobApplicationByTeacher(id: ID!): [JobApplication],
 }
 
 extend type Mutation {

@@ -29,8 +29,9 @@ public class NotificationClient extends BaseClient {
   }
 
   public Response<List<Notification>> getNotifications(BigInteger id) {
-    return get(String.valueOf(id), new ParameterizedTypeReference<Response<List<Notification>>>() {
-    });
+    return get("notification/" + id,
+        new ParameterizedTypeReference<Response<List<Notification>>>() {
+        });
   }
 
   public Response<Notification> saveJobApplicationNotification(NotificationRequest request) {

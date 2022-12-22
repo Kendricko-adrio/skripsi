@@ -13,7 +13,7 @@ input OrderInput{
 
 extend type Query {
     getAllOrder:[Order]
-    viewOwnOrder(page: Int, size: Int,userId: Int!): [Order]
+    viewOwnOrder(page: Int, size: Int,userId: ID!): [Order]
 }
 
 extend type Mutation {

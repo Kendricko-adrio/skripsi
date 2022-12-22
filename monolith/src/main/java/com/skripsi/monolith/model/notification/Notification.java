@@ -1,5 +1,6 @@
 package com.skripsi.monolith.model.notification;
 
+import com.skripsi.monolith.model.BaseEntity;
 import com.skripsi.monolith.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,7 @@ import java.math.BigInteger;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "notifications")
-public class Notification {
+public class Notification extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
