@@ -1,32 +1,27 @@
 package com.skripsi.monolith.service.order;
 
-import com.skripsi.monolith.dto.course.CourseInput;
-import com.skripsi.monolith.dto.order.OrderInput;
-import com.skripsi.monolith.model.course.Course;
 import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.model.order.Order;
-import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.model.user.User;
+import com.skripsi.monolith.repository.order.JobVacancyRepository;
 import com.skripsi.monolith.repository.order.OrderRepository;
-import com.skripsi.monolith.repository.user.UserRepository;
-import com.skripsi.monolith.service.course.CourseService;
-import com.skripsi.monolith.service.user.RoleService;
-import com.skripsi.monolith.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 public class OrderService {
     private OrderRepository orderRepository;
 
+    @Autowired
+    private JobVacancyRepository jobVacancyRepository;
 
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -50,6 +45,7 @@ public class OrderService {
 //        order.setIsActive(true);
 //        return orderRepository.save(order);
 //    }
+
     public Order createOrder(JobVacancy jobVacancy, BigInteger teacherId) {
         Order order = Order.builder()
                 .course(jobVacancy.getCourse())
@@ -60,6 +56,7 @@ public class OrderService {
 
         return orderRepository.save(order);
     }
+
 
     public List<Order> getAllOrder(){
 

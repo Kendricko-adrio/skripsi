@@ -17,4 +17,5 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
   List<JobApplication> findAllByTeacherIdAndMarkForDeleteFalse(BigInteger teacherId);
 
   JobApplication findByJobVacancyIdAndTeacherId(BigInteger jobVacancyId, BigInteger teacherId);
+
 }

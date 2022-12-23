@@ -3,6 +3,7 @@ package com.skripsi.monolith.controller.order;
 import com.skripsi.monolith.dto.course.CourseInput;
 import com.skripsi.monolith.dto.order.OrderInput;
 import com.skripsi.monolith.model.course.Course;
+import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.model.order.Order;
 import com.skripsi.monolith.service.course.CourseService;
 import com.skripsi.monolith.service.order.OrderService;
@@ -33,4 +34,5 @@ public class OrderController {
   public List<Order> getAllOrder() {
     return orderService.getAllOrder();
   }
+
 }
