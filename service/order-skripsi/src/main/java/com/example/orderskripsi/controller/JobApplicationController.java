@@ -23,7 +23,6 @@ public class JobApplicationController {
     @Autowired
     private JobApplicationService jobApplicationService;
 
-    //  @QueryMapping
     @GetMapping
     public ResponseEntity<BaseResponse> getJobApplications(@RequestParam BigInteger jobVacancyId,
                                                            @RequestParam BigInteger teacherId) {
@@ -31,32 +30,27 @@ public class JobApplicationController {
 
     }
 
-    //  @QueryMapping
     @GetMapping("/teacher")
     public ResponseEntity<BaseResponse> getJobApplicationsByTeacher(@RequestParam BigInteger teacherId) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, jobApplicationService.getJobApplicationsByTeacher(teacherId));
     }
 
-    //  @MutationMapping
     @PostMapping
     public ResponseEntity<BaseResponse> createJobApplication(@RequestBody CreateJobApplicationRequest request) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, jobApplicationService.createJobApplication(request));
     }
 
-    //  @MutationMapping
     @PutMapping("/reject")
     public ResponseEntity<BaseResponse> rejectJobApplication(@RequestBody RejectJobApplicationRequest request) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, jobApplicationService.rejectJobApplication(request));
 
     }
 
-    //  @MutationMapping
     @PutMapping("/withdraw")
     public ResponseEntity<BaseResponse> withdrawJobApplication(@RequestBody WithdrawJobApplicationRequest request) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, jobApplicationService.withdrawJobApplication(request));
     }
 
-    //  @MutationMapping
     @PutMapping("/accept")
     public ResponseEntity<BaseResponse> acceptJobApplication(@RequestBody AcceptJobApplicationRequest request) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, jobApplicationService.acceptJobApplication(request));

@@ -46,18 +46,18 @@ public class JobVacancyClient extends BaseClient {
     });
   }
 
-  public Response<JobVacancy> createJobVacancy(CreateJobVacancyRequest jobVacancy) {
-    return post("job-vacancy", jobVacancy, new ParameterizedTypeReference<Response<JobVacancy>>() {
+  public Response<JobVacancy> createJobVacancy(CreateJobVacancyRequest request) {
+    return post("job-vacancy", request, new ParameterizedTypeReference<Response<JobVacancy>>() {
     });
   }
 
-  public Response<JobVacancy> updateJobVacancy(UpdateJobVacancyRequest jobVacancy) {
-    return put("job-vacancy", jobVacancy, new ParameterizedTypeReference<Response<JobVacancy>>() {
+  public Response<JobVacancy> updateJobVacancy(UpdateJobVacancyRequest request) {
+    return put("job-vacancy", request, new ParameterizedTypeReference<Response<JobVacancy>>() {
     });
   }
 
-  public Response<Boolean> deleteJobVacancy(DeleteJobVacancyRequest id) {
-    return delete("job-vacancy/" + id, new ParameterizedTypeReference<Response<Boolean>>() {
+  public Response<Boolean> deleteJobVacancy(DeleteJobVacancyRequest request) {
+    return delete("job-vacancy", request, new ParameterizedTypeReference<Response<Boolean>>() {
     });
   }
 

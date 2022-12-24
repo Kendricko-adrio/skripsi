@@ -6,5 +6,5 @@ type Notification {
 }
 
 extend type Query {
-    getNotifications(id: ID!): [Notification!]!
+    getNotifications(id: ID!): [Notification]
 }

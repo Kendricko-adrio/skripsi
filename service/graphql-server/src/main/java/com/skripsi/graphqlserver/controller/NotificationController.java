@@ -4,6 +4,7 @@ import com.skripsi.graphqlserver.client.notification.NotificationClient;
 import com.skripsi.graphqlserver.model.notification.Notification;
 import com.skripsi.graphqlserver.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ public class NotificationController {
   private NotificationClient notificationClient;
 
   @QueryMapping
-  public List<Notification> getNotifications(BigInteger id) {
+  public List<Notification> getNotifications(@Argument BigInteger id) {
     return notificationClient.getNotifications(id).getData();
   }
 

@@ -19,26 +19,20 @@ import java.util.List;
 @RequestMapping("/api/notification")
 public class NotificationController {
 
+  @Autowired
   private NotificationService notificationService;
 
-  public NotificationController(NotificationService notificationService) {
-    this.notificationService = notificationService;
-  }
-
-//  @QueryMapping
-    @GetMapping("/{userId}")
+  @GetMapping("/{userId}")
   public ResponseEntity<BaseResponse> getNotifications(@PathVariable BigInteger userId) {
-      return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,notificationService.getNotifications(userId));
+    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
+        notificationService.getNotifications(userId));
   }
-
-//  @SchemaMapping
-//  List<Notification> notifications(User user) {
-//    return notificationService.getNotifications(user.getId());
-//  }
 
   @PostMapping
   public ResponseEntity<BaseResponse> saveJobApplicationNotification(@RequestBody NotificationRequest request) {
-    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,notificationService.saveJobApplicationNotification(request.getUserId(), request.getStatus()));
+    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
+        notificationService.saveJobApplicationNotification(request.getUserId(),
+            request.getStatus()));
   }
 
 }

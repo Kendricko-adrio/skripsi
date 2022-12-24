@@ -49,4 +49,10 @@ public abstract class BaseClient {
         , null, responseType).getBody();
   }
 
+  public <T, S> T delete(String url, S request, ParameterizedTypeReference<T> responseType) {
+    HttpEntity<S> entity = new HttpEntity<>(request);
+    return restTemplate.exchange(getServiceProperties() + url, HttpMethod.DELETE,
+        entity, responseType).getBody();
+  }
+
 }

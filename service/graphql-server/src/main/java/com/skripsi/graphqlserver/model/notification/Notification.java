@@ -1,5 +1,6 @@
 package com.skripsi.graphqlserver.model.notification;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skripsi.graphqlserver.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,10 @@ public class Notification {
 
   private BigInteger id;
 
-  private User user;
+//  private User user;
+
+  @JsonProperty("user_id")
+  private BigInteger userId;
 
   private String content;
 
