@@ -8,3 +8,7 @@ type Notification {
 extend type Query {
     getNotifications(id: ID!): [Notification!]!
 }
+
+extend type Mutation{
+    readNotifications(ids: [ID!]): Boolean!
+}
