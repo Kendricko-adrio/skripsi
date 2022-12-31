@@ -33,6 +33,9 @@ public class JobApplicationService {
     private JobVacancyRepository jobVacancyRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private OrderService orderService;
 
 
@@ -82,7 +85,7 @@ public class JobApplicationService {
         jobApplicationRepository.save(jobApplication);
 
         JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        notificationService.saveJobApplicationNotification(userRepository.findById(request.getTeacherId()).orElse(null),
                 NotificationStatus.JOB_APPLICATION_REJECTION);
 
         return true;
@@ -112,10 +115,10 @@ public class JobApplicationService {
         jobApplicationRepository.save(jobApplication);
 
         JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        notificationService.saveJobApplicationNotification(userRepository.findById(request.getTeacherId()).orElse(null),
                 NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
-
         orderService.createOrder(jobVacancy, request.getTeacherId());
+
         return true;
     }
 
