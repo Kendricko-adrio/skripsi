@@ -1,27 +1,23 @@
-package com.federated.courses.entity;
+package com.federated.courses.dto.course;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "courses")
-public class Course {
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class CourseRequest {
     private BigInteger id;
-
     private String courseName;
-
     private String courseDescription;
-
     private BigInteger coursePrice;
-
-    private User createdBy;
+    private BigInteger createdBy;
 }
