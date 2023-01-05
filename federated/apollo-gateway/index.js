@@ -20,8 +20,8 @@ const {ApolloGateway, IntrospectAndCompose} = require('@apollo/gateway')
 const gateway = new ApolloGateway({
     supergraphSdl: new IntrospectAndCompose({
         subgraphs: [
-            { name: 'users', url: 'http://localhost:8081/graphql' },
-            { name: 'courses', url: 'http://localhost:8082/graphql' },
+            { name: 'users', url: 'http://localhost:8085/graphql' },
+            { name: 'courses', url: 'http://localhost:8086/graphql' },
         ]
     })
 });

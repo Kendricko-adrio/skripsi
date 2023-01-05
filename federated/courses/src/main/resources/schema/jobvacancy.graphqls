@@ -1,0 +1,73 @@
+type JobVacancy{
+    id: ID!
+    course: Course!
+    student: User!
+    description: String!
+    jobApplications: [JobApplication!]!
+    isActive: Boolean!
+}
+
+type JobApplication {
+    jobVacancyId: ID!
+    jobApplicationId: JobApplicationId!
+    approvalStatus: String!
+}
+
+type JobApplicationId {
+    jobVacancy: JobVacancy!
+    teacher: User!
+}
+
+input CreateJobVacancyRequest {
+    courseId: ID!
+    studentId: ID!
+    description: String!
+}
+
+input UpdateJobVacancyRequest {
+    id: ID!
+    description: String!
+    isActive: Boolean!
+}
+
+input DeleteJobVacancyRequest {
+    id: ID!
+}
+
+input CreateJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+input RejectJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+input WithdrawJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+input AcceptJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+extend type Query {
+    getJobVacancy(id: ID!): JobVacancy!,
+    getJobVacancies: [JobVacancy!]!,
+    getJobVacancyByUser(id: ID!): JobVacancy!,
+    getJobApplications: [JobApplication!]!,
+    getJobApplicationByTeacher(teacherId: ID!): [JobApplication!],
+}
+
+extend type Mutation {
+    createJobVacancy(request: CreateJobVacancyRequest!): JobVacancy!,
+    updateJobVacancy(request: UpdateJobVacancyRequest!): JobVacancy!,
+    deleteJobVacancy(request: DeleteJobVacancyRequest!): Boolean!,
+    createJobApplication(request: CreateJobApplicationRequest!): JobApplication!,
+    rejectJobApplication(request: RejectJobApplicationRequest!): Boolean!,
+    withdrawJobApplication(request: WithdrawJobApplicationRequest!): Boolean!,
+    acceptJobApplication(request: AcceptJobApplicationRequest!): Boolean!,
+}

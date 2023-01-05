@@ -21,9 +21,8 @@ public class UserDataFetcher {
 
     @DgsEntityFetcher(name = "User")
     public User getUserById(Map<String, Object> values) {
-//        String id = (String) values.get("id");
-//        return users.stream().filter(user -> user.getId().compareTo(new BigInteger(id))== 0).findFirst().orElse(null);
-        return null;
+        String id = (String) values.get("id");
+        return userService.getUser(new BigInteger(id));
     }
 
     @DgsQuery
