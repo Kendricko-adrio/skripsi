@@ -3,7 +3,7 @@ type JobVacancy {
     course: Course!
     student: User!
     description: String!
-    jobApplications: [JobApplication]
+    jobApplications: [JobApplication!]!
     isActive: Boolean!
 }
 
@@ -51,11 +51,11 @@ input AcceptJobApplicationRequest {
 }
 
 extend type Query {
-    getJobVacancy(id: ID!): JobVacancy!,
+    getJobVacancy(id: ID!): JobVacancy,
     getJobVacancies: [JobVacancy],
     getJobVacancyByUser(id: ID!): [JobVacancy],
-    getJobApplications: [JobApplication],
-    getJobApplicationByTeacher(teacherId: ID!): [JobApplication],
+    getJobApplications(jobVacancyId:ID!, teacherId:ID!): [JobApplication],
+    getJobApplicationByTeacher(id: ID!): [JobApplication],
 }
 
 extend type Mutation {
