@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +33,11 @@ public class JobApplicationService {
     private JobVacancyRepository jobVacancyRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private OrderService orderService;
+
 
     public List<JobApplication> getJobApplications(BigInteger jobVacancyId, BigInteger teacherId) {
         return jobApplicationRepository.findAllByJobVacancyIdAndTeacherIdAndMarkForDeleteFalse(
@@ -46,6 +51,15 @@ public class JobApplicationService {
 
     public List<JobApplication> getJobApplicationsByTeacher(BigInteger teacherId) {
         return jobApplicationRepository.findAllByTeacherIdAndMarkForDeleteFalse(teacherId);
+    }
+
+    public JobApplicationId getJobApplicationByJobVacancyIdAndTeacherId(BigInteger jobVacancyId, BigInteger teacherId){
+        JobApplication ja = jobApplicationRepository.findByJobVacancyIdAndTeacherId(jobVacancyId, teacherId);
+        return JobApplicationId.builder()
+                .jobVacancyId(ja.getJobVacancyId())
+                .teacherId(ja.getTeacherId())
+                .build();
+//        return ja;
     }
 
     public JobApplication createJobApplication(CreateJobApplicationRequest request) {
@@ -71,7 +85,7 @@ public class JobApplicationService {
         jobApplicationRepository.save(jobApplication);
 
         JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        notificationService.saveJobApplicationNotification(userRepository.findById(request.getTeacherId()).orElse(null),
                 NotificationStatus.JOB_APPLICATION_REJECTION);
 
         return true;
@@ -101,11 +115,20 @@ public class JobApplicationService {
         jobApplicationRepository.save(jobApplication);
 
         JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        notificationService.saveJobApplicationNotification(userRepository.findById(request.getTeacherId()).orElse(null),
                 NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
-
         orderService.createOrder(jobVacancy, request.getTeacherId());
+
         return true;
     }
 
+    public List<JobApplication> getJobApplicationsByStudent(BigInteger studentId) {
+        List<JobVacancy> listJV = jobVacancyRepository.findAllByStudentIdAndMarkForDeleteFalse(studentId);
+        List<JobApplication> listJA = new ArrayList<>();
+        for(JobVacancy jv : listJV){
+            listJA.addAll(jobApplicationRepository.findAllByJobVacancyIdAndMarkForDeleteFalse(jv.getId()));
+        }
+
+        return listJA;
+    }
 }

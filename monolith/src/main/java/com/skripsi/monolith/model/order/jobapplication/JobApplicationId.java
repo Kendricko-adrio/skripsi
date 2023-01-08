@@ -21,5 +21,4 @@ public class JobApplicationId implements Serializable {
   private BigInteger jobVacancyId;
 
   private BigInteger teacherId;
-
 }

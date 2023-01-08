@@ -29,7 +29,7 @@ import java.math.BigInteger;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "orders")
-public class Order extends BaseEntity {
+public class  Order extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigInteger id;
