@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -108,4 +109,13 @@ public class JobApplicationService {
         return true;
     }
 
+    public List<JobApplication> getJobApplicationsByStudent(BigInteger studentId) {
+        List<JobVacancy> listJV = jobVacancyRepository.findAllByStudentIdAndMarkForDeleteFalse(studentId);
+        List<JobApplication> listJA = new ArrayList<>();
+        for(JobVacancy jv : listJV){
+            listJA.addAll(jobApplicationRepository.findAllByJobVacancyIdAndMarkForDeleteFalse(jv.getId()));
+        }
+
+        return listJA;
+    }
 }

@@ -7,6 +7,7 @@ import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.model.order.Order;
 import com.skripsi.monolith.model.user.Role;
 import com.skripsi.monolith.model.user.User;
+import com.skripsi.monolith.repository.order.JobVacancyRepository;
 import com.skripsi.monolith.repository.order.OrderRepository;
 import com.skripsi.monolith.repository.user.UserRepository;
 import com.skripsi.monolith.service.course.CourseService;
@@ -25,7 +26,12 @@ import java.util.List;
 @Service
 @Slf4j
 public class OrderService {
+
+    @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private JobVacancyRepository jobVacancyRepository;
 
 
     public OrderService(OrderRepository orderRepository) {

@@ -30,4 +30,16 @@ public class NotificationService {
         .user(targetUser)
         .build());
   }
+
+  public Boolean readNotifications(List<BigInteger> ids) {
+    for(BigInteger id : ids){
+      Notification notification = repository.findById(id).orElse(null);
+
+      if(notification != null){
+        notification.setRead(true);
+        repository.save(notification);
+      }
+    }
+    return true;
+  }
 }

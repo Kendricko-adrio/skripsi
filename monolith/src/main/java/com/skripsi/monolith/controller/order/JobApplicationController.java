@@ -65,4 +65,9 @@ public class JobApplicationController {
     return jobApplicationService.getJobApplicationsByJobVacancy(jobVacancy.getId());
   }
 
+  @QueryMapping
+  public List<JobApplication> getJobApplicationsByStudent(@Argument BigInteger studentId){
+    return jobApplicationService.getJobApplicationsByStudent(studentId);
+  }
+
 }

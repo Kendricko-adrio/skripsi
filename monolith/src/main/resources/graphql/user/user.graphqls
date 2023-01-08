@@ -37,6 +37,8 @@ input UserLoginDTO{
 extend type Query {
     getUsers: [User]
     getUser(id: ID): User
+    getRoles: [Role]
+    getCountries: [Country]
     getUserByUsername(username: String!): User
     checkUserLogin(user: UserLoginDTO!): Boolean
 }
