@@ -20,8 +20,7 @@ public class CourseService {
     }
 
     public Course insertCourse(@Argument CourseInput input){
-        ObjectMapper mapper = new ObjectMapper();
-        Course course = mapper.convertValue(input, Course.class);
+        Course course = requestToCourseMapper(input);
         return repository.save(course);
     }
 
@@ -47,6 +46,15 @@ public class CourseService {
         courseUpdate.setCourseDescription(input.getCourseDescription());
         courseUpdate.setCreatedBy(input.getCreatedBy());
         return repository.save(courseUpdate);
+    }
+
+    private Course requestToCourseMapper(CourseInput courseInput){
+        return Course.builder()
+            .courseName(courseInput.getCourseName())
+            .courseDescription(courseInput.getCourseDescription())
+            .coursePrice(courseInput.getCoursePrice())
+            .createdBy(courseInput.getCreatedBy())
+            .build();
     }
 
 }

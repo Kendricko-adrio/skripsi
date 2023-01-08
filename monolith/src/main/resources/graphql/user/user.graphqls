@@ -1,6 +1,7 @@
 type User {
     id: ID!
     username: String!
+    name: String!
     email: String!
     country: Country!
     role: Role!
@@ -36,6 +37,8 @@ input UserLoginDTO{
 extend type Query {
     getUsers: [User]
     getUser(id: ID): User
+    getRoles: [Role]
+    getCountries: [Country]
     getUserByUsername(username: String!): User
     checkUserLogin(user: UserLoginDTO!): Boolean
 }

@@ -5,13 +5,13 @@ type Chapter {
     course: Course!
 }
 
-input CreateChapter {
+input CreateChapterRequest {
     name: String!
     detail: String!
     courseId: ID!
 }
 
-input UpdateChapter {
+input UpdateChapterRequest {
     id: ID!
     name: String
     detail: String
@@ -23,7 +23,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    createChapter(input: CreateChapter!): Chapter
-    updateChapter(input: UpdateChapter!): Chapter
+    createChapter(input: CreateChapterRequest!): Chapter
+    updateChapter(input: UpdateChapterRequest!): Chapter
     deleteChapter(id: ID!): Boolean
 }
