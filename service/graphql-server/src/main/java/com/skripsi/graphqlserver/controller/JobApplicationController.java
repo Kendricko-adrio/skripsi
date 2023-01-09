@@ -35,6 +35,11 @@ public class JobApplicationController {
     return jobApplicationClient.getJobApplicationByTeacher(id).getData();
   }
 
+  @QueryMapping
+  public List<JobApplication> getJobApplicationByStudent(@Argument BigInteger id) {
+    return jobApplicationClient.getJobApplicationByStudent(id).getData();
+  }
+
   @MutationMapping
   public JobApplication createJobApplication(@Argument CreateJobApplicationRequest request) {
     return jobApplicationClient.createJobApplication(request).getData();

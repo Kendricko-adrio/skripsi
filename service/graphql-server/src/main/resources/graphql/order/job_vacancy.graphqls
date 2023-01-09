@@ -55,7 +55,8 @@ extend type Query {
     getJobVacancies: [JobVacancy],
     getJobVacancyByUser(id: ID!): [JobVacancy],
     getJobApplications(jobVacancyId:ID!, teacherId:ID!): [JobApplication],
-    getJobApplicationByTeacher(id: ID!): [JobApplication],
+    getJobApplicationsByTeacher(teacherId: ID!): [JobApplication],
+    getJobApplicationsByStudent(studentId: ID!): [JobApplication],
 }
 
 extend type Mutation {

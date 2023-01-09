@@ -2,6 +2,7 @@ package com.example.notificationskripsi.controller;
 
 import com.example.notificationskripsi.dto.BaseResponse;
 import com.example.notificationskripsi.dto.NotificationRequest;
+import com.example.notificationskripsi.dto.ReadNotificationsRequest;
 import com.example.notificationskripsi.dto.ResponseMessage;
 import com.example.notificationskripsi.model.Notification;
 import com.example.notificationskripsi.model.constants.NotificationStatus;
@@ -33,6 +34,12 @@ public class NotificationController {
     return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
         notificationService.saveJobApplicationNotification(request.getUserId(),
             request.getStatus()));
+  }
+
+  @PostMapping("/read")
+  public ResponseEntity<BaseResponse> readNotifications (@RequestBody ReadNotificationsRequest request) {
+    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
+        notificationService.readNotifications(request.getIds()));
   }
 
 }

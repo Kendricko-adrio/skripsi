@@ -28,13 +28,18 @@ public class JobApplicationController {
       @RequestParam BigInteger teacherId) {
     return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
         jobApplicationService.getJobApplications(jobVacancyId, teacherId));
-
   }
 
   @GetMapping("/teacher")
   public ResponseEntity<BaseResponse> getJobApplicationsByTeacher(@RequestParam BigInteger teacherId) {
     return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
         jobApplicationService.getJobApplicationsByTeacher(teacherId));
+  }
+
+  @GetMapping("/student")
+  public ResponseEntity<BaseResponse> getJobApplicationsByStudent(@RequestParam BigInteger studentId) {
+    return ResponseHandler.generateResponse(ResponseMessage.SUCCESS,
+        jobApplicationService.getJobApplicationsByStudent(studentId));
   }
 
   @PostMapping

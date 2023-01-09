@@ -21,13 +21,17 @@ public class NotificationService {
         return repository.findAllByUserId(userId);
     }
 
-    //  public Notification saveJobApplicationNotification(User targetUser, NotificationStatus status) {
-//    return repository.save(Notification.builder()
-//        .content(status.name())
-//        .read(false)
-//            .userId(targetUser.getId())
-//        .build());
-//  }
+    public Boolean readNotifications(List<BigInteger> ids) {
+        for (BigInteger id : ids) {
+            Notification notification = repository.findById(id).orElse(null);
+            if (notification != null) {
+                notification.setRead(true);
+                repository.save(notification);
+            }
+        }
+        return true;
+    }
+
     public Notification saveJobApplicationNotification(BigInteger id, NotificationStatus status) {
         return repository.save(Notification.builder()
                 .content(status.name())

@@ -5,8 +5,8 @@ type User {
     email: String!
     country: Country!
     role: Role!
-    notifications: [Notification!]!
-    jobVacancies: [JobVacancy!]!
+    notifications: [Notification!]
+    jobVacancies: [JobVacancy!]
 }
 
 type Country {
