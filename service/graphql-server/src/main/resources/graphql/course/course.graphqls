@@ -4,6 +4,7 @@ type Course{
     courseDescription: String!
     coursePrice: Int!
     createdBy: Int
+    chapters: [Chapter!]
 }
 
 input CourseInput{

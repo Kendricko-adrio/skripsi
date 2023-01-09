@@ -6,6 +6,7 @@ import com.skripsi.graphqlserver.model.order.JobVacancy;
 import com.skripsi.graphqlserver.model.request.order.jobvacancy.CreateJobVacancyRequest;
 import com.skripsi.graphqlserver.model.request.order.jobvacancy.DeleteJobVacancyRequest;
 import com.skripsi.graphqlserver.model.request.order.jobvacancy.UpdateJobVacancyRequest;
+import com.skripsi.graphqlserver.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -55,6 +56,11 @@ public class JobVacancyController {
   @SchemaMapping
   public JobVacancy jobVacancy(JobApplication jobApplication) {
     return jobVacancyClient.getJobVacancy(jobApplication.getJobVacancyId()).getData();
+  }
+
+  @SchemaMapping
+  public List<JobVacancy> jobVacancies(User user) {
+    return jobVacancyClient.getJobVacancyByUser(user.getId()).getData();
   }
 
 }

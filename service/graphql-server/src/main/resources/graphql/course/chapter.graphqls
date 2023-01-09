@@ -25,5 +25,5 @@ extend type Query {
 extend type Mutation {
     createChapter(input: CreateChapterRequest): Chapter
     updateChapter(input: UpdateChapterRequest): Chapter
-    deleteChapter(id: ID): Boolean
+    deleteChapter(id: ID!): Boolean
 }
