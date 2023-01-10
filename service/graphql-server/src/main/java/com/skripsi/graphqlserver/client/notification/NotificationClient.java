@@ -3,6 +3,7 @@ package com.skripsi.graphqlserver.client.notification;
 import com.skripsi.graphqlserver.client.BaseClient;
 import com.skripsi.graphqlserver.model.notification.Notification;
 import com.skripsi.graphqlserver.model.request.notification.NotificationRequest;
+import com.skripsi.graphqlserver.model.request.notification.ReadNotificationsRequest;
 import com.skripsi.graphqlserver.model.response.Response;
 import com.skripsi.graphqlserver.property.ServiceProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class NotificationClient extends BaseClient {
     return get("notification/" + id,
         new ParameterizedTypeReference<Response<List<Notification>>>() {
         });
+  }
+
+  public Response<Boolean> readNotifications(ReadNotificationsRequest request) {
+    return post("notification/read", request, new ParameterizedTypeReference<Response<Boolean>>() {
+    });
   }
 
   public Response<Notification> saveJobApplicationNotification(NotificationRequest request) {

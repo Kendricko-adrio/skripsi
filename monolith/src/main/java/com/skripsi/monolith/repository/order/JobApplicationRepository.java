@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 public interface JobApplicationRepository extends JpaRepository<JobApplication, JobApplicationId> {
 
@@ -14,5 +15,7 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
   List<JobApplication> findAllByJobVacancyIdAndMarkForDeleteFalse(BigInteger jobVacancyId);
 
   List<JobApplication> findAllByTeacherIdAndMarkForDeleteFalse(BigInteger teacherId);
+
+  Optional<JobApplication> findByJobVacancyIdAndTeacherId(BigInteger jobVacancyId, BigInteger teacherId);
 
 }

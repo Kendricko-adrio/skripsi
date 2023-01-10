@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,6 +47,17 @@ public class JobApplicationService {
 
   public List<JobApplication> getJobApplicationsByTeacher(BigInteger teacherId) {
     return jobApplicationRepository.findAllByTeacherIdAndMarkForDeleteFalse(teacherId);
+  }
+
+  public List<JobApplication> getJobApplicationsByStudent(BigInteger studentId) {
+    List<JobVacancy> listJV =
+        jobVacancyRepository.findAllByStudentIdAndMarkForDeleteFalse(studentId);
+    List<JobApplication> listJA = new ArrayList<>();
+    for (JobVacancy jv : listJV) {
+      listJA.addAll(jobApplicationRepository.findAllByJobVacancyIdAndMarkForDeleteFalse(jv.getId()));
+    }
+
+    return listJA;
   }
 
   public JobApplication createJobApplication(CreateJobApplicationRequest request) {

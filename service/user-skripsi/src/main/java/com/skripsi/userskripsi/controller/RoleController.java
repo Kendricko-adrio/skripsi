@@ -25,11 +25,6 @@ public class RoleController {
   @Autowired
   private RoleService roleService;
 
-//  @SchemaMapping
-//  public Role role(User user) {
-//    return roleService.getRole(user.getRole().getId());
-//  }
-
   @GetMapping("/{id}")
   public Response<Role> role(@PathVariable BigInteger id) {
     return ResponseHandler.ok(roleService.getRole(id));

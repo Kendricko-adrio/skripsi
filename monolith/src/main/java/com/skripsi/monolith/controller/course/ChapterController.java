@@ -6,6 +6,7 @@ import com.skripsi.monolith.model.course.Chapter;
 import com.skripsi.monolith.model.course.Course;
 import com.skripsi.monolith.service.course.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -21,7 +22,7 @@ public class ChapterController {
   private ChapterService chapterService;
 
   @QueryMapping
-  public Chapter getChapter(BigInteger id) {
+  public Chapter getChapter(@Argument BigInteger id) {
     return chapterService.getChapter(id);
   }
 
@@ -31,12 +32,12 @@ public class ChapterController {
   }
 
   @MutationMapping
-  public Chapter createChapter(CreateChapterRequest request) {
+  public Chapter createChapter(@Argument CreateChapterRequest request) {
     return chapterService.insertChapter(request);
   }
 
   @MutationMapping
-  public Chapter updateChapter(UpdateChapterRequest request) {
+  public Chapter updateChapter(@Argument UpdateChapterRequest request) {
     return chapterService.updateChapter(request);
   }
 

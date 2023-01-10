@@ -48,6 +48,7 @@ public class JobVacancyService {
         .course(courseRepository.findById(request.getCourseId()).orElse(null))
         .student(userRepository.findById(request.getStudentId()).orElse(null))
         .description(request.getDescription())
+        .isActive(true)
         .build();
     return jobVacancyRepository.save(jobVacancy);
   }
