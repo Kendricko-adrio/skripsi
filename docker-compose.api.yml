@@ -1,0 +1,101 @@
+version: "3.8"
+services:
+  postgres:
+    image: "postgres:latest"
+    container_name: postgres-skripsi
+    environment:
+      - POSTGRES_USER=siplah
+      - POSTGRES_PASSWORD=siplah
+    volumes:
+      - db:/var/lib/postgresql_skripsi/data
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  api_gateway_app:
+    image: "gateway:latest"
+    container_name: gateway-skripsi
+    ports:
+      - "8090:8090"
+
+  api_graphql_server:
+    image: "graphql-server:latest"
+    container_name: graphql-server-skripsi
+    ports:
+      - "8080:8080"
+    networks:
+      - microservices
+    environment:
+      - SERVICE_USER=http://user-service-skripsi:8081/api/
+      - SERVICE_COURSE=http://course-skripsi-service:8082/api/
+      - SERVICE_ORDER=http://order-skripsi-service:8083/api/
+      - SERVICE_NOTIFICATION=http://notification-skripsi-service:8084/api/
+    depends_on:
+      - api_user_service
+      - api_course_service
+      - api_order_service
+      - api_notification_service
+
+  api_user_service:
+    image: "user-service:latest"
+    container_name: user-service-skripsi
+    ports:
+      - "8081:8081"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/user_service
+      - SPRING_DATASOURCE_USERNAME=siplah
+      - SPRING_DATASOURCE_PASSWORD=siplah
+
+  api_course_service:
+    image: "course-service:latest"
+    container_name: course-skripsi-service
+    ports:
+      - "8082:8082"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/course_service
+      - SPRING_DATASOURCE_USERNAME=siplah
+      - SPRING_DATASOURCE_PASSWORD=siplah
+
+  api_order_service:
+    image: "order-service:latest"
+    container_name: order-skripsi-service
+    ports:
+      - "8083:8083"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/order_service
+      - SPRING_DATASOURCE_USERNAME=siplah
+      - SPRING_DATASOURCE_PASSWORD=siplah
+
+  api_notification_service:
+    image: "notification-service:latest"
+    container_name: notification-skripsi-service
+    ports:
+      - "8084:8084"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/notification_service
+      - SPRING_DATASOURCE_USERNAME=siplah
+      - SPRING_DATASOURCE_PASSWORD=siplah
+
+networks:
+  postgres:
+    driver: bridge
+  microservices:
+    driver: bridge
+volumes:
+  db:
+    driver: local
+# docker-compose -f docker-compose.api.yml up -d
