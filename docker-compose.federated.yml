@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  courses_federated:
+    image: "courses-federated:latest"
+    container_name: courses-federated-skripsi
+    ports:
+      - "8086:8086"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/monolith
+      - SPRING_DATASOURCE_USERNAME=siplah
+      - SPRING_DATASOURCE_PASSWORD=siplah
+      - EXTERNAL_COURSE_URL=http://course-skripsi-service:8082/api/course
+      - EXTERNAL_CHAPTER_URL=http://course-skripsi-service:8082/api/chapter
+      - EXTERNAL_APPLICATION_URL=http://order-skripsi-service:8083/api/job-application
+      - EXTERNAL_VACANCY_URL=http://order-skripsi-service:8083/api/job-vacancy
+      - EXTERNAL_ORDER_URL=http://order-skripsi-service:8083/api/order
+
+  users_federated:
+    image: "users-federated:latest"
+    container_name: users-federated-skripsi
+    ports:
+      - "8085:8085"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/monolith
+      - SPRING_DATASOURCE_USERNAME=siplah
+      - SPRING_DATASOURCE_PASSWORD=siplah
+      - EXTERNAL_USER_URL=http://user-skripsi-service:8081/api/user
+      - EXTERNAL_NOTIF_URL=http://notification-skripsi-service:8084/api/notification
+
+  apollo_gateway:
+    image: "apollo-gateway:latest"
+    container_name: apollo-gateway
+    ports:
+      - "4000:4000"
+    networks:
+      - postgres
+      - microservices
+    environment:
+      - SERVER_PORT=4000
+      - SERVICES_USERS_URL=http://users-federated-skripsi:8085/graphql
+      - SERVICES_COURSES_URL=http://courses-federated-skripsi:8086/graphql
+
+networks:
+  postgres:
+    driver: bridge
+  microservices:
+    driver: bridge
+# docker-compose -f docker-compose.federated.yml up -d

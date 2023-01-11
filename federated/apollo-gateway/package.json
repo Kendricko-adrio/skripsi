@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":" node index.js"
+    "start": " node index.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,8 @@
   "dependencies": {
     "@apollo/gateway": "^2.0.3",
     "apollo-server": "^3.8.1",
+    "config": "^3.3.8",
+    "dotenv": "^16.0.3",
     "graphql": "^16.5.0"
   }
 }
