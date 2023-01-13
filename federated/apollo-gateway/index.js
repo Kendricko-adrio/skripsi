@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-const { ApolloServer, gql } = require('apollo-server');
-const {ApolloGateway, IntrospectAndCompose} = require('@apollo/gateway')
+const { ApolloServer, gql } = require("apollo-server");
+const { ApolloGateway, IntrospectAndCompose } = require("@apollo/gateway");
+require("dotenv").config();
+
+const port = process.env.SERVER_PORT;
+const usersUrl = process.env.SERVICES_USERS_URL;
+const coursesUrl = process.env.SERVICES_COURSES_URL;
 
 const gateway = new ApolloGateway({
-    supergraphSdl: new IntrospectAndCompose({
-        subgraphs: [
-            { name: 'users', url: 'http://localhost:8085/graphql' },
-            { name: 'courses', url: 'http://localhost:8086/graphql' },
-        ]
-    })
+	supergraphSdl: new IntrospectAndCompose({
+		subgraphs: [
+			{ name: "users", url: usersUrl },
+			{ name: "courses", url: coursesUrl },
+		],
+	}),
 });
 
-const server = new ApolloServer({ gateway, subscriptions:false, tracing:true });
-server.listen().then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
-  });
+const server = new ApolloServer({ gateway, subscriptions: false, tracing: true });
+server.listen({ port: port }).then(({ url }) => {
+	console.log(`🚀 Server ready at ${url}`);
+});

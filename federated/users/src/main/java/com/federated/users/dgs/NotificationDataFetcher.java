@@ -5,6 +5,7 @@ import com.federated.users.model.user.User;
 import com.federated.users.service.NotificationService;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
+import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
 import com.netflix.graphql.dgs.DgsQuery;
 import com.netflix.graphql.dgs.InputArgument;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class NotificationDataFetcher {
   }
 
   @DgsData(parentType = "User", field = "notifications")
-  List<Notification> notifications(User user) {
+  List<Notification> notifications(DgsDataFetchingEnvironment dfe) {
+    User user = dfe.getSource();
     return notificationService.getNotifications(user.getId());
   }
 }
