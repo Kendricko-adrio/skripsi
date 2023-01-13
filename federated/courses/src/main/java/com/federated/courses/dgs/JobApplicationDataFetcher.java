@@ -24,11 +24,10 @@ public class JobApplicationDataFetcher {
     @Autowired
     private JobApplicationService jobApplicationService;
 
-    // gtw ini bwt apa
     @DgsQuery
-    public List<JobApplication> getJobApplications(@InputArgument BigInteger jobVacancyId,
-                                                   @InputArgument BigInteger teacherId) {
-        return jobApplicationService.getJobApplications(jobVacancyId, teacherId);
+    public List<JobApplication> getJobApplications(@InputArgument String jobVacancyId,
+        @InputArgument String teacherId) {
+        return jobApplicationService.getJobApplications(new BigInteger(jobVacancyId), new BigInteger(teacherId));
     }
 
     @DgsQuery
@@ -62,11 +61,6 @@ public class JobApplicationDataFetcher {
 //    }
 
 
-//
-//    @SchemaMapping
-//    public List<JobApplication> jobApplications(JobVacancy jobVacancy) {
-//        return jobApplicationService.getJobApplicationsByJobVacancy(jobVacancy.getId());
-//    }
     @DgsData(parentType = "JobVacancy")
     public List<JobApplication> jobApplications(DgsDataFetchingEnvironment dfe) {
         JobVacancy jobVacancy = dfe.getSource();

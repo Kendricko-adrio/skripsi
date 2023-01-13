@@ -4,9 +4,8 @@ type User @key(fields: "id"){
     email: String!
     country: Country!
     role: Role!
+    notifications: [Notification!]!
 }
-
-
 
 type Country {
     id: ID!
