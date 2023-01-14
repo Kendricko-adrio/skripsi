@@ -38,7 +38,7 @@ public class CourseService extends ExternalBaseService{
         return mapper.convertValue(response.getData(), Course.class);
     }
 
-    public Course updateCourse(@Argument CourseInput input){
+    public Course updateCourse(CourseInput input){
         CourseRequest courseRequest = inputToRequest(input);
         Response response = hitExternalService(courseUrl, HttpMethod.PUT, courseRequest, null, Response.class);
         return mapper.convertValue(response.getData(), Course.class);

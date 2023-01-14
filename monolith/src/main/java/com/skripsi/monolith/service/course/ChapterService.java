@@ -29,6 +29,10 @@ public class ChapterService {
     return chapterRepository.findById(id).orElse(null);
   }
 
+  public List<Chapter> getChaptersByCourse(BigInteger courseId) {
+    return chapterRepository.findAllByCourse_Id(courseId);
+  }
+
   public Chapter insertChapter(CreateChapterRequest request) {
     Chapter chapter = Chapter.builder()
         .name(request.getName())
@@ -50,10 +54,6 @@ public class ChapterService {
     Chapter chapter = chapterRepository.findById(id).get();
     chapterRepository.delete(chapter);
     return true;
-  }
-
-  public List<Chapter> getChaptersByCourse(BigInteger courseId) {
-    return chapterRepository.findAllByCourse_Id(courseId);
   }
 
 }
