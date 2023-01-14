@@ -1,8 +1,10 @@
 package com.federated.courses.model.order;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.federated.courses.model.BaseEntity;
+import com.federated.courses.model.User;
 import com.federated.courses.model.constants.JobApplicationStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,11 +22,13 @@ import java.math.BigInteger;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class JobApplication extends BaseEntity {
 
-  private BigInteger jobVacancyId;
+    private BigInteger jobVacancyId;
 
-  private BigInteger teacherId;
+    //  private BigInteger teacherId;
+    @JsonProperty("teacher_id")
+    private User teacher;
 
-  private JobApplicationStatus approvalStatus;
+    private JobApplicationStatus approvalStatus;
 
-  private boolean markForDelete;
+    private boolean markForDelete;
 }
