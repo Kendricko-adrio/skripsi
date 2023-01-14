@@ -32,6 +32,11 @@ public class ChapterService extends ExternalBaseService {
     return mapper.convertValue(response.getData(), Chapter.class);
   }
 
+  public List<Chapter> getChaptersByCourse(BigInteger courseId) {
+    Response response = hitExternalService(chapterUrl + "/course/" + courseId, HttpMethod.GET, null, null, Response.class);
+    return mapper.convertValue(response.getData(), mapper.getTypeFactory().constructCollectionType(List.class, Chapter.class));
+  }
+
   public Chapter insertChapter(CreateChapter request) {
     Response response = hitExternalService(chapterUrl, HttpMethod.POST,inputToRequest(request) , null, Response.class);
     return mapper.convertValue(response.getData(), Chapter.class);

@@ -32,20 +32,19 @@ public class ChapterController {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, chapterService.getChapters());
     }
 
+    @GetMapping("/course/{id}")
+    public ResponseEntity<BaseResponse> getChaptersByCourse(@PathVariable BigInteger id) {
+        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, chapterService.getChaptersByCourse(id));
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse> createChapter(@RequestBody CreateChapterRequest request) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, chapterService.insertChapter(request));
     }
 
-    //  @MutationMapping
     @PutMapping
     public ResponseEntity<BaseResponse> updateChapter(@RequestBody UpdateChapterRequest request) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, chapterService.updateChapter(request));
     }
-
-    //  @SchemaMapping
-//    public ResponseEntity<BaseResponse> chapters(Course course) {
-//        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, chapterService.getChaptersByCourse(course.getId()));
-//    }
 
 }

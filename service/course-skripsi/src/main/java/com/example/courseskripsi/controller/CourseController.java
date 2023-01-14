@@ -20,38 +20,24 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
-//    @MutationMapping
+
+    @GetMapping
+    public ResponseEntity<BaseResponse> getCourses() {
+        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.getCourses());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BaseResponse> getCourse(@PathVariable BigInteger id) {
+        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.getCourse(id));
+    }
 
     @PostMapping
     public ResponseEntity<BaseResponse> insertCourse(@RequestBody CourseInput input) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.insertCourse(input));
     }
 
-    //    @QueryMapping
-    @GetMapping
-    public ResponseEntity<BaseResponse> getCourses() {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.getCourses());
-    }
-
-    //    @QueryMapping
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse> getCourse(@PathVariable BigInteger id) {
-        return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.getCourse(id));
-    }
-
-    //    @MutationMapping
     @PutMapping("")
     public ResponseEntity<BaseResponse> updateCourse(@RequestBody CourseInput input) {
         return ResponseHandler.generateResponse(ResponseMessage.SUCCESS, courseService.updateCourse(input));
     }
-
-//    @SchemaMapping
-//    public Course course(Order order){
-//        return courseService.getCourse(order.getCourse().getId());
-//    }
-
-//    @SchemaMapping
-//    public Course course(JobVacancy jobVacancy){
-//        return courseService.getCourse(jobVacancy.getCourse().getId());
-//    }
 }
