@@ -18,12 +18,6 @@ public class CourseService {
         this.repository = repository;
     }
 
-    public Course insertCourse(CourseInput input){
-        ObjectMapper mapper = new ObjectMapper();
-        Course course = mapper.convertValue(input, Course.class);
-        return repository.save(course);
-    }
-
     public List<Course> getCourses(){
         return repository.findAll();
     }
@@ -34,6 +28,12 @@ public class CourseService {
             throw new RuntimeException("No course found!");
         }
         return course.get();
+    }
+
+    public Course insertCourse(CourseInput input){
+        ObjectMapper mapper = new ObjectMapper();
+        Course course = mapper.convertValue(input, Course.class);
+        return repository.save(course);
     }
 
     public Course updateCourse(CourseInput input){

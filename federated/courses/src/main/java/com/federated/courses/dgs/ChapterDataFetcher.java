@@ -42,9 +42,10 @@ public class ChapterDataFetcher {
         return chapterService.updateChapter(input);
     }
 
-//    @SchemaMapping
-//    public List<Chapter> chapters(Course course) {
-//        return chapterService.getChaptersByCourse(course.getId());
-//    }
+    @DgsData(parentType = "Course")
+    public List<Chapter> chapters(DgsDataFetchingEnvironment dfe) {
+        Course course = dfe.getSource();
+        return chapterService.getChaptersByCourse(course.getId());
+    }
 
 }

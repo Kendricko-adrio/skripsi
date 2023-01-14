@@ -8,6 +8,3 @@ spring:
           uri: http://localhost:8080
           predicates:
             - Path=/graphql
-  redis:
-    host: localhost
-    port: 6379
