@@ -1,8 +1,10 @@
 package com.federated.courses.dgs;
 
 import com.federated.courses.dto.course.CourseInput;
+import com.federated.courses.model.Chapter;
 import com.federated.courses.model.Course;
 import com.federated.courses.model.order.JobVacancy;
+import com.federated.courses.model.order.Order;
 import com.federated.courses.service.CourseService;
 import com.netflix.graphql.dgs.*;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +21,6 @@ public class CourseDataFetcher {
     @Autowired
     private CourseService courseService;
 
-    @DgsMutation
-    public Course insertCourse(@Argument CourseInput input){
-        return courseService.insertCourse(input);
-    }
-
     @DgsQuery
     public List<Course> getCourses(){
         return courseService.getCourses();
@@ -32,6 +29,11 @@ public class CourseDataFetcher {
     @DgsQuery
     public Course getCourse(@InputArgument String id){
         return courseService.getCourse(new BigInteger(id));
+    }
+
+    @DgsMutation
+    public Course insertCourse(@Argument CourseInput input){
+        return courseService.insertCourse(input);
     }
 
     @DgsMutation
@@ -50,10 +52,9 @@ public class CourseDataFetcher {
 //        return courseService.getCourse(jobVacancy.getCourse().getId());
 //    }
     @DgsData(parentType = "JobVacancy", field = "course")
-    public Course course(DgsDataFetchingEnvironment dfe){
+    public Course courseJobVacancy(DgsDataFetchingEnvironment dfe){
         JobVacancy jobVacancy = dfe.getSource();
         return courseService.getCourse(jobVacancy.getCourseId());
     }
-
 
 }

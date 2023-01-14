@@ -4,20 +4,8 @@ type Course{
     courseDescription: String!
     coursePrice: Int!
     createdBy: User!
+    chapters: [Chapter!]!
 }
-
-type User @key(fields: "id") @extends {
-    id: ID! @external
-    jobVacancies: [JobVacancy!]!
-}
-
-#type Course{
-#    id: ID!
-#    courseName: String!
-#    courseDescription: String!
-#    coursePrice: Int!
-#    createdBy: Int
-#}
 
 input CourseInput{
     id: ID
