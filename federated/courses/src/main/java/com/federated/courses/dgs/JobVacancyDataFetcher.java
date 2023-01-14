@@ -4,6 +4,7 @@ import com.federated.courses.dto.jobvacancy.CreateJobVacancyRequest;
 import com.federated.courses.dto.jobvacancy.DeleteJobVacancyRequest;
 import com.federated.courses.dto.jobvacancy.UpdateJobVacancyRequest;
 import com.federated.courses.model.User;
+import com.federated.courses.model.order.JobApplication;
 import com.federated.courses.model.order.JobVacancy;
 import com.federated.courses.service.JobVacancyService;
 import com.netflix.graphql.dgs.*;
@@ -58,6 +59,12 @@ public class JobVacancyDataFetcher {
     public List<JobVacancy> jobVacancies(DgsDataFetchingEnvironment dfe) {
         User user = dfe.getSource();
         return jobVacancyService.getJobVacanciesByStudent(user.getId());
+    }
+
+    @DgsData(parentType = "JobApplication")
+    public JobVacancy jobVacancy (DgsDataFetchingEnvironment dfe) {
+        JobApplication jobApplication = dfe.getSource();
+        return jobVacancyService.getJobVacancy(jobApplication.getJobVacancyId());
     }
 
     @DgsEntityFetcher(name = "User")

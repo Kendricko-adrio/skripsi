@@ -1,0 +1,4 @@
+type User @key(fields: "id") @extends {
+    id: ID! @external
+    jobVacancies: [JobVacancy!]!
+}
