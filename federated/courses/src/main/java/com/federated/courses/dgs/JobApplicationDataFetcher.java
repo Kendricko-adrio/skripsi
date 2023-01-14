@@ -5,6 +5,7 @@ import com.federated.courses.dto.jobapplication.AcceptJobApplicationRequest;
 import com.federated.courses.dto.jobapplication.CreateJobApplicationRequest;
 import com.federated.courses.dto.jobapplication.RejectJobApplicationRequest;
 import com.federated.courses.dto.jobapplication.WithdrawJobApplicationRequest;
+import com.federated.courses.model.User;
 import com.federated.courses.model.order.JobApplication;
 import com.federated.courses.model.order.JobVacancy;
 import com.federated.courses.service.JobApplicationService;
@@ -17,6 +18,7 @@ import org.springframework.graphql.data.method.annotation.SchemaMapping;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 @DgsComponent
 public class JobApplicationDataFetcher {
@@ -60,10 +62,15 @@ public class JobApplicationDataFetcher {
 //        return jobApplicationService.getJobApplicationsByTeacher(teacher.getId());
 //    }
 
-
     @DgsData(parentType = "JobVacancy")
     public List<JobApplication> jobApplications(DgsDataFetchingEnvironment dfe) {
         JobVacancy jobVacancy = dfe.getSource();
         return jobApplicationService.getJobApplicationsByJobVacancy(jobVacancy.getId());
+    }
+
+    @DgsEntityFetcher(name = "User")
+    public User getUserById(Map<String, Object> values) {
+        String id = (String) values.get("id");
+        return new User(new BigInteger(id));
     }
 }
