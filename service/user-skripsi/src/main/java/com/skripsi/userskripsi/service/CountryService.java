@@ -16,8 +16,6 @@ public class CountryService {
 
   private final CountryRepository countryRepository;
 
-  @Autowired
-  private ObjectMapper objectMapper;
 
   public CountryService(CountryRepository countryRepository) {
     this.countryRepository = countryRepository;
