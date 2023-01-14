@@ -21,11 +21,6 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @MutationMapping
-    public Course insertCourse(@Argument CourseInput input){
-        return courseService.insertCourse(input);
-    }
-
     @QueryMapping
     public List<Course> getCourses(){
         return courseService.getCourses();
@@ -34,6 +29,11 @@ public class CourseController {
     @QueryMapping
     public Course getCourse(@Argument BigInteger id){
         return courseService.getCourse(id);
+    }
+
+    @MutationMapping
+    public Course insertCourse(@Argument CourseInput input){
+        return courseService.insertCourse(input);
     }
 
     @MutationMapping

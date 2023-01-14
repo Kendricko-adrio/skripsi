@@ -1,0 +1,39 @@
+type JobApplication {
+    jobVacancyId: ID!
+    jobVacancy: JobVacancy!
+    teacher: User!
+    approvalStatus: String!
+}
+
+input CreateJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+input RejectJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+input WithdrawJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+input AcceptJobApplicationRequest {
+    jobVacancyId: ID!
+    teacherId: ID!
+}
+
+extend type Query {
+    getJobApplications(jobVacancyId: ID!, teacherId: ID!): [JobApplication]
+    getJobApplicationsByTeacher(teacherId: ID!): [JobApplication]
+    getJobApplicationsByStudent(studentId: ID!): [JobApplication]
+}
+
+extend type Mutation {
+    createJobApplication(request: CreateJobApplicationRequest!): JobApplication!
+    rejectJobApplication(request: RejectJobApplicationRequest!): Boolean!
+    withdrawJobApplication(request: WithdrawJobApplicationRequest!): Boolean!
+    acceptJobApplication(request: AcceptJobApplicationRequest!): Boolean!
+}

@@ -27,8 +27,11 @@ public class JobApplicationService extends ExternalBaseService{
     private ObjectMapper mapper = new ObjectMapper();
 
     public List<JobApplication> getJobApplications(BigInteger jobVacancyId, BigInteger teacherId) {
-       Response response = hitExternalService(externalApplicationUrl, HttpMethod.GET, null, null, Response.class);
-       return mapper.convertValue(response.getData(), mapper.getTypeFactory().constructCollectionType(List.class, JobApplication.class));
+        String uri =
+            externalApplicationUrl + "?jobVacancyId=" + jobVacancyId + "&teacherId=" + teacherId;
+        Response response = hitExternalService(uri, HttpMethod.GET, null, null, Response.class);
+        return mapper.convertValue(response.getData(),
+            mapper.getTypeFactory().constructCollectionType(List.class, JobApplication.class));
     }
 
     public List<JobApplication> getJobApplicationsByJobVacancy(BigInteger jobVacancyId) {

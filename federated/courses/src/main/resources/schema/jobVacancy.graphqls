@@ -1,0 +1,36 @@
+type JobVacancy {
+	id: ID!
+	course: Course!
+	student: User!
+	description: String!
+	jobApplications: [JobApplication!]!
+	isActive: Boolean!
+}
+
+input CreateJobVacancyRequest {
+	courseId: ID!
+	studentId: ID!
+	description: String!
+}
+
+input UpdateJobVacancyRequest {
+	id: ID!
+	description: String!
+	isActive: Boolean!
+}
+
+input DeleteJobVacancyRequest {
+	id: ID!
+}
+
+extend type Query {
+	getJobVacancy(id: ID!): JobVacancy
+	getJobVacancies: [JobVacancy]
+	getJobVacancyByUser(id: ID!): [JobVacancy]
+}
+
+extend type Mutation {
+	createJobVacancy(request: CreateJobVacancyRequest!): JobVacancy!
+	updateJobVacancy(request: UpdateJobVacancyRequest!): JobVacancy!
+	deleteJobVacancy(request: DeleteJobVacancyRequest!): Boolean!
+}
