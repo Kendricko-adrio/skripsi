@@ -63,6 +63,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/user_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin:9411
 
   api_course_service:
     image: "course-service:latest"
@@ -81,6 +82,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/course_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin:9411
 
   api_order_service:
     image: "order-service:latest"
@@ -99,6 +101,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/order_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin:9411
 
   api_notification_service:
     image: "notification-service:latest"
@@ -117,6 +120,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/notification_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin:9411
 
 networks:
   postgres:
