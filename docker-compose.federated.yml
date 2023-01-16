@@ -19,6 +19,8 @@ services:
       - EXTERNAL_APPLICATION_URL=http://order-service:8083/api/job-application
       - EXTERNAL_VACANCY_URL=http://order-service:8083/api/job-vacancy
       - EXTERNAL_ORDER_URL=http://order-service:8083/api/order
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
 
   users_federated:
     image: "user-federated:latest"
@@ -36,6 +38,8 @@ services:
     environment:
       - EXTERNAL_USER_URL=http://user-service:8081/api/user
       - EXTERNAL_NOTIF_URL=http://notification-service:8084/api/notification
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
 
   apollo_gateway:
     image: "apollo-gateway:latest"

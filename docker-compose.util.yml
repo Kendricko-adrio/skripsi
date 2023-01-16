@@ -2,7 +2,7 @@ version: "3.8"
 services:
   zipkin:
     image: openzipkin/zipkin
-    container_name: zipkin
+    container_name: zipkin-server
     networks:
       - microservices
     ports:
