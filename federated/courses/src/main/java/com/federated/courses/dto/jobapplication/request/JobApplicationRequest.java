@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 
 @Data
@@ -16,9 +15,7 @@ import java.math.BigInteger;
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class JobApplicationRequest {
-    @NotNull(message = "NotNull")
     private BigInteger jobVacancyId;
 
-    @NotNull(message = "NotNull")
     private BigInteger teacherId;
 }

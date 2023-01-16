@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import java.math.BigInteger;
 
 @Data
 @Builder
@@ -14,10 +12,8 @@ import java.math.BigInteger;
 @AllArgsConstructor
 public class RejectJobApplicationRequest {
 
-  @NotNull(message = "NotNull")
   private String jobVacancyId;
 
-  @NotNull(message = "NotNull")
   private String teacherId;
 
 }

@@ -16,22 +16,30 @@ services:
 
   api_gateway_app:
     image: "gateway:latest"
-    container_name: gateway-skripsi
+    container_name: gateway
     ports:
       - "8090:8090"
+    networks:
+      - microservices
+    environment:
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=graphql
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://graphql-server:8080
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0=Path=/graphql
+    depends_on:
+      - api_graphql_server
 
   api_graphql_server:
     image: "graphql-server:latest"
-    container_name: graphql-server-skripsi
+    container_name: graphql-server
     ports:
       - "8080:8080"
     networks:
       - microservices
     environment:
-      - SERVICE_USER=http://user-service-skripsi:8081/api/
-      - SERVICE_COURSE=http://course-skripsi-service:8082/api/
-      - SERVICE_ORDER=http://order-skripsi-service:8083/api/
-      - SERVICE_NOTIFICATION=http://notification-skripsi-service:8084/api/
+      - SERVICE_USER=http://user-service:8081/api/
+      - SERVICE_COURSE=http://course-service:8082/api/
+      - SERVICE_ORDER=http://order-service:8083/api/
+      - SERVICE_NOTIFICATION=http://notification-service:8084/api/
     depends_on:
       - api_user_service
       - api_course_service
@@ -40,12 +48,17 @@ services:
 
   api_user_service:
     image: "user-service:latest"
-    container_name: user-service-skripsi
+    container_name: user-service
     ports:
       - "8081:8081"
     networks:
       - postgres
       - microservices
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 512M
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/user_service
       - SPRING_DATASOURCE_USERNAME=siplah
@@ -53,9 +66,14 @@ services:
 
   api_course_service:
     image: "course-service:latest"
-    container_name: course-skripsi-service
+    container_name: course-service
     ports:
       - "8082:8082"
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 512M
     networks:
       - postgres
       - microservices
@@ -66,12 +84,17 @@ services:
 
   api_order_service:
     image: "order-service:latest"
-    container_name: order-skripsi-service
+    container_name: order-service
     ports:
       - "8083:8083"
     networks:
       - postgres
       - microservices
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 512M
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/order_service
       - SPRING_DATASOURCE_USERNAME=siplah
@@ -79,12 +102,17 @@ services:
 
   api_notification_service:
     image: "notification-service:latest"
-    container_name: notification-skripsi-service
+    container_name: notification-service
     ports:
       - "8084:8084"
     networks:
       - postgres
       - microservices
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 512M
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/notification_service
       - SPRING_DATASOURCE_USERNAME=siplah

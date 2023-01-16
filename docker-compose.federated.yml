@@ -1,37 +1,41 @@
 version: "3.8"
 services:
   courses_federated:
-    image: "courses-federated:latest"
-    container_name: courses-federated-skripsi
+    image: "course-federated:latest"
+    container_name: course-federated
     ports:
       - "8086:8086"
     networks:
       - postgres
       - microservices
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 512M
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/monolith
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
-      - EXTERNAL_COURSE_URL=http://course-skripsi-service:8082/api/course
-      - EXTERNAL_CHAPTER_URL=http://course-skripsi-service:8082/api/chapter
-      - EXTERNAL_APPLICATION_URL=http://order-skripsi-service:8083/api/job-application
-      - EXTERNAL_VACANCY_URL=http://order-skripsi-service:8083/api/job-vacancy
-      - EXTERNAL_ORDER_URL=http://order-skripsi-service:8083/api/order
+      - EXTERNAL_COURSE_URL=http://course-service:8082/api/course
+      - EXTERNAL_CHAPTER_URL=http://course-service:8082/api/chapter
+      - EXTERNAL_APPLICATION_URL=http://order-service:8083/api/job-application
+      - EXTERNAL_VACANCY_URL=http://order-service:8083/api/job-vacancy
+      - EXTERNAL_ORDER_URL=http://order-service:8083/api/order
 
   users_federated:
-    image: "users-federated:latest"
-    container_name: users-federated-skripsi
+    image: "user-federated:latest"
+    container_name: user-federated
     ports:
       - "8085:8085"
     networks:
       - postgres
       - microservices
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 512M
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/monolith
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
-      - EXTERNAL_USER_URL=http://user-skripsi-service:8081/api/user
-      - EXTERNAL_NOTIF_URL=http://notification-skripsi-service:8084/api/notification
+      - EXTERNAL_USER_URL=http://user-service:8081/api/user
+      - EXTERNAL_NOTIF_URL=http://notification-service:8084/api/notification
 
   apollo_gateway:
     image: "apollo-gateway:latest"
@@ -43,8 +47,11 @@ services:
       - microservices
     environment:
       - SERVER_PORT=4000
-      - SERVICES_USERS_URL=http://users-federated-skripsi:8085/graphql
-      - SERVICES_COURSES_URL=http://courses-federated-skripsi:8086/graphql
+      - SERVICES_USERS_URL=http://user-federated:8085/graphql
+      - SERVICES_COURSES_URL=http://course-federated:8086/graphql
+    depends_on:
+      - courses_federated
+      - users_federated
 
 networks:
   postgres:
