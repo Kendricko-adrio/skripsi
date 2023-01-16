@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin-server
+    networks:
+      - microservices
+    ports:
+      - "9411:9411"
+
+networks:
+  microservices:
+    driver: bridge

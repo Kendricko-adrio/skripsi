@@ -25,6 +25,8 @@ services:
       - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=graphql
       - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://graphql-server:8080
       - SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0=Path=/graphql
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
     depends_on:
       - api_graphql_server
 
@@ -40,6 +42,8 @@ services:
       - SERVICE_COURSE=http://course-service:8082/api/
       - SERVICE_ORDER=http://order-service:8083/api/
       - SERVICE_NOTIFICATION=http://notification-service:8084/api/
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
     depends_on:
       - api_user_service
       - api_course_service
@@ -63,6 +67,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/user_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
 
   api_course_service:
     image: "course-service:latest"
@@ -81,6 +87,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/course_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
 
   api_order_service:
     image: "order-service:latest"
@@ -99,6 +107,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/order_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
 
   api_notification_service:
     image: "notification-service:latest"
@@ -117,6 +127,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/notification_service
       - SPRING_DATASOURCE_USERNAME=siplah
       - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
+      - SPRING_ZIPKIN_ENABLED=false
 
 networks:
   postgres:

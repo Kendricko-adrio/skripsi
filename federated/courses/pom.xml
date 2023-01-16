@@ -9,12 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.skripsi</groupId>
-	<artifactId>monolith</artifactId>
+	<artifactId>courses-federated</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>monolith</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Courses Federated</description>
 	<properties>
 		<java.version>8</java.version>
+		<spring-cloud.version>2021.0.5</spring-cloud.version>
 	</properties>
 
 	<dependencyManagement>
@@ -27,10 +28,15 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-
 
 	<dependencies>
 		<dependency>
@@ -78,7 +84,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
