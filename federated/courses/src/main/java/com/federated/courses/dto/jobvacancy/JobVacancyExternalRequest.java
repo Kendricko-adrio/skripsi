@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.math.BigInteger;
 
 
@@ -14,12 +13,9 @@ import java.math.BigInteger;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class JobVacancyExternalRequest {
-    @NotBlank(message = "NotBlank")
     private BigInteger courseId;
 
-    @NotBlank(message = "NotBlank")
     private BigInteger studentId;
 
-    @NotBlank(message = "NotBlank")
     private String description;
 }

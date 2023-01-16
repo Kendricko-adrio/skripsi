@@ -1,20 +1,17 @@
 package com.federated.courses.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@MappedSuperclass
+
 @Data
+@JsonNaming(value = com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class BaseEntity implements Serializable {
 
-  @CreatedDate
   protected long createdAt;
 
-  @LastModifiedDate
   protected long updatedAt;
 
 }

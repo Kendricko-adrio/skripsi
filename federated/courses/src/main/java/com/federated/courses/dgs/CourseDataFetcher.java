@@ -1,7 +1,6 @@
 package com.federated.courses.dgs;
 
 import com.federated.courses.dto.course.CourseInput;
-import com.federated.courses.model.Chapter;
 import com.federated.courses.model.Course;
 import com.federated.courses.model.order.JobVacancy;
 import com.federated.courses.model.order.Order;
