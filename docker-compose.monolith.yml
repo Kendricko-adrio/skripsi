@@ -17,8 +17,8 @@ services:
       - postgres
     environment: # spring boot application.yml properties
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/monolith
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test123
       - SERVER_TOMCAT_ACCEPT-COUNT=60
       - SERVER_TOMCAT_MAX-CONNECTIONS=60
       - SERVER_TOMCAT_THREADS_MAX=60
@@ -27,12 +27,12 @@ services:
     image: "postgres:latest"
     container_name: postgres-skripsi
     environment:
-      - POSTGRES_USER=siplah
-      - POSTGRES_PASSWORD=siplah
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test123
     volumes:
       - db:/var/lib/postgresql_skripsi/data
     ports:
-      - "5432:5432"
+      - "5431:5432"
     networks:
       - postgres
     restart: unless-stopped

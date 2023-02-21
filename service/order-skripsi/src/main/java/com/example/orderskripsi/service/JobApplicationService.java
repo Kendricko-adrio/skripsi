@@ -68,6 +68,7 @@ public class JobApplicationService {
         .build();
 
     JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
+
     notificationService.saveJobApplicationNotification(jobVacancy.getStudentId(),
         NotificationStatus.JOB_APPLICATION_NEW);
 
@@ -82,7 +83,7 @@ public class JobApplicationService {
     jobApplicationRepository.save(jobApplication);
 
     JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-    notificationService.saveJobApplicationNotification(jobVacancy.getStudentId(),
+    notificationService.saveJobApplicationNotification(request.getTeacherId(),
         NotificationStatus.JOB_APPLICATION_REJECTION);
 
     return true;
@@ -110,7 +111,7 @@ public class JobApplicationService {
     jobApplicationRepository.save(jobApplication);
 
     JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-    notificationService.saveJobApplicationNotification(jobVacancy.getStudentId(),
+    notificationService.saveJobApplicationNotification(request.getTeacherId(),
         NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
 
     orderService.createOrder(jobVacancy, request.getTeacherId());

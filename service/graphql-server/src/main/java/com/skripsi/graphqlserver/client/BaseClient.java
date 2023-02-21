@@ -34,6 +34,8 @@ public abstract class BaseClient {
 
   public <T, S> T post(String url, S request, ParameterizedTypeReference<T> responseType) {
     HttpEntity<S> entity = new HttpEntity<>(request);
+    System.out.println(getServiceProperties() + url);
+    System.out.println(entity);
     return restTemplate.exchange(getServiceProperties() + url, HttpMethod.POST
         , entity, responseType).getBody();
   }

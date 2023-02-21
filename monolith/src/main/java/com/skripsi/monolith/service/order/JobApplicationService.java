@@ -9,6 +9,7 @@ import com.skripsi.monolith.model.constants.NotificationStatus;
 import com.skripsi.monolith.model.order.JobApplication;
 import com.skripsi.monolith.model.order.JobVacancy;
 import com.skripsi.monolith.model.order.jobapplication.JobApplicationId;
+import com.skripsi.monolith.model.user.User;
 import com.skripsi.monolith.repository.order.JobApplicationRepository;
 import com.skripsi.monolith.repository.order.JobVacancyRepository;
 import com.skripsi.monolith.repository.user.UserRepository;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobApplicationService {
@@ -31,6 +33,9 @@ public class JobApplicationService {
 
     @Autowired
     private JobVacancyRepository jobVacancyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private OrderService orderService;
@@ -72,7 +77,9 @@ public class JobApplicationService {
         jobApplicationRepository.save(jobApplication);
 
         JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+
+        User teacher = userRepository.findById(request.getTeacherId()).orElse(null);
+        notificationService.saveJobApplicationNotification(teacher,
                 NotificationStatus.JOB_APPLICATION_REJECTION);
 
         return true;
@@ -102,7 +109,8 @@ public class JobApplicationService {
         jobApplicationRepository.save(jobApplication);
 
         JobVacancy jobVacancy = jobVacancyRepository.findById(request.getJobVacancyId()).get();
-        notificationService.saveJobApplicationNotification(jobVacancy.getStudent(),
+        User teacher = userRepository.findById(request.getTeacherId()).orElse(null);
+        notificationService.saveJobApplicationNotification(teacher,
                 NotificationStatus.JOB_APPLICATION_ACCEPTANCE);
 
         orderService.createOrder(jobVacancy, request.getTeacherId());

@@ -1,5 +1,6 @@
 package com.skripsi.graphqlserver.model.course;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.skripsi.graphqlserver.model.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Data
 @Builder
@@ -28,4 +30,6 @@ public class Course extends BaseEntity {
   @JsonProperty("created_by")
   private BigInteger createdBy;
 
+  @JsonProperty("chapters")
+  private List<Chapter> chapters;
 }

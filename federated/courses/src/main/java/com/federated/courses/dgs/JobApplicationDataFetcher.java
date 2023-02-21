@@ -33,8 +33,12 @@ public class JobApplicationDataFetcher {
     }
 
     @DgsQuery
-    public List<JobApplication> getJobApplicationByTeacher(@InputArgument String teacherId) {
+    public List<JobApplication> getJobApplicationsByTeacher(@InputArgument String teacherId) {
         return jobApplicationService.getJobApplicationsByTeacher(new BigInteger(teacherId));
+    }
+    @DgsQuery
+    public List<JobApplication> getJobApplicationsByStudent(@InputArgument String studentId) {
+        return jobApplicationService.getJobApplicationsByStudent(new BigInteger(studentId));
     }
 
     @DgsMutation
