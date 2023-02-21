@@ -3,11 +3,7 @@ package com.federated.users.dgs;
 import com.federated.users.model.notif.Notification;
 import com.federated.users.model.user.User;
 import com.federated.users.service.NotificationService;
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
-import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
-import com.netflix.graphql.dgs.DgsQuery;
-import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -30,6 +26,11 @@ public class NotificationDataFetcher {
   @DgsQuery
   public List<Notification> getNotifications(@InputArgument String id) {
     return notificationService.getNotifications(new BigInteger(id));
+  }
+
+  @DgsMutation
+  public Boolean readNotifications(@InputArgument List<String> ids) {
+    return notificationService.readNotifications(ids);
   }
 
   @DgsData(parentType = "User", field = "notifications")

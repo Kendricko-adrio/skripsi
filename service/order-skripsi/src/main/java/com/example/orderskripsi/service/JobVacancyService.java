@@ -63,6 +63,8 @@ public class JobVacancyService {
     jobVacancy.setMarkForDelete(Boolean.TRUE);
     jobVacancyRepository.save(jobVacancy);
     return Boolean.TRUE;
+//    log.info("HERE");
+//    return jobVacancyRepository.save(jobVacancy);
   }
 
 

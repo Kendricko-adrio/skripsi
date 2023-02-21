@@ -31,13 +31,13 @@ public class JobApplicationController {
   }
 
   @QueryMapping
-  public List<JobApplication> getJobApplicationByTeacher(@Argument BigInteger id) {
-    return jobApplicationClient.getJobApplicationByTeacher(id).getData();
+  public List<JobApplication> getJobApplicationsByTeacher(@Argument BigInteger teacherId) {
+    return jobApplicationClient.getJobApplicationByTeacher(teacherId).getData();
   }
 
   @QueryMapping
-  public List<JobApplication> getJobApplicationByStudent(@Argument BigInteger id) {
-    return jobApplicationClient.getJobApplicationByStudent(id).getData();
+  public List<JobApplication> getJobApplicationsByStudent(@Argument BigInteger studentId) {
+    return jobApplicationClient.getJobApplicationByStudent(studentId).getData();
   }
 
   @MutationMapping

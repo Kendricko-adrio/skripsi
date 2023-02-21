@@ -49,7 +49,7 @@ public class JobVacancyService extends ExternalBaseService {
     }
 
     public Boolean deleteJobVacancy(DeleteJobVacancyRequest request) {
-        Response response = hitExternalService(vacancyUrl, HttpMethod.PUT, inputToExternalRequest(request), null, Response.class);
+        Response response = hitExternalService(vacancyUrl, HttpMethod.DELETE, inputToExternalRequest(request), null, Response.class);
         return mapper.convertValue(response.getData(), Boolean.class);
     }
 
@@ -70,8 +70,11 @@ public class JobVacancyService extends ExternalBaseService {
     }
 
     private JobVacancyDeleteRequest inputToExternalRequest(DeleteJobVacancyRequest request) {
+//        JobVacancy jv = getJobVacancy(new BigInteger(request.getId()));
         return JobVacancyDeleteRequest.builder()
                 .id(new BigInteger(request.getId()))
+//                .isActive(jv.getIsActive())
+//                .description(jv.getDescription())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.example.courseskripsi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -32,4 +35,8 @@ public class Course extends BaseEntity {
 
     @Column(name = "created_by")
     private BigInteger createdBy;
+
+    @OneToMany(mappedBy="course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("course")
+    private List<Chapter> chapters = new ArrayList<>();
 }

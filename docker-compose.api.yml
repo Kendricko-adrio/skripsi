@@ -4,12 +4,12 @@ services:
     image: "postgres:latest"
     container_name: postgres-skripsi
     environment:
-      - POSTGRES_USER=siplah
-      - POSTGRES_PASSWORD=siplah
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test123
     volumes:
       - db:/var/lib/postgresql_skripsi/data
     ports:
-      - "5432:5432"
+      - "5431:5432"
     networks:
       - postgres
     restart: unless-stopped
@@ -65,8 +65,8 @@ services:
           memory: 512M
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/user_service
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test123
       - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
       - SPRING_ZIPKIN_ENABLED=false
 
@@ -85,8 +85,8 @@ services:
       - microservices
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/course_service
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test123
       - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
       - SPRING_ZIPKIN_ENABLED=false
 
@@ -105,8 +105,8 @@ services:
           memory: 512M
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/order_service
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test123
       - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
       - SPRING_ZIPKIN_ENABLED=false
 
@@ -125,8 +125,8 @@ services:
           memory: 512M
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-skripsi:5432/notification_service
-      - SPRING_DATASOURCE_USERNAME=siplah
-      - SPRING_DATASOURCE_PASSWORD=siplah
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=test123
       - SPRING_ZIPKIN_BASE-URL=http://zipkin-server:9411
       - SPRING_ZIPKIN_ENABLED=false
 

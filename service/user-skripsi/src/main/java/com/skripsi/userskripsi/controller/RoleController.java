@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/role")
@@ -24,6 +25,9 @@ public class RoleController {
 
   @Autowired
   private RoleService roleService;
+
+  @GetMapping
+  public Response<List<Role>> roles(){ return ResponseHandler.ok(roleService.getRoles()); }
 
   @GetMapping("/{id}")
   public Response<Role> role(@PathVariable BigInteger id) {

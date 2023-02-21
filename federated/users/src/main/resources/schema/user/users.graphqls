@@ -1,5 +1,6 @@
 type User @key(fields: "id"){
     id: ID!
+    name: String!
     username: String!
     email: String!
     country: Country!
@@ -7,12 +8,12 @@ type User @key(fields: "id"){
     notifications: [Notification!]!
 }
 
-type Country {
+type Country @key(fields: "id"){
     id: ID!
     name: String!
 }
 
-type Role{
+type Role @key(fields: "id"){
     id: ID!
     name: String!
 }
@@ -37,6 +38,10 @@ extend type Query {
     getUser(id: ID): User
     getUserByUsername(username: String!): User
     checkUserLogin(user: UserLoginDTO!): Boolean
+    getCountries: [Country!]
+    getCountry(id: ID): Country
+    getRoles: [Role!]
+    getRole(id: ID): Role
 }
 
 extend type Mutation{

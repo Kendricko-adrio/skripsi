@@ -12,4 +12,6 @@ import java.math.BigInteger;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class JobVacancyDeleteRequest {
     private BigInteger id;
+    private String description;
+    private Boolean isActive;
 }

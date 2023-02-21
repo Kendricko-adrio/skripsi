@@ -52,11 +52,12 @@ public class UserService {
   public User updateUser(UserRequestDTO request) {
     return userRepository.findById(request.getId()).map(user -> {
       user.setEmail(user.getEmail());
-      user.setUsername(user.getUsername());
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      user.setName(user.getName());
-      user.setCountry(Country.builder().id(user.getCountry().getId()).build());
-      user.setRole(Role.builder().id(user.getRole().getId()).build());
+      user.setUsername(request.getUsername());
+      user.setPassword(passwordEncoder.encode(request.getPassword()));
+      user.setName(request.getName());
+      user.setCountry(Country.builder().id(user.getCountry().getId()).name(user.getCountry().getName()).build());
+      user.setRole(Role.builder().id(user.getRole().getId()).name(user.getRole().getName()).build());
+
       return userRepository.save(user);
     }).orElse(null);
   }
